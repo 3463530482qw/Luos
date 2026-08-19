@@ -1,0 +1,1 @@
+std::unordered_map<std::string, json_reader> data;
