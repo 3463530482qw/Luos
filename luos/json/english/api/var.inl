@@ -1,1 +1,1 @@
-std::unordered_map<std::string, json_reader> data;
+std::unordered_map<std::string, rapidjson::Document> data;
