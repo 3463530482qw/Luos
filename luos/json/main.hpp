@@ -1,11 +1,11 @@
 namespace Gnik_luos {
     class Json {
         public:
-            #include "english/api/var.inl"
+            #include "english/available/variable.inl"
         public:
-            #include "english/api/function.inl"
+            #include "english/available/function.inl"
         private:
-            #include "english/api/internal/var.inl"
+            #include "english/available/internal/variable.inl"
         public:
             Json();
             ~Json();
