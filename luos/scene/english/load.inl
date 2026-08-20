@@ -26,15 +26,16 @@ namespace Gnik_luos {
             return;
         }
         // 从顶层对象中取出对应 type 的一组映射（函数名 -> DLL 路径）
-        auto typeIt = json.FindMember(type.c_str());
-        if (typeIt == json.MemberEnd() || !typeIt->value.IsObject()) {
+        auto type_it = json.FindMember(type.c_str());
+        if (type_it == json.MemberEnd() || !type_it->value.IsObject()) {
             std::cerr << "batch_load: type \"" << type << "\" not found or not an object" << std::endl;
             return;
         }
-        for (const auto& entry : typeIt->value.GetObject()) {
+        for (const auto& entry : type_it->value.GetObject()) {
             if (!entry.value.IsString()) {
-                std::cerr << "batch_load: path for \"" << entry.name.GetString()
-                          << "\" is not a string" << std::endl;
+                std::cerr << "batch_load: path for \"" 
+                    << entry.name.GetString()
+                    << "\" is not a string" << std::endl;
                 continue;
             }
             load(entry.value.GetString(), entry.name.GetString());

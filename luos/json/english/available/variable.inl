@@ -1,1 +1,0 @@
-std::unordered_map<std::string, rapidjson::Document> data;

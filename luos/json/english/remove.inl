@@ -1,5 +1,5 @@
 namespace Gnik_luos {
-    void Json::remove(std::string name) {
+    void Json::remove(const std::string& name) {
         data.erase(name);
     }
 }
