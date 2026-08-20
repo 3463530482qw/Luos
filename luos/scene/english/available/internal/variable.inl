@@ -1,0 +1,1 @@
+std::unordered_map<std::string, HMODULE> private_data{};
