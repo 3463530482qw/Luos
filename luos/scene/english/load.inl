@@ -20,25 +20,27 @@ namespace Gnik_luos {
         }
     }
 
-    void Scene::batch_load(const rapidjson::Document& json, const std::string& type) {
-        if (!json.IsObject()) {
+    void Scene::batch_load(simdjson::dom::element json, const std::string& type) {
+        simdjson::dom::object top;
+        if (json.get_object().get(top)) {
             std::cerr << "batch_load: JSON is not an object" << std::endl;
             return;
         }
         // 从顶层对象中取出对应 type 的一组映射（函数名 -> DLL 路径）
-        auto type_it = json.FindMember(type.c_str());
-        if (type_it == json.MemberEnd() || !type_it->value.IsObject()) {
+        simdjson::dom::element group;
+        if (top.at_key(type).get(group) || !group.is_object()) {
             std::cerr << "batch_load: type \"" << type << "\" not found or not an object" << std::endl;
             return;
         }
-        for (const auto& entry : type_it->value.GetObject()) {
-            if (!entry.value.IsString()) {
-                std::cerr << "batch_load: path for \"" 
-                    << entry.name.GetString()
+        for (auto field : group.get_object()) {
+            std::string_view path;
+            if (field.value.get_string().get(path)) {
+                std::cerr << "batch_load: path for \""
+                    << field.key
                     << "\" is not a string" << std::endl;
                 continue;
             }
-            load(entry.value.GetString(), entry.name.GetString());
+            load(std::string(path), std::string(field.key));
         }
     }
 }

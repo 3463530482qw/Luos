@@ -1,3 +1,4 @@
+#include "english/parameters/entry.inl"
 namespace Gnik_luos {
     class Json {
         public:
@@ -6,7 +7,6 @@ namespace Gnik_luos {
         private:
             #include "english/available/internal/variable.inl"
         public:
-            Json();
             ~Json();
     };
     using 配置文件 = Json;
