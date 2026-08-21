@@ -62,4 +62,11 @@ namespace Gnik_luos {
             });
         }
     }
+    Thread::~Thread() {
+        wait();
+        for (uint16_t i =0; i < thread_quantity; i++) {
+            thread_pool[i].request_stop();
+        }
+        condition_variable.notify_all();
+    }
 }
