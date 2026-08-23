@@ -1,5 +1,5 @@
 namespace Gnik_luos {
-    Window_settings_info& Window_settings_info::batch_load(simdjson::dom::element json, const std::string& type) {
+    Window_settings_info& Window_settings_info::batch_load(const simdjson::dom::element& json, const std::string& type) {
         if (json.get_object().get(json_object)) {
             throw std::runtime_error("windowinfo::batch_load: JSON 顶层不是对象");
         }
