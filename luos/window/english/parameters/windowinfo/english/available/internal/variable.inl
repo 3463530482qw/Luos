@@ -1,0 +1,10 @@
+simdjson::dom::object json_object{};
+simdjson::dom::element config{};
+simdjson::dom::object target_type{};
+std::string_view temporary_name{};
+int64_t temporary_width{};
+int64_t temporary_height{};
+int64_t temporary_logic_width{};
+int64_t temporary_logic_height{};
+std::string_view temporary_icon{};
+uint64_t temporary_display_index{};

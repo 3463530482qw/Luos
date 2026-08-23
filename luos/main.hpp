@@ -2,5 +2,6 @@
 #include "luos/scene/main.hpp"
 #include "luos/thread/main.hpp"
 #include "luos/run/main.hpp"
+#include "luos/window/main.hpp"
 
 #include "initialize.inl"
