@@ -20,7 +20,7 @@ namespace Gnik_luos {
         }
     }
 
-    void Scene::batch_load(simdjson::dom::element json, const std::string& type) {
+    void Scene::batch_load(const simdjson::dom::element& json, const std::string& type) {
         simdjson::dom::object top;
         if (json.get_object().get(top)) {
             std::cerr << "batch_load: JSON is not an object" << std::endl;
