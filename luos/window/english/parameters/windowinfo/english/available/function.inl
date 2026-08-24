@@ -1,1 +1,1 @@
-Window_settings_info& batch_load(const simdjson::dom::element& json, const std::string& type);
+Window_settings_info& batch_load(const simdjson::dom::element& json, std::string_view type);

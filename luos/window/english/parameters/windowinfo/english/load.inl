@@ -1,11 +1,15 @@
 namespace Gnik_luos {
-    Window_settings_info& Window_settings_info::batch_load(const simdjson::dom::element& json, const std::string& type) {
+    Window_settings_info& Window_settings_info::batch_load(const simdjson::dom::element& json, std::string_view type) {
         if (json.get_object().get(json_object)) {
-            throw std::runtime_error("windowinfo::batch_load: JSON 顶层不是对象");
+            throw std::runtime_error("windowinfo::batch_load: JSON load failed");
         }
 
-        if (json_object.at_key(type).get(config) || !config.is_object()) {
-            throw std::runtime_error("windowinfo::batch_load: type \"" + type + "\" 不存在或不是对象");
+        if (json_object.at_key(type.data()).get(config) || !config.is_object()) {
+            throw std::runtime_error(
+                std::string("windowinfo::batch_load: \"") + 
+                type.data() + 
+                std::string("\" Doesn't exist")
+            );
         }
         target_type = config.get_object();
 

@@ -1,4 +1,4 @@
-void add(const std::string& json_path, const std::string& name);
+void add(std::string_view json_path, std::string_view name);
 void clear();
-void remove(const std::string& name);
-simdjson::dom::element get(const std::string& name);
+void remove(std::string_view name);
+simdjson::dom::element get(std::string_view name);

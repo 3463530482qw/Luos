@@ -1,4 +1,4 @@
-void load(const std::string& dll_path, const std::string& function_name);
-void batch_load(const simdjson::dom::element& json, const std::string& type);
-Scene& remove(const std::string& name);
+void load(std::string_view dll_path, std::string_view function_name);
+void batch_load(const simdjson::dom::element& json, std::string_view type);
+Scene& remove(std::string_view name);
 Scene& clear();
