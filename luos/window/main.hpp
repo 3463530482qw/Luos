@@ -13,3 +13,4 @@ namespace Gnik_luos {
     using 窗口 = Window;
 }
 #include "english/setting/setting.inl"
+#include "english/create.inl"
