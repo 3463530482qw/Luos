@@ -11,3 +11,4 @@ namespace Gnik_luos {
 #include "english/scene.inl"
 #include "english/thread.inl"
 #include "english/start.inl"
+#include "english/window.inl"

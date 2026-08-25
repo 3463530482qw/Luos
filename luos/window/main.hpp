@@ -14,3 +14,4 @@ namespace Gnik_luos {
 }
 #include "english/setting/setting.inl"
 #include "english/create.inl"
+#include "english/run.inl"
