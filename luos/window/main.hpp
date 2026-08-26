@@ -1,5 +1,6 @@
 #include "english/parameters/windowinfo/main.hpp"
 #include "english/parameters/create_info/main.hpp"
+#include "english/parameters/time/main.hpp"
 namespace Gnik_luos {
     class Window {
         public:

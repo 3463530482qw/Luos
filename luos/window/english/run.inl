@@ -1,5 +1,6 @@
 namespace Gnik_luos {
     Window& Window::run() {
+        time.update();
         while (SDL_PollEvent(&pre_event_ptr)) {
             if (pre_event_ptr.window.windowID != 0 && pre_event_ptr.window.windowID != wid) {
                 pre_event.push_back(pre_event_ptr);

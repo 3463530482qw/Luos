@@ -6,3 +6,4 @@ std::string icon;
 std::string name{"a window"};
 SDL_Window* id{nullptr};
 bool isrun{true};
+Window_time time;
