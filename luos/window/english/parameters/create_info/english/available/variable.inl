@@ -22,6 +22,6 @@ bool fill_document{false};        // 窗口处于填充文档模式（仅限Emsc
 bool transparent{false};          // 窗口带有透明缓冲区
 bool not_focusable{false};        // 窗口不应获取焦点
 bool opengl{false};               // 窗口渲染
-bool vulkan{true};
+bool vulkan{false};
 bool metal{false};
 SDL_WindowFlags flage{0};

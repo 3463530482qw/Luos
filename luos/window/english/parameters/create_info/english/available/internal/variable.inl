@@ -26,5 +26,5 @@ bool temporary_fill_document{false};
 bool temporary_transparent{false};       
 bool temporary_not_focusable{false};     
 bool temporary_opengl{false};             
-bool temporary_vulkan{true};
+bool temporary_vulkan{false};
 bool temporary_metal{false};
