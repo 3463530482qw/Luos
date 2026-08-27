@@ -4,6 +4,6 @@ float aspectratio{0};
 SDL_WindowID window_id{0};
 SDL_Event pre_event_ptr;                       // 窗口事件
 std::vector<SDL_Event> pre_event;
-float re_aspectratio{1.0f};
+float re_aspectratio{0};
 int cut_offset_width{0};
 int cut_offset_height{0};

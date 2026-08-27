@@ -16,3 +16,4 @@ if (window_settings_info.width == 0 && window_settings_info.height == 0) {
 aspectratio = static_cast<float>(width) / static_cast<float>(height);
 logic_width = window_settings_info.logic_width;
 logic_height = window_settings_info.logic_height;
+re_aspectratio = static_cast<float>(width) / static_cast<float>(logic_width);

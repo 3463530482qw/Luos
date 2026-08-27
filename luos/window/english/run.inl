@@ -14,7 +14,7 @@ namespace Gnik_luos {
                     isrun = false;
                     break;
                 case SDL_EVENT_MOUSE_MOTION:
-                    mouse_update(pre_event_ptr.motion.x, pre_event_ptr.motion.x); 
+                    mouse_update(pre_event_ptr.motion.x, pre_event_ptr.motion.y); 
                     break;
                 default:
                     break;
