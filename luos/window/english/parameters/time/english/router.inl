@@ -7,6 +7,7 @@ namespace Gnik_luos {
         } else {
             sleep_fps = 0;
         }
+        private_update.push_back([this]() { time(); });
         if (youk_smooth) {
             youk_target_time = sleep_fps * (sleep_fps + 1.0f) * (sleep_fps + 2.0f);
             private_update.push_back([this]() { youklx_frame_time(); });

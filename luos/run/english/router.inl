@@ -21,6 +21,11 @@ namespace Gnik_luos {
                         it->second->run();
                     }
                 }
+                for (auto it = private_window.begin(); it != private_window.end(); ++it) {
+                    it->second->time.start = std::chrono::steady_clock::now();
+                    it->second->time.before   = 0.0f;
+                    it->second->time.current  = 0.0f;
+                }
             };
         };
     }

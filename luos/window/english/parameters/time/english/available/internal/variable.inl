@@ -3,3 +3,8 @@ double sleep_fps{0};
 double youk_target_time{0};
 double youk_frame_time{0};
 double remaining{};
+simdjson::dom::object json_object{};
+simdjson::dom::element config{};
+simdjson::dom::object target_type{};
+double temporary_set_fps{60.0f};
+bool temporary_youk_smooth{true};

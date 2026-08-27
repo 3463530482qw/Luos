@@ -14,7 +14,8 @@ namespace Gnik_luos {
     };
     using 窗口时间 = Window_time;
 }
-
+#include "english/load.inl"
+#include "english/time.inl"
 #include "english/youklx_frame_time.inl"
 #include "english/sleep.inl"
 #include "english/router.inl"
