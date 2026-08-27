@@ -26,7 +26,8 @@ namespace Gnik_luos {
                     it->second->time.before   = 0.0f;
                     it->second->time.current  = 0.0f;
                 }
-            };
+                private_thread->clear();
+            };  
         };
     }
 }
