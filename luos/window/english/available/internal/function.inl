@@ -1,0 +1,1 @@
+void mouse_update(float mouse_x, float mouse_y);

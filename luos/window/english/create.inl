@@ -4,7 +4,7 @@ namespace Gnik_luos {
         if (!id) {
             throw std::runtime_error(std::string("Window::create => ") + SDL_GetError());
         }
-        wid = SDL_GetWindowID(id);
+        window_id = SDL_GetWindowID(id);
         position_adjustment_positional(window_position::middle, window_position::middle);
         return *this;
     }

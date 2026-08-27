@@ -2,7 +2,7 @@ namespace Gnik_luos {
     Window& Window::run() {
         time.update();
         while (SDL_PollEvent(&pre_event_ptr)) {
-            if (pre_event_ptr.window.windowID != 0 && pre_event_ptr.window.windowID != wid) {
+            if (pre_event_ptr.window.windowID != 0 && pre_event_ptr.window.windowID != window_id) {
                 pre_event.push_back(pre_event_ptr);
                 continue;
             }
@@ -12,6 +12,9 @@ namespace Gnik_luos {
                     break;
                 case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
                     isrun = false;
+                    break;
+                case SDL_EVENT_MOUSE_MOTION:
+                    mouse_update(pre_event_ptr.motion.x, pre_event_ptr.motion.x); 
                     break;
                 default:
                     break;
