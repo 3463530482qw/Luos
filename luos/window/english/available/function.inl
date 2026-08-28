@@ -8,5 +8,6 @@ Window& position_adjustment_positional(int x, int y);
 Window& resize();
 Window& resize(int w, int h);
 Window& resize(float w, float h);
+Window& set_icon(Information_image image);
 Window& run();
 Window& close();
