@@ -1,5 +1,5 @@
 namespace Gnik_luos {
-    Image& load(const char* path) {
+    Image& Image::load(const char* path) {
         Information_image image;
         image.data = stbi_load(path, &image.width, &image.height, nullptr, 4);
         if (!image.data) {
@@ -9,7 +9,7 @@ namespace Gnik_luos {
         pack.back().push_back(image);
         return *this;
     }
-    Image& batch_load(const simdjson::dom::element& json, std::string_view type) {
+    Image& Image::batch_load(const simdjson::dom::element& json, std::string_view type) {
         if (json.get_object().get(json_object)) {
             throw std::runtime_error("windowinfo::batch_load: JSON load failed");
         }
@@ -21,10 +21,25 @@ namespace Gnik_luos {
                 std::string("\" Doesn't exist")
             );
         }
-        target_type = config.get_object();
 
-        if (!target_type.at_key("fps").get_string().get(temporary_set_fps)) {
-            set_fps = 1.0f / temporary_set_fps;
+        pack.emplace_back();
+
+        for (auto field : config.get_object()) {
+            if (field.value.get_string().get(temporary_path)) {
+                throw std::runtime_error(
+                    std::string("Scene::batch_load => batch_load: path for \"") + 
+                    field.key.data() + 
+                    std::string("\" is not a string")
+                );
+                continue;
+            }
+            Information_image image;
+            image.data = stbi_load(temporary_path.data(), &image.width, &image.height, nullptr, 4);
+            if (!image.data) {
+                throw std::runtime_error(std::string("Image::load => Image failed to load: ") + temporary_path.data() + " (" + stbi_failure_reason() + ")");
+            }
+            pack.back().push_back(image);
         }
+        return *this;
     }
 }

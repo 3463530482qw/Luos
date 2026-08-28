@@ -22,20 +22,16 @@ namespace Gnik_luos {
     }
 
     void Scene::batch_load(const simdjson::dom::element& json, std::string_view type) {
-        simdjson::dom::object top;
-        if (json.get_object().get(top)) {
-            std::cerr << "batch_load: JSON is not an object" << std::endl;
-            return;
+        if (json.get_object().get(json_object)) {
+            throw std::runtime_error("Scene::batch_load => batch_load: JSON is not an object");
         }
 
-        simdjson::dom::element group;
-        if (top.at_key(type.data()).get(group) || !group.is_object()) {
+        if (json_object.at_key(type.data()).get(config) || !config.is_object()) {
             throw std::runtime_error(std::string("Scene::batch_load => batch_load: type \"") + type.data() + std::string("\" not found or not an object"));
-            return;
         }
-        for (auto field : group.get_object()) {
-            std::string_view path;
-            if (field.value.get_string().get(path)) {
+        
+        for (auto field : config.get_object()) {
+            if (field.value.get_string().get(temporary_path)) {
                 throw std::runtime_error(
                     std::string("Scene::batch_load => batch_load: path for \"") + 
                     field.key.data() + 
@@ -43,7 +39,7 @@ namespace Gnik_luos {
                 );
                 continue;
             }
-            load(std::string(path), field.key);
+            load(std::string(temporary_path), field.key);
         }
     }
 }

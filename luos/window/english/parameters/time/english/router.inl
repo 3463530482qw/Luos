@@ -14,4 +14,5 @@ namespace Gnik_luos {
         }
         private_update.push_back([this]() { sleep(); });
     }
+    private_update();
 }
