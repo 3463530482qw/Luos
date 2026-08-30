@@ -29,6 +29,7 @@ namespace Gnik_luos {
             SDL_PushEvent(&e);
         }
         pre_event.clear();
+        key.update();
         return *this;
     }
 }

@@ -8,3 +8,4 @@ SDL_Window* id{nullptr};
 bool isrun{true};
 Window_time time;
 window_mouse mouse;
+Key_board key;
