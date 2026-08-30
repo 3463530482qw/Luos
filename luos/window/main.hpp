@@ -2,6 +2,7 @@
 #include "english/parameters/create_info/main.hpp"
 #include "english/parameters/time/main.hpp"
 #include "english/parameters/mouse/main.hpp"
+#include "english/parameters/key_board/main.hpp"
 namespace Gnik_luos {
     class Window {
         public:
