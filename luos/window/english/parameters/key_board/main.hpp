@@ -11,6 +11,6 @@ namespace Gnik_luos {
     using 键盘 = Key_board;
 }
 #include "english/press.inl"
-//#include "english/hold.inl"
-//#include "english/release.inl"
+#include "english/hold.inl"
+#include "english/release.inl"
 #include "english/update.inl"

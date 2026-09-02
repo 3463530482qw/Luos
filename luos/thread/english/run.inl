@@ -32,5 +32,6 @@ namespace Gnik_luos {
             }
             condition_variable.notify_all();
         }
+        //wait();
     }
 }
