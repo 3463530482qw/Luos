@@ -18,6 +18,7 @@ namespace Gnik_luos {
 #include "english/load.inl"
 #include "english/time.inl"
 #include "english/youklx_frame_time.inl"
+#include "english/ema_frame_time.inl"
 #include "english/sleep.inl"
 #include "english/router.inl"
 #include "english/update.inl"

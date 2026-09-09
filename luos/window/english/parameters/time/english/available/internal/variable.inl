@@ -2,6 +2,7 @@ std::vector<std::function<void()>> private_update;
 std::chrono::steady_clock::time_point private_last{};
 std::chrono::steady_clock::time_point private_target{};
 double private_frame_accum{0};
+double private_smooth_dt{0};
 double youk_target_time{0};
 simdjson::dom::object json_object{};
 simdjson::dom::element config{};

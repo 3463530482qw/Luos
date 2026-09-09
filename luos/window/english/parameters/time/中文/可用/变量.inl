@@ -3,3 +3,4 @@ double& 当前{current};
 double& 上帧{before};
 double& 帧间隔{dt};
 double& 设定帧间隔{set_fps};
+double& 平滑系数{smooth_alpha};
