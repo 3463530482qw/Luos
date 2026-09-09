@@ -15,9 +15,8 @@ namespace Gnik_luos {
             data[function_name.data()] = function;
             private_data[function_name.data()] = handle;
         } else {
-            throw std::runtime_error(std::string("Scene::load => Function ") + function_name.data() + std::string(" not found in ") + dll_path.data());
             FreeLibrary(handle);
-            std::cerr << "Function " << function_name.data() << " not found in " << dll_path.data() << std::endl;
+            throw std::runtime_error(std::string("Scene::load => Function ") + function_name.data() + std::string(" not found in ") + dll_path.data());
         }
     }
 

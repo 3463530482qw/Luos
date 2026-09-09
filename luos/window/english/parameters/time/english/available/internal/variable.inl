@@ -1,8 +1,8 @@
 std::vector<std::function<void()>> private_update;
-double sleep_fps{0};
+std::chrono::steady_clock::time_point private_last{};
+std::chrono::steady_clock::time_point private_target{};
+double private_frame_accum{0};
 double youk_target_time{0};
-double youk_frame_time{0};
-double remaining{};
 simdjson::dom::object json_object{};
 simdjson::dom::element config{};
 simdjson::dom::object target_type{};

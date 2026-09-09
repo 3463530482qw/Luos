@@ -2,6 +2,7 @@ namespace Gnik_luos {
     class Window_time {
         public:
             #include "english/available/variable.inl"
+            #include "中文/可用/变量.inl"
         public:
             #include "english/available/function.inl"
         private:
