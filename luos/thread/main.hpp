@@ -15,6 +15,8 @@ namespace Gnik_luos {
     using 线程 = Thread;
 }
 #include "english/pack.inl"
+#include "english/dispatch.inl"
+#include "english/generation.inl"
 #include "english/run.inl"
 #include "english/clear.inl"
 #include "english/wait.inl"

@@ -11,5 +11,10 @@ std::atomic<size_t> update_claimed{0};
 std::atomic<size_t> draw_claimed{0};
 std::atomic<size_t> update_completed{0};
 std::atomic<size_t> draw_completed{0};
-std::atomic<bool> update_done{true};
-std::atomic<bool> draw_done{true};
+
+std::atomic<size_t> update_outstanding{0};
+std::atomic<size_t> draw_outstanding{0};
+
+uint32_t current_gen{0};
+uint32_t update_done_gen{0};
+uint32_t draw_done_gen{0};
