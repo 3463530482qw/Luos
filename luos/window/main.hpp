@@ -22,6 +22,7 @@ namespace Gnik_luos {
 #include "english/setting/setting.inl"
 #include "english/create.inl"
 #include "english/mouse_update.inl"
+#include "english/window_resize.inl"
 #include "english/icon.inl"
 #include "english/run.inl"
 #include "english/close.inl"

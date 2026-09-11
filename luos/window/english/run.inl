@@ -16,6 +16,9 @@ namespace Gnik_luos {
                 case SDL_EVENT_MOUSE_MOTION:
                     mouse_update(pre_event_ptr.motion.x, pre_event_ptr.motion.y); 
                     break;
+                case SDL_EVENT_WINDOW_RESIZED:
+                    window_resize(static_cast<float>(pre_event_ptr.window.data1), static_cast<float>(pre_event_ptr.window.data2));
+                    break;
                 case 0x8000:
                     SDL_SetWindowIcon(id, static_cast<SDL_Surface*>(pre_event_ptr.user.data1));
                     SDL_DestroySurface(static_cast<SDL_Surface*>(pre_event_ptr.user.data1));
