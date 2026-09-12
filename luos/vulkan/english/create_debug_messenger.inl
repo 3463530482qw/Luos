@@ -13,7 +13,10 @@ namespace Gnik_luos {
             }
             vulkan_info.extension.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 
-            validation_features.setEnabledValidationFeatures(collect_validation_features(vulkan_info.debug_info));
+            // 启用项必须落在成员 vector 上:局部 vector 出函数即销毁,
+            // validation_features 里的指针会变成悬垂(校验层会报枚举值越界 49)
+            enabled_features = collect_validation_features(vulkan_info.debug_info);
+            validation_features.setEnabledValidationFeatures(enabled_features);
 
             debug_create_info.setMessageSeverity(vulkan_info.debug_info.severity);
             debug_create_info.setMessageType(vulkan_info.debug_info.message_type);

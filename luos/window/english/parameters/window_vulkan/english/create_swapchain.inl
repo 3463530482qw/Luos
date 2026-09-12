@@ -11,6 +11,7 @@ namespace Gnik_luos {
         renderpass.create(vulkan->device, swapchain.format);
         framebuffer.create(vulkan->device, renderpass.render_pass, swapchain.image_views, swapchain.extent);
         command_buffer.allocate(vulkan->device, command_pool.command_pool, static_cast<uint32_t>(swapchain.image_views.size()));
+        synchronization.create(vulkan->device, static_cast<uint32_t>(swapchain.image_views.size()));
         record_command_buffers();
     }
 }

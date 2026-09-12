@@ -16,7 +16,6 @@ namespace Gnik_luos {
         find_graphics_queue_family();
         vulkan->create_logical_device(graphics_queue_family);
         command_pool.create(vulkan->device, graphics_queue_family);
-        synchronization.create(vulkan->device);
 
         pending_width = window_width;
         pending_height = window_height;

@@ -1,7 +1,7 @@
 namespace Gnik_luos {
     void Window_vulkan::destroy_resources() {
-        synchronization.image_available.clear();
-        synchronization.render_finished.clear();
+        synchronization.image_available_per_frame.clear();
+        synchronization.render_finished_per_image.clear();
         synchronization.frame_fence.clear();
         command_buffer.command_buffers.clear();
         framebuffer.framebuffers.clear();
