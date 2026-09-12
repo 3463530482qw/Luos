@@ -2,10 +2,9 @@
 namespace Gnik_luos {
     class Vulkan_surface {
         public:
-            vk::SurfaceKHR surface{nullptr};
+            #include "english/available/variable.inl"
         public:
-            void create(SDL_Window* window, const vk::raii::Instance& instance);
-            void destroy(const vk::raii::Instance& instance);
+            #include "english/available/function.inl"
     };
     using 火山表面 = Vulkan_surface;
 }

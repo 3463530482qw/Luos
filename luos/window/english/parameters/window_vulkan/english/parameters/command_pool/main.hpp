@@ -2,9 +2,9 @@
 namespace Gnik_luos {
     class Vulkan_command_pool {
         public:
-            vk::raii::CommandPool command_pool{nullptr};
+            #include "english/available/variable.inl"
         public:
-            void create(const vk::raii::Device& device, uint32_t graphics_queue_family);
+            #include "english/available/function.inl"
     };
     using 命令池 = Vulkan_command_pool;
 }

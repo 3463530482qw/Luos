@@ -2,14 +2,9 @@
 namespace Gnik_luos {
     class Vulkan_framebuffer {
         public:
-            std::vector<vk::raii::Framebuffer> framebuffers;
+            #include "english/available/variable.inl"
         public:
-            void create(
-                const vk::raii::Device& device,
-                const vk::raii::RenderPass& render_pass,
-                const std::vector<vk::raii::ImageView>& image_views,
-                vk::Extent2D extent
-            );
+            #include "english/available/function.inl"
     };
     using 帧缓冲 = Vulkan_framebuffer;
 }

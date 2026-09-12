@@ -2,12 +2,9 @@
 namespace Gnik_luos {
     class Vulkan_synchronization {
         public:
-            vk::raii::Semaphore image_available{nullptr};
-            vk::raii::Semaphore render_finished{nullptr};
-            vk::raii::Fence frame_fence{nullptr};
+            #include "english/available/variable.inl"
         public:
-            void create(const vk::raii::Device& device);
-            void wait(const vk::raii::Device& device);
+            #include "english/available/function.inl"
     };
     using 同步对象 = Vulkan_synchronization;
 }
