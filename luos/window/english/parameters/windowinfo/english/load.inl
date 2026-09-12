@@ -18,19 +18,19 @@ namespace Gnik_luos {
         }
             
         if (!target_type.at_key("width").get_int64().get(temporary_width)) {
-            width = static_cast<int>(temporary_width);
+            width = static_cast<uint32_t>(temporary_width);
         }
 
         if (!target_type.at_key("height").get_int64().get(temporary_height)) {
-            height = static_cast<int>(temporary_height);
+            height = static_cast<uint32_t>(temporary_height);
         }
   
         if (!target_type.at_key("logic_width").get_int64().get(temporary_logic_width)) {
-            logic_width = static_cast<int>(temporary_logic_width);
+            logic_width = static_cast<uint32_t>(temporary_logic_width);
         }
 
         if (!target_type.at_key("logic_height").get_int64().get(temporary_logic_height)) {
-            logic_height = static_cast<int>(temporary_logic_height);
+            logic_height = static_cast<uint32_t>(temporary_logic_height);
         }
             
         if (!target_type.at_key("icon").get_string().get(temporary_icon)) {

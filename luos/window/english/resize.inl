@@ -8,8 +8,8 @@ namespace Gnik_luos {
             target_width = mode->w * 0.9f;
             target_height = target_width / aspectratio;
         }
-        width = static_cast<int>(target_width);
-        height = static_cast<int>(target_height);
+        width = static_cast<uint32_t>(target_width);
+        height = static_cast<uint32_t>(target_height);
         if(!SDL_SetWindowSize(id, width, height)) {
             throw std::runtime_error(std::string("Window::resize => Window resize failed"));
         }
