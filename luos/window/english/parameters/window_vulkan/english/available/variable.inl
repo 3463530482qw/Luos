@@ -1,4 +1,8 @@
-Command_buffer command_buffer{};
-uint32_t pending_width{0};
-uint32_t pending_height{0};
-bool frame_buffer_resize{false};
+Vulkan_viewport viewport;
+Vulkan_surface surface;
+Vulkan_swapchain swapchain;
+Vulkan_renderpass renderpass;
+Vulkan_framebuffer framebuffer;
+Vulkan_command_pool command_pool;
+Vulkan_command_buffer command_buffer;
+Vulkan_synchronization synchronization;

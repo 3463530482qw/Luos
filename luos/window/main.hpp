@@ -3,6 +3,7 @@
 #include "english/parameters/time/main.hpp"
 #include "english/parameters/mouse/main.hpp"
 #include "english/parameters/key_board/main.hpp"
+#include "luos/vulkan/main.hpp"
 #include "english/parameters/window_vulkan/main.hpp"
 namespace Gnik_luos {
     class Window {

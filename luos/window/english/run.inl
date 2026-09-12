@@ -1,6 +1,9 @@
 namespace Gnik_luos {
     Window& Window::run() {
         time.update();
+        if (window_vulkan.is_initialized()) {
+            window_vulkan.draw_frame();
+        }
         while (SDL_PollEvent(&pre_event_ptr)) {
             if (pre_event_ptr.window.windowID != 0 && pre_event_ptr.window.windowID != window_id) {
                 pre_event.push_back(pre_event_ptr);

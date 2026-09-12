@@ -1,1 +1,0 @@
-vk::raii::Context context;
