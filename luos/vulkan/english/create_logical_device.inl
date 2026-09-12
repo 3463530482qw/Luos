@@ -3,14 +3,24 @@ namespace Gnik_luos {
         if (device != vk::raii::Device{nullptr}) {
             return;
         }
-        float queue_priority = 1.0f;
 
+        // 窗口呈现必须的扩展:确认可用再启用,否则 vkCreateDevice 会直接失败
+        std::vector<const char*> device_extension;
+        for (const auto& extension : physical_device.enumerateDeviceExtensionProperties()) {
+            if (strcmp(extension.extensionName, VK_KHR_SWAPCHAIN_EXTENSION_NAME) == 0) {
+                device_extension.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+                break;
+            }
+        }
+        if (device_extension.empty()) {
+            throw std::runtime_error("Vulkan::create_logical_device => The device does not support VK_KHR_swapchain");
+        }
+
+        float queue_priority = 1.0f;
         vk::DeviceQueueCreateInfo queue_create_info;
         queue_create_info.setQueueFamilyIndex(graphics_queue_family);
         queue_create_info.setQueueCount(1);
         queue_create_info.setPQueuePriorities(&queue_priority);
-
-        std::vector<const char*> device_extension{VK_KHR_SWAPCHAIN_EXTENSION_NAME};
 
         vk::PhysicalDeviceFeatures device_features;
 

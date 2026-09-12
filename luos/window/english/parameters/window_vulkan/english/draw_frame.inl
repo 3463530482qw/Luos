@@ -18,6 +18,8 @@ namespace Gnik_luos {
         }
 
         synchronization.wait(vulkan->device);
+
+        // 与移植前一致:命令缓冲每帧重录(带单次提交标记,不能复用上一次的录制结果)
         record_command_buffers();
         submit_frame();
     }

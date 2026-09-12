@@ -1,6 +1,6 @@
 namespace Gnik_luos {
     #ifndef NDEBUG
-        void Vulkan::create_debug_messenger(Vulkan_info& vulkan_info) {
+        bool Vulkan::create_debug_messenger(Vulkan_info& vulkan_info) {
             auto available_layers = context.enumerateInstanceLayerProperties();
             for (const auto& layer : available_layers) {
                 if (strcmp(layer.layerName, "VK_LAYER_KHRONOS_validation") == 0) {
@@ -9,7 +9,20 @@ namespace Gnik_luos {
                 }
             }
             if (layers.empty()) {
-                return;
+                return false;
+            }
+
+            // 扩展不一定存在:确认可用后再启用,否则 vkCreateInstance 会直接失败
+            auto available_extensions = context.enumerateInstanceExtensionProperties();
+            bool support_debug_utils = false;
+            for (const auto& extension : available_extensions) {
+                if (strcmp(extension.extensionName, VK_EXT_DEBUG_UTILS_EXTENSION_NAME) == 0) {
+                    support_debug_utils = true;
+                    break;
+                }
+            }
+            if (!support_debug_utils) {
+                return false;
             }
             vulkan_info.extension.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 
@@ -22,10 +35,13 @@ namespace Gnik_luos {
             debug_create_info.setMessageType(vulkan_info.debug_info.message_type);
             debug_create_info.setPfnUserCallback(debug_message_callback);
             debug_create_info.setPUserData(nullptr);
+            // 实例创建期的消息靠这条 pNext 链兜住(此时 messenger 尚未建立)
             debug_create_info.setPNext(&validation_features);
+            return true;
         }
     #else
-        void Vulkan::create_debug_messenger(Vulkan_info& vulkan_info) {
+        bool Vulkan::create_debug_messenger(Vulkan_info& vulkan_info) {
+            return false;
         }
     #endif
 }

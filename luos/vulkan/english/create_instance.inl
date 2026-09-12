@@ -17,8 +17,9 @@ namespace Gnik_luos {
         application_info.setEngineVersion(VK_MAKE_VERSION(1, 0, 0));
         application_info.setApiVersion(vk::ApiVersion14);
 
+        bool support_debug_utils = false;
         #ifndef NDEBUG
-            create_debug_messenger(vulkan_info);
+            support_debug_utils = create_debug_messenger(vulkan_info);
         #endif
 
         vk::InstanceCreateInfo create_info;
@@ -34,5 +35,13 @@ namespace Gnik_luos {
         #endif
 
         instance = vk::raii::Instance(context, create_info);
+
+        #ifndef NDEBUG
+            // messenger 用局部量:它只需活到本函数结束。
+            // 若做成成员,析构顺序会晚于 instance(实例先销毁),校验层会报 leaked objects。
+            if (support_debug_utils) {
+                vk::raii::DebugUtilsMessengerEXT messenger(instance, debug_create_info);
+            }
+        #endif
     }
 }

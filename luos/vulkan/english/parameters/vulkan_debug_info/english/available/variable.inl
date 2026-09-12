@@ -9,4 +9,3 @@ vk::DebugUtilsMessageTypeFlagsEXT message_type{
 };
 bool best_practices{true};
 bool synchronization_validation{true};
-const void* pnext{nullptr};
