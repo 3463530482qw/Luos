@@ -15,5 +15,8 @@ namespace Gnik_luos {
             window_vulkan.command_buffer.viewport_height = (static_cast<float>(height) - window_vulkan.command_buffer.viewport_height) / 2.0f;
         }
         logic_aspectratio = static_cast<float>(window_vulkan.command_buffer.viewport_width) / static_cast<float>(logic_width);
+        window_vulkan.frame_buffer_resize = true;
+        window_vulkan.pending_width = width;
+        window_vulkan.pending_height = height;
     }
 }
