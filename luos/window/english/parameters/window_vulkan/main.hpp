@@ -1,4 +1,3 @@
-#pragma once
 #include "english/parameters/viewport/main.hpp"
 #include "english/parameters/surface/main.hpp"
 #include "english/parameters/swapchain/main.hpp"
@@ -39,7 +38,6 @@ namespace Gnik_luos {
 #include "english/parameters/synchronization/english/create.inl"
 #include "english/parameters/synchronization/english/wait.inl"
 #include "english/find_graphics_queue_family.inl"
-#include "english/initialize.inl"
 #include "english/create_swapchain.inl"
 #include "english/viewport_rect.inl"
 #include "english/record_command_buffers.inl"
@@ -47,3 +45,4 @@ namespace Gnik_luos {
 #include "english/submit_frame.inl"
 #include "english/rebuild.inl"
 #include "english/destroy.inl"
+#include "english/destructor.inl"

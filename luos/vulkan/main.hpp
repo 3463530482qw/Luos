@@ -1,4 +1,3 @@
-#pragma once
 #include "english/parameters/vulkan_debug_info/main.hpp"
 #include "english/parameters/vulkan_info/main.hpp"
 namespace Gnik_luos {

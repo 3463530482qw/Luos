@@ -1,35 +1,28 @@
 namespace Gnik_luos {
-    void Window_vulkan::initialize(
-        Vulkan& vulkan_engine,
-        SDL_Window* window,
-        uint32_t window_width,
-        uint32_t window_height,
-        float window_aspectratio,
-        uint32_t logic_width
-    ) {
+    void Window_vulkan::initialize(Vulkan& vulkan_engine) {
         if (initialized) {
             throw std::runtime_error("Window_vulkan::initialize => The window vulkan module has been initialized");
         }
 
-        vulkan = &vulkan_engine;   // 借用:火山由应用持有与销毁,窗口不负责其生命周期
-        surface.create(window, vulkan->instance);
+        vulkan = &vulkan_engine;   // 借用:火山由应用持有与销毁,窗口火山不负责其生命周期
+        surface.create(host->id, vulkan->instance);
         find_graphics_queue_family();
         vulkan->create_logical_device(graphics_queue_family);
         command_pool.create(vulkan->device, graphics_queue_family);
 
-        pending_width = window_width;
-        pending_height = window_height;
-        pending_aspectratio = window_aspectratio;
-        pending_logic_width = logic_width;
+        pending_width = host->width;
+        pending_height = host->height;
+        pending_aspectratio = host->aspectratio;
+        pending_logic_width = host->logic_width;
         initialized = true;
 
         // 窗口最小化时尺寸为 0,表面尚不可用:交换链留到尺寸恢复后由 rebuild 建立
-        if (window_width == 0 || window_height == 0) {
+        if (pending_width == 0 || pending_height == 0) {
             rebuild_flag = true;
             return;
         }
 
-        create_swapchain(window_width, window_height, window_aspectratio, logic_width);
+        create_swapchain(pending_width, pending_height, pending_aspectratio, pending_logic_width);
         rebuild_flag = false;
     }
 
@@ -44,12 +37,5 @@ namespace Gnik_luos {
             pending_aspectratio = window_aspectratio;
         }
         rebuild_flag = true;
-    }
-
-    Window_vulkan::~Window_vulkan() {
-        // 显式销毁由 destroy 负责,这里只保证句柄与借用指针不残留
-        initialized = false;
-        rebuild_flag = false;
-        vulkan = nullptr;
     }
 }

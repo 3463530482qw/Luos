@@ -9,6 +9,7 @@ namespace Gnik_luos {
         public:
     };
     using 键盘 = Key_board;
+    class Window;
 }
 #include "english/press.inl"
 #include "english/hold.inl"

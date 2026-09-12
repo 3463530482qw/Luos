@@ -1,4 +1,3 @@
-#pragma once
 namespace Gnik_luos {
     class Vulkan_debug_info {
         public:

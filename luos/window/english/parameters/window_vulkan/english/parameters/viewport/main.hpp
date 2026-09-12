@@ -1,5 +1,5 @@
-#pragma once
 namespace Gnik_luos {
+    class Vulkan;
     class Vulkan_viewport {
         public:
             #include "english/available/variable.inl"

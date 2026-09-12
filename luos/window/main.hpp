@@ -3,7 +3,6 @@
 #include "english/parameters/time/main.hpp"
 #include "english/parameters/mouse/main.hpp"
 #include "english/parameters/key_board/main.hpp"
-#include "luos/vulkan/main.hpp"
 #include "english/parameters/window_vulkan/main.hpp"
 namespace Gnik_luos {
     class Window {
@@ -16,9 +15,14 @@ namespace Gnik_luos {
             #include "english/available/internal/variable.inl"
         private:
             #include "english/available/internal/function.inl"
+        public:
+            Window();
+            ~Window();
     };
     using 窗口 = Window;
 }
+// initialize 需要 Window 完整定义(参数全部取自宿主窗口),故在 Window 之后引入
+#include "english/parameters/window_vulkan/english/initialize.inl"
 #include "english/position_adjustment/main.inl"
 #include "english/resize.inl"
 #include "english/setting/setting.inl"
@@ -28,3 +32,4 @@ namespace Gnik_luos {
 #include "english/icon.inl"
 #include "english/run.inl"
 #include "english/close.inl"
+#include "main.inl"

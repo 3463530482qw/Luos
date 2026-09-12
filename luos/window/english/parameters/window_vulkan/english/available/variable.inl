@@ -6,3 +6,4 @@ Vulkan_framebuffer framebuffer;
 Vulkan_command_pool command_pool;
 Vulkan_command_buffer command_buffer;
 Vulkan_synchronization synchronization;
+Window* host{nullptr};   // 宿主窗口,由 Window 构造函数回指

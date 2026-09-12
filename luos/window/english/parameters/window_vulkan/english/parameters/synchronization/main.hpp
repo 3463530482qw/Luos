@@ -1,4 +1,3 @@
-#pragma once
 namespace Gnik_luos {
     class Vulkan_synchronization {
         public:
