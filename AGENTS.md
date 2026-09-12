@@ -1,4 +1,9 @@
 # 工作规范
+项目位置：D:\MemorySea
+库位置:D:\Luos
+llvm-ucrt-mingw编译器及部分第三方库:D:\mingw64
+vulakn位置:C:\vulkan
+
 变量命名采用纯小写,应当避免大写.多个单词可用下划线链接.格式 单词_单词
 
 跨模块变量定义到vmain,vmode
