@@ -1,4 +1,4 @@
-#include "english/parameters/windowinfo/main.hpp"
+#include "english/parameters/window_info/main.hpp"
 #include "english/parameters/create_info/main.hpp"
 #include "english/parameters/time/main.hpp"
 #include "english/parameters/mouse/main.hpp"
