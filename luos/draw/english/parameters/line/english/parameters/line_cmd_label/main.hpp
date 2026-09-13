@@ -14,5 +14,7 @@ namespace Gnik_luos {
             bool fill_inside{false};    //封边后填充形状内部
 
             bool fill_outside{false};   //填充相机画面里形状之外的区域
+
+            bool fill_above{false};     //两样填充盖在线条之上(默认压在线条之下)
     };
 }

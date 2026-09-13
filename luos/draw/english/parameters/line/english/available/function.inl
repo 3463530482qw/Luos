@@ -17,5 +17,6 @@ Draw_line_cmd& solid(bool on = true);
 Draw_line_cmd& connect(bool on = true);
 Draw_line_cmd& fill_inside(uint8_t red, uint8_t green, uint8_t blue, float alpha = 1.0f);
 Draw_line_cmd& fill_outside(uint8_t red, uint8_t green, uint8_t blue, float alpha = 1.0f);
+Draw_line_cmd& fill_above(bool on = true);   // 填充改到线条之上
 Draw_line_cmd& end(bool on = true);
 Draw_line_cmd& rotation(float radians, float center_x, float center_y);

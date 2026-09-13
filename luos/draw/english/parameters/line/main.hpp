@@ -46,5 +46,6 @@ namespace Gnik_luos {
 #include "english/connect.inl"
 #include "english/fill_inside.inl"
 #include "english/fill_outside.inl"
+#include "english/fill_above.inl"
 #include "english/end.inl"
 #include "english/rotation.inl"
