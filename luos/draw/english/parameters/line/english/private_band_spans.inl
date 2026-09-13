@@ -3,10 +3,10 @@ namespace Gnik_luos {
     // 相邻两项配对就是形状内部的一段(偶奇规则);带的边界都取在顶点 y 上,所以边只会整条跨带
     void Draw_line_cmd::private_band_spans(float top, float bottom, std::vector<std::array<float, 2>>& out) const {
         out.clear();
-        size_t count = private_point.size();
+        size_t count = private_path.size();
         for (size_t index = 0; index < count; index++) {
-            const Line_point& begin = private_point[index];
-            const Line_point& end = private_point[(index + 1) % count];
+            const Line_point& begin = private_path[index];
+            const Line_point& end = private_path[(index + 1) % count];
             bool spans = (begin.y <= top && end.y >= bottom) || (end.y <= top && begin.y >= bottom);
             if (!spans) {
                 continue;   // 不跨带(水平边、退化边都落在这一支)

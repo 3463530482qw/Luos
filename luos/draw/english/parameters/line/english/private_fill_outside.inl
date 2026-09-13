@@ -2,7 +2,7 @@ namespace Gnik_luos {
     void Draw_line_cmd::private_fill_outside() {
         // 外部填充:相机画面矩形挖掉形状本身
         // 和内部填充同一套梯形带,每带把形状占掉的段跳过去,剩下的就是画面里形状之外的部分
-        if (!label.fill_outside || camera == nullptr || private_point.size() < 3) {
+        if (!label.fill_outside || camera == nullptr || private_path.size() < 3) {
             return;
         }
         View_rect view = camera->view();
@@ -31,8 +31,8 @@ namespace Gnik_luos {
             return;
         }
         std::vector<float> cut{view.top, view.bottom};
-        cut.reserve(private_point.size() + 2);
-        for (const Line_point& point : private_point) {
+        cut.reserve(private_path.size() + 2);
+        for (const Line_point& point : private_path) {
             cut.push_back(point.y);
         }
         std::sort(cut.begin(), cut.end());

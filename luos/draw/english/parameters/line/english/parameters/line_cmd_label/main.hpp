@@ -1,8 +1,8 @@
 namespace Gnik_luos {
     class Line_cmd_label {
         public:
-        //放一块的是冲突项
             bool solid{true};
+
             bool dashed{false};
 
             bool gradient{}; 
@@ -17,15 +17,19 @@ namespace Gnik_luos {
 
             bool fill_above{false};     //两样填充盖在线条之上(默认压在线条之下)
 
-            //线条边缘怎么封(放一块的是冲突项):矩形是现在的做法,四种三角形按 封边大小 摆位
+            //线条边缘怎么封(放一块的是冲突项):四种三角形只差延伸点落在哪,两种半圆是圆头的正负形
             bool edge_rect{true};    //端头平切,不封边
 
-            bool edge_top{false};    //不回缩,三角形尖落在端头外 大小 处
+            bool edge_top{false};    //回缩 大小/2,延伸点在线宽上沿、原端头外 大小/2
 
-            bool edge_middle{false}; //端头回缩 大小/2,尖落在原端头外 大小/2 处
+            bool edge_middle{false}; //同回缩,延伸点落在线宽中线
 
-            bool edge_bottom{false}; //端头回缩 大小,尖落在原端头
+            bool edge_bottom{false}; //同回缩,延伸点在线宽下沿
 
-            bool edge_both{false};   //回缩 大小,一整块三角形高 2×大小
+            bool edge_both{false};   //负形:端面挖掉一个三角形,上下两块尖一直留到原端头
+
+            bool edge_round{false};        //半圆正形:端头鼓出一个半圆(直径 = 封边大小)
+
+            bool edge_round_notch{false};  //半圆负形:端面挖进一个半圆(直径 = 封边大小)
     };
 }

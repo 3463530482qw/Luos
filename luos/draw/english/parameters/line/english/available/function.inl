@@ -23,5 +23,8 @@ Draw_line_cmd& edge_rect(bool on = true);      // 端头平切(现在的做法)
 Draw_line_cmd& edge_top(float size);           // 封边:上
 Draw_line_cmd& edge_middle(float size);        // 封边:中
 Draw_line_cmd& edge_bottom(float size);        // 封边:下
-Draw_line_cmd& edge_both(float size);          // 封边:上下一块(与 end 互斥)
+Draw_line_cmd& edge_both(float size);          // 封边:上下一块(三角形负形)
+Draw_line_cmd& edge_round(float size);         // 封边:半圆正形(直径 = size)
+Draw_line_cmd& edge_round_notch(float size);   // 封边:半圆负形
+Draw_line_cmd& smooth(float value);            // 拐点圆滑度 0~1
 Draw_line_cmd& rotation(float radians, float center_x, float center_y);

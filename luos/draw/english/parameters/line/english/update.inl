@@ -6,6 +6,8 @@ namespace Gnik_luos {
         // 每次重算都从"没有上一段"起,否则起头会冒出一个接头
         private_prev_valid = false;
         private_first_valid = false;
+        // 拐点圆角(改路径本身那种)以后再做:private_round_path 先不接上
+        private_path = private_point;
         // 填充单独成层:算好交给 Draw 排在全部线条之前,只填充不画线也行
         private_fill_inside();
         private_fill_outside();
@@ -13,7 +15,7 @@ namespace Gnik_luos {
         if (private_step.empty()) {
             return;
         }
-        if (private_point.size() < 2) {
+        if (private_path.size() < 2) {
             // 没走链条:画变量给的那一条,两头都是开放的端头
             private_u0 = 0.0f;
             private_u1 = 1.0f;
@@ -28,25 +30,25 @@ namespace Gnik_luos {
             private_segment(x1, y1, x2, y2);
             return;
         }
-        const Line_point& head = private_point.front();
-        const Line_point& tail = private_point.back();
+        const Line_point& head = private_path.front();
+        const Line_point& tail = private_path.back();
         // 收尾:末点没回到起点时补一段末点→起点
         float tail_dx = head.x - tail.x;
         float tail_dy = head.y - tail.y;
         float tail_length = std::sqrt(tail_dx * tail_dx + tail_dy * tail_dy);
         bool tailing = ended && tail_length > 0.0f;
         private_path_length = tailing ? tail_length : 0.0f;
-        for (size_t index = 1; index < private_point.size(); index++) {
-            float dx = private_point[index].x - private_point[index - 1].x;
-            float dy = private_point[index].y - private_point[index - 1].y;
+        for (size_t index = 1; index < private_path.size(); index++) {
+            float dx = private_path[index].x - private_path[index - 1].x;
+            float dy = private_path[index].y - private_path[index - 1].y;
             private_path_length += std::sqrt(dx * dx + dy * dy);
         }
         // 逐段跑管线:进度按累计弧长分配,虚线相位也顺着弧长接下去
-        const size_t last = private_point.size() - 1;
+        const size_t last = private_path.size() - 1;
         float passed = 0.0f;
-        for (size_t index = 1; index < private_point.size(); index++) {
-            const Line_point& begin = private_point[index - 1];
-            const Line_point& end = private_point[index];
+        for (size_t index = 1; index < private_path.size(); index++) {
+            const Line_point& begin = private_path[index - 1];
+            const Line_point& end = private_path[index];
             float dx = end.x - begin.x;
             float dy = end.y - begin.y;
             float length = std::sqrt(dx * dx + dy * dy);

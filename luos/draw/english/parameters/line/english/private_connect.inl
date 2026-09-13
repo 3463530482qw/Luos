@@ -41,6 +41,69 @@ namespace Gnik_luos {
             private_pixel_cells(corner, private_u0, private_u0);
             return;
         }
+        if (corner_smooth > 0.0f) {
+            // 拐点圆角:路径不动,只把外侧那个角从斜接点收成一段圆弧
+            // 圆滑度 0 就是斜接点,1 收到半径 = 半线宽的圆弧(round join 那种)
+            float outer_x = mx - bx;
+            float outer_y = my - by;
+            float outer_length = std::sqrt(outer_x * outer_x + outer_y * outer_y);
+            if (outer_length > 0.0001f) {
+                outer_x /= outer_length;
+                outer_y /= outer_length;
+                float peak_reach = outer_length + (half - outer_length) * corner_smooth;
+                float peak_x = bx + outer_x * peak_reach;
+                float peak_y = by + outer_y * peak_reach;
+                // 过 p1、peak、p2 的圆,从圆心把 p1 扫到 p2
+                float a2 = p1x * p1x + p1y * p1y;
+                float b2 = peak_x * peak_x + peak_y * peak_y;
+                float c2 = p2x * p2x + p2y * p2y;
+                float divisor = 2.0f * (p1x * (peak_y - p2y) + peak_x * (p2y - p1y) + p2x * (p1y - peak_y));
+                if (std::fabs(divisor) > 0.0001f) {
+                    float center_x = (a2 * (peak_y - p2y) + b2 * (p2y - p1y) + c2 * (p1y - peak_y)) / divisor;
+                    float center_y = (a2 * (p2x - peak_x) + b2 * (p1x - p2x) + c2 * (peak_x - p1x)) / divisor;
+                    float radius = std::sqrt((p1x - center_x) * (p1x - center_x) + (p1y - center_y) * (p1y - center_y));
+                    float start = std::atan2(p1y - center_y, p1x - center_x);
+                    float middle = std::atan2(peak_y - center_y, peak_x - center_x);
+                    float end = std::atan2(p2y - center_y, p2x - center_x);
+                    while (start - middle > 3.14159265f) {
+                        start -= 6.28318531f;
+                    }
+                    while (start - middle < -3.14159265f) {
+                        start += 6.28318531f;
+                    }
+                    while (end - middle > 3.14159265f) {
+                        end -= 6.28318531f;
+                    }
+                    while (end - middle < -3.14159265f) {
+                        end += 6.28318531f;
+                    }
+                    const int steps = 10;
+                    float previous_x = p1x;
+                    float previous_y = p1y;
+                    for (int index = 1; index <= steps; index++) {
+                        // 两端强制落在原来的角点上,免得弧算出来差一点点留缝
+                        float x = p2x;
+                        float y = p2y;
+                        if (index < steps) {
+                            float angle = start + (end - start) * (static_cast<float>(index) / steps);
+                            x = center_x + radius * std::cos(angle);
+                            y = center_y + radius * std::sin(angle);
+                        }
+                        Vertex slice[3] = {
+                            {bx, by, private_u0, 0.0f},
+                            {previous_x, previous_y, private_u0, 0.0f},
+                            {x, y, private_u0, 0.0f}
+                        };
+                        for (int i = 0; i < 3; i++) {
+                            private_vertex.push_back(slice[i]);
+                        }
+                        previous_x = x;
+                        previous_y = y;
+                    }
+                    return;
+                }
+            }
+        }
         Vertex corner[6] = {
             {p1x, p1y, private_u0, 0.0f},
             {mx,  my,  private_u0, 0.0f},

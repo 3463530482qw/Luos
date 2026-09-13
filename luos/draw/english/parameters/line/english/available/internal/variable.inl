@@ -2,6 +2,7 @@
 std::vector<Vertex> private_vertex{};                    // 本命令这条路径的几何
 std::vector<Vertex> private_fill_vertex{};               // 本命令的填充几何(单独一层,排在全部线条之前)
 std::vector<Line_point> private_point{};                 // 链条顶点,每点带那一段的颜色快照
+std::vector<Line_point> private_path{};                  // 本次真正拿来画的路径(拐点圆角后就比 private_point 密)
 std::vector<void (Draw_line_cmd::*)()> private_step{};   // 效果管线
 Line_cmd_label private_label{};                          // 上次路由的标志快照
 bool private_rotate_on{false};
@@ -32,6 +33,6 @@ bool private_edge_on{false};                             // 本次是否要封�
 float private_cap_retract{0.0f};                         // 端头回缩量
 float private_cap_forward{0.0f};                         // 延伸点离回缩后端头多远
 float private_cap_lateral{0.0f};                         // 延伸点偏在线宽的上沿(-1)/中线(0)/下沿(+1)
-bool private_cap_notch{false};                           // 上下一块:端头挖一个三角形负形
+bool private_cap_notch{false};                           // 上下一块/半圆负形:端头挖一个三角形负形
 bool private_cap_begin{false};                           // 本段起点那一头要不要封
 bool private_cap_end{false};                             // 本段终点那一头要不要封

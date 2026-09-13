@@ -21,3 +21,4 @@ void private_edge_pick(bool& mode, float size);
 void private_edge_place();
 void private_edge_cap();
 void private_edge_triangle(const std::array<std::array<float, 2>, 4>& corner);
+void private_round_path();

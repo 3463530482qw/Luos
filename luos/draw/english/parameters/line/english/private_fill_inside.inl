@@ -2,14 +2,14 @@ namespace Gnik_luos {
     void Draw_line_cmd::private_fill_inside() {
         // 内部填充:按顶点 y 把形状切成水平梯形带,每带的交点按偶奇规则配成段再铺四边形
         // 边界都是直线段,梯形带与形状贴合;凹形状、自交形状(例如原路折回的尖刺)也不会多填
-        if (!label.fill_inside || private_point.size() < 3) {
+        if (!label.fill_inside || private_path.size() < 3) {
             return;
         }
         if (label.pixelated && pixel_size > 0.0f) {
             // 像素化:逐格行采样,行中心落在形状里才铺这一行,列也按格心取
-            float min_y = private_point.front().y;
-            float max_y = private_point.front().y;
-            for (const Line_point& point : private_point) {
+            float min_y = private_path.front().y;
+            float max_y = private_path.front().y;
+            for (const Line_point& point : private_path) {
                 min_y = std::min(min_y, point.y);
                 max_y = std::max(max_y, point.y);
             }
@@ -31,8 +31,8 @@ namespace Gnik_luos {
             return;
         }
         std::vector<float> cut{};
-        cut.reserve(private_point.size());
-        for (const Line_point& point : private_point) {
+        cut.reserve(private_path.size());
+        for (const Line_point& point : private_path) {
             cut.push_back(point.y);
         }
         std::sort(cut.begin(), cut.end());
