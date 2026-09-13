@@ -5,6 +5,8 @@ void private_endpoint();
 void private_rotation();
 void private_normal();
 void private_connect();
+void private_connect_miter();
+void private_connect_round();
 void private_geometry();
 void private_quad(float ax, float ay, float bx, float by, float u0, float u1);
 void private_dashed();

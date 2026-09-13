@@ -16,6 +16,7 @@ float private_half_width{0.0f};                          // 本段实际用的�
 float private_dx{0.0f}, private_dy{0.0f};                // 本段单位方向
 float private_prev_dx{0.0f}, private_prev_dy{0.0f};      // 上一段单位方向
 bool private_prev_valid{false};                          // 上一段有效(退化段不参与补接头)
+std::array<std::array<float, 2>, 4> private_corner{};    // 拐角的四个点:两个外侧角点、斜接点、拐点
 float private_first_ax{0.0f}, private_first_ay{0.0f};    // 首段进管线的起点
 float private_first_dx{0.0f}, private_first_dy{0.0f};    // 首段单位方向(闭合时补首尾接头用)
 bool private_first_valid{false};
