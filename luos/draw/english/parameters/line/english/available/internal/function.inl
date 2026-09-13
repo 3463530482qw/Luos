@@ -1,0 +1,11 @@
+void router();
+void private_segment(float start_x, float start_y, float end_x, float end_y);
+void private_segment_colors(const Line_point& point, bool open);
+void private_endpoint();
+void private_rotation();
+void private_normal();
+void private_geometry();
+void private_quad(float ax, float ay, float bx, float by, float u0, float u1);
+void private_dashed();
+void private_gradient();
+void private_single_color();

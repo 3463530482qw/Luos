@@ -1,0 +1,36 @@
+#include "english/parameters/line_cmd_label/main.hpp"
+#include "english/parameters/line_point.inl"
+#include "../vertex.inl"
+namespace Gnik_luos {
+    class Draw_line_cmd {
+        public:
+            #include "english/available/variable.inl"
+        public:
+            #include "english/available/function.inl"
+        private:
+            #include "english/available/internal/variable.inl"
+        private:
+            #include "english/available/internal/function.inl"
+    };
+}
+#include "english/router.inl"
+#include "english/update.inl"
+#include "english/vertex.inl"
+#include "english/private_segment.inl"
+#include "english/private_segment_colors.inl"
+#include "english/private_endpoint.inl"
+#include "english/private_rotation.inl"
+#include "english/private_normal.inl"
+#include "english/private_geometry.inl"
+#include "english/private_quad.inl"
+#include "english/private_dashed.inl"
+#include "english/private_gradient.inl"
+#include "english/private_single_color.inl"
+#include "english/from.inl"
+#include "english/to.inl"
+#include "english/line_width.inl"
+#include "english/color.inl"
+#include "english/gradient.inl"
+#include "english/dash.inl"
+#include "english/solid.inl"
+#include "english/rotation.inl"

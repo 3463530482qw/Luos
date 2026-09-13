@@ -22,6 +22,9 @@ wiall用于#include标准头文件,第三方库,自定义大类,除了wiall其�
 
 如果犯错了可以在本文件内进行添加记录保证不会再犯.
 
+记录:批量替换标识符要按整词或带分隔符匹配.曾用 substring 把 lable 换成 label,连 "available" 里的 lable 一起改掉,
+污染了 include 路径(availabel),事后才手工修回.
+
 # 类标准定义
 include parameters(用到的数据结构体或子类)
 namespace youklx {

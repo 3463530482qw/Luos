@@ -14,6 +14,8 @@ namespace Gnik_luos {
         pending_height = host->height;
         pending_aspectratio = host->aspectratio;
         pending_logic_width = host->logic_width;
+        logic_width = host->logic_width;
+        logic_height = host->logic_height;
         initialized = true;
 
         // 窗口最小化时尺寸为 0,表面尚不可用:交换链留到尺寸恢复后由 rebuild 建立

@@ -6,6 +6,7 @@
 #include "english/parameters/command_pool/main.hpp"
 #include "english/parameters/command_buffer/main.hpp"
 #include "english/parameters/synchronization/main.hpp"
+#include "english/parameters/line_render/main.hpp"
 namespace Gnik_luos {
     class Window_vulkan {
         public:
