@@ -1,6 +1,7 @@
 #include "english/parameters/line/main.hpp"
 namespace Gnik_luos {
     class Window;
+    class Camera;
     class Draw {
         public:
             #include "english/available/function.inl"
@@ -10,3 +11,4 @@ namespace Gnik_luos {
     using 绘制 = Draw;
 }
 #include "english/draw.inl"
+#include "english/bind_camera.inl"

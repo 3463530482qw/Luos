@@ -1,5 +1,6 @@
 //用于存放顶点缓存之类的
 std::vector<Vertex> private_vertex{};                    // 本命令这条路径的几何
+std::vector<Vertex> private_fill_vertex{};               // 本命令的填充几何(单独一层,排在全部线条之前)
 std::vector<Line_point> private_point{};                 // 链条顶点,每点带那一段的颜色快照
 std::vector<void (Draw_line_cmd::*)()> private_step{};   // 效果管线
 Line_cmd_label private_label{};                          // 上次路由的标志快照

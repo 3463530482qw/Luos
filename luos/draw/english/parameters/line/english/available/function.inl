@@ -1,5 +1,6 @@
 void update();   // 由 Draw::draw 调用
 const std::vector<Vertex>& vertex() const;
+const std::vector<Vertex>& fill_vertex() const;   // 填充单独一层,由 Draw::draw 排在全部线条之前
 // 链式设置:返回自身并置更新标志
 Draw_line_cmd& from(float x, float y);
 Draw_line_cmd& to(float x, float y);
@@ -13,5 +14,7 @@ Draw_line_cmd& gradient(
 Draw_line_cmd& dash(float length, float gap);
 Draw_line_cmd& solid(bool on = true);
 Draw_line_cmd& connect(bool on = true);
+Draw_line_cmd& fill_inside(uint8_t red, uint8_t green, uint8_t blue, float alpha = 1.0f);
+Draw_line_cmd& fill_outside(uint8_t red, uint8_t green, uint8_t blue, float alpha = 1.0f);
 Draw_line_cmd& end(bool on = true);
 Draw_line_cmd& rotation(float radians, float center_x, float center_y);

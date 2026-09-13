@@ -2,9 +2,13 @@ namespace Gnik_luos {
     void Draw_line_cmd::update() {
         router();
         private_vertex.clear();
+        private_fill_vertex.clear();
         // 每次重算都从"没有上一段"起,否则起头会冒出一个接头
         private_prev_valid = false;
         private_first_valid = false;
+        // 填充单独成层:算好交给 Draw 排在全部线条之前,只填充不画线也行
+        private_fill_inside();
+        private_fill_outside();
         if (private_step.empty()) {
             return;
         }

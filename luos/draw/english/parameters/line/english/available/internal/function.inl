@@ -10,3 +10,6 @@ void private_quad(float ax, float ay, float bx, float by, float u0, float u1);
 void private_dashed();
 void private_gradient();
 void private_single_color();
+void private_fill_inside();
+void private_fill_outside();
+void private_band_spans(float top, float bottom, std::vector<std::array<float, 2>>& out) const;
