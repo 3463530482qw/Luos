@@ -13,7 +13,7 @@ namespace Gnik_luos {
         if (std::fabs(turn) < 0.0001f) {
             return;   // 直着接,本来就没有缺口
         }
-        float half = thickness * 0.5f;
+        float half = private_half_width;
         float o1x = (turn > 0.0f) ?  d1y : -d1y;
         float o1y = (turn > 0.0f) ? -d1x :  d1x;
         float o2x = (turn > 0.0f) ?  d2y : -d2y;
@@ -33,6 +33,13 @@ namespace Gnik_luos {
             float shrink = limit / reach;
             mx = bx + (mx - bx) * shrink;
             my = by + (my - by) * shrink;
+        }
+        if (label.pixelated && pixel_size > 0.0f) {
+            const std::array<std::array<float, 2>, 4> corner{{
+                {p1x, p1y}, {mx, my}, {p2x, p2y}, {bx, by}
+            }};
+            private_pixel_cells(corner, private_u0, private_u0);
+            return;
         }
         Vertex corner[6] = {
             {p1x, p1y, private_u0, 0.0f},

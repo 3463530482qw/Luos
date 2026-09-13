@@ -5,6 +5,31 @@ namespace Gnik_luos {
         if (!label.fill_inside || private_point.size() < 3) {
             return;
         }
+        if (label.pixelated && pixel_size > 0.0f) {
+            // 像素化:逐格行采样,行中心落在形状里才铺这一行,列也按格心取
+            float min_y = private_point.front().y;
+            float max_y = private_point.front().y;
+            for (const Line_point& point : private_point) {
+                min_y = std::min(min_y, point.y);
+                max_y = std::max(max_y, point.y);
+            }
+            std::vector<float> crossing{};
+            int first_row = static_cast<int>(std::floor(min_y / pixel_size));
+            int last_row = static_cast<int>(std::ceil(max_y / pixel_size)) - 1;
+            for (int row = first_row; row <= last_row; row++) {
+                private_crossings((static_cast<float>(row) + 0.5f) * pixel_size, crossing);
+                for (size_t index = 0; index + 1 < crossing.size(); index += 2) {
+                    private_pixel_rect(
+                        private_pixel_col(crossing[index]),
+                        private_pixel_col(crossing[index + 1]) - 1,
+                        row,
+                        inside_color,
+                        inside_alpha
+                    );
+                }
+            }
+            return;
+        }
         std::vector<float> cut{};
         cut.reserve(private_point.size());
         for (const Line_point& point : private_point) {

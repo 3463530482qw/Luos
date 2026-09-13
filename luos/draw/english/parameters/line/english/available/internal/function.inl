@@ -13,3 +13,7 @@ void private_single_color();
 void private_fill_inside();
 void private_fill_outside();
 void private_band_spans(float top, float bottom, std::vector<std::array<float, 2>>& out) const;
+void private_crossings(float y, std::vector<float>& out) const;
+int private_pixel_col(float x) const;
+void private_pixel_rect(int first_col, int last_col, int row, const std::array<uint8_t, 3>& color, float alpha);
+void private_pixel_cells(const std::array<std::array<float, 2>, 4>& corner, float u0, float u1);

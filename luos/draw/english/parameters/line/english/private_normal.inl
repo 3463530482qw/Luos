@@ -12,9 +12,13 @@ namespace Gnik_luos {
             private_dy = 0.0f;
             return;
         }
-        float half = thickness * 0.5f;
-        private_nx = -dy / private_length * half;
-        private_ny =  dx / private_length * half;
+        float width = thickness;
+        if (label.pixelated && pixel_size > width) {
+            width = pixel_size;   //像素化时线宽至少铺满一个方块,细线才有格子可落
+        }
+        private_half_width = width * 0.5f;
+        private_nx = -dy / private_length * private_half_width;
+        private_ny =  dx / private_length * private_half_width;
         private_dx = dx / private_length;
         private_dy = dy / private_length;
     }

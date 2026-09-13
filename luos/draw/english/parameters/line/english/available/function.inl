@@ -12,6 +12,7 @@ Draw_line_cmd& gradient(
     float start_alpha = 1.0f, float end_alpha = 1.0f
 );
 Draw_line_cmd& dash(float length, float gap);
+Draw_line_cmd& pixelate(float size);   // 打开像素化并给出方块边长;size <= 0 视为关闭
 Draw_line_cmd& solid(bool on = true);
 Draw_line_cmd& connect(bool on = true);
 Draw_line_cmd& fill_inside(uint8_t red, uint8_t green, uint8_t blue, float alpha = 1.0f);

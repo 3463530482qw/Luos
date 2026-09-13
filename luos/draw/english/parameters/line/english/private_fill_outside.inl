@@ -6,6 +6,30 @@ namespace Gnik_luos {
             return;
         }
         View_rect view = camera->view();
+        if (label.pixelated && pixel_size > 0.0f) {
+            // 像素化:逐格行取补集,行与列都夹在相机画面内
+            int first_row = private_pixel_col(view.top);
+            int last_row = private_pixel_col(view.bottom) - 1;
+            int view_first_col = private_pixel_col(view.left);
+            int view_last_col = private_pixel_col(view.right) - 1;
+            std::vector<float> crossing{};
+            for (int row = first_row; row <= last_row; row++) {
+                private_crossings((static_cast<float>(row) + 0.5f) * pixel_size, crossing);
+                int cursor = view_first_col;
+                for (size_t index = 0; index + 1 < crossing.size(); index += 2) {
+                    int first_col = private_pixel_col(crossing[index]);
+                    int last_col = private_pixel_col(crossing[index + 1]) - 1;
+                    if (first_col > cursor) {
+                        private_pixel_rect(cursor, first_col - 1, row, outside_color, outside_alpha);
+                    }
+                    cursor = std::max(cursor, last_col + 1);
+                }
+                if (cursor <= view_last_col) {
+                    private_pixel_rect(cursor, view_last_col, row, outside_color, outside_alpha);
+                }
+            }
+            return;
+        }
         std::vector<float> cut{view.top, view.bottom};
         cut.reserve(private_point.size() + 2);
         for (const Line_point& point : private_point) {

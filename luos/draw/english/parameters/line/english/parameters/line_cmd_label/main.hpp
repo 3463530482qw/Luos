@@ -7,6 +7,8 @@ namespace Gnik_luos {
 
             bool gradient{}; 
 
+            bool pixelated{false};  //按像素方块的颗粒重画几何(斜边与线宽都变成格子)
+
             bool connected{true};   //相接的两段在拐角处是否连上(补外侧缺口;虚线时不补)
 
             bool fill_inside{false};    //封边后填充形状内部
