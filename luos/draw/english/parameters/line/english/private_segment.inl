@@ -9,5 +9,17 @@ namespace Gnik_luos {
         for (void (Draw_line_cmd::*step)() : private_step) {
             (this->*step)();
         }
+        if (!private_prev_valid && private_length > 0.0f) {
+            // 本次重算里的第一段:闭合时补首尾接头要用它的起点与方向
+            private_first_ax = private_ax;
+            private_first_ay = private_ay;
+            private_first_dx = private_dx;
+            private_first_dy = private_dy;
+            private_first_valid = true;
+        }
+        // 本段方向留给下一段补接头
+        private_prev_dx = private_dx;
+        private_prev_dy = private_dy;
+        private_prev_valid = (private_length > 0.0f);
     }
 }

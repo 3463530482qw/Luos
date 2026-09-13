@@ -10,6 +10,12 @@ float private_ex{0.0f}, private_ey{0.0f};
 float private_ax{0.0f}, private_ay{0.0f};                // 本段进管线的两端
 float private_bx{0.0f}, private_by{0.0f};
 float private_nx{0.0f}, private_ny{0.0f};                // 线宽半宽法线
+float private_dx{0.0f}, private_dy{0.0f};                // 本段单位方向
+float private_prev_dx{0.0f}, private_prev_dy{0.0f};      // 上一段单位方向
+bool private_prev_valid{false};                          // 上一段有效(退化段不参与补接头)
+float private_first_ax{0.0f}, private_first_ay{0.0f};    // 首段进管线的起点
+float private_first_dx{0.0f}, private_first_dy{0.0f};    // 首段单位方向(闭合时补首尾接头用)
+bool private_first_valid{false};
 float private_length{0.0f};
 size_t private_emit_begin{0};                            // 本段顶点在缓存中的起点
 float private_u0{0.0f}, private_u1{1.0f};                // 本段两端在整条路径上的进度

@@ -8,10 +8,14 @@ namespace Gnik_luos {
             private_length = 0.0f;
             private_nx = 0.0f;
             private_ny = 0.0f;
+            private_dx = 0.0f;
+            private_dy = 0.0f;
             return;
         }
         float half = thickness * 0.5f;
         private_nx = -dy / private_length * half;
         private_ny =  dx / private_length * half;
+        private_dx = dx / private_length;
+        private_dy = dy / private_length;
     }
 }

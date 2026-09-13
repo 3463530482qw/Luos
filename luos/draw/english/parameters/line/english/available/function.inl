@@ -12,4 +12,6 @@ Draw_line_cmd& gradient(
 );
 Draw_line_cmd& dash(float length, float gap);
 Draw_line_cmd& solid(bool on = true);
+Draw_line_cmd& connect(bool on = true);
+Draw_line_cmd& end(bool on = true);
 Draw_line_cmd& rotation(float radians, float center_x, float center_y);

@@ -9,8 +9,9 @@ namespace Gnik_luos {
         size_t bytes = vertex.size() * sizeof(Vertex);
         if (bytes > vertex_capacity) {
             // 顶点变多就扩容:prepare 在帧围栏之后调用,上一帧的 GPU 工作已结束,重建缓冲安全
+            // 一次翻倍留出余量,免得顶点数在容量附近来回时每帧重建
             vulkan->device.waitIdle();
-            create_vertex_buffer(bytes);
+            create_vertex_buffer(std::max(bytes, vertex_capacity * 2));
         }
 
         // 双缓冲交替:GPU 读上一帧那块,这里写另一块

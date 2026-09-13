@@ -6,6 +6,7 @@ namespace Gnik_luos {
             private_label.solid == label.solid &&
             private_label.dashed == label.dashed &&
             private_label.gradient == label.gradient &&
+            private_label.connected == label.connected &&
             private_rotate_on == rotate_on) {
             return;
         }
@@ -19,6 +20,9 @@ namespace Gnik_luos {
         }
         private_step.push_back(rotate_on ? &Draw_line_cmd::private_rotation : &Draw_line_cmd::private_endpoint);
         private_step.push_back(&Draw_line_cmd::private_normal);
+        if (label.connected && !label.dashed) {
+            private_step.push_back(&Draw_line_cmd::private_connect);
+        }
         private_step.push_back(label.dashed ? &Draw_line_cmd::private_dashed : &Draw_line_cmd::private_geometry);
         private_step.push_back(label.gradient ? &Draw_line_cmd::private_gradient : &Draw_line_cmd::private_single_color);
     }

@@ -10,4 +10,5 @@ std::array<float, 2> a{1.0f, 1.0f};
 float dash_length{6.0f};
 float dash_gap{4.0f};
 Line_cmd_label label{};
+bool ended{false};   //路径首尾封口:末点没回到起点就补一段接回去
 bool cmd_update{true}; //用于缓存更新，调用函数后设为true计算完成后设为flase
