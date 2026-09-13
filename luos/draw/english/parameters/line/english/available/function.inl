@@ -19,4 +19,9 @@ Draw_line_cmd& fill_inside(uint8_t red, uint8_t green, uint8_t blue, float alpha
 Draw_line_cmd& fill_outside(uint8_t red, uint8_t green, uint8_t blue, float alpha = 1.0f);
 Draw_line_cmd& fill_above(bool on = true);   // 填充改到线条之上
 Draw_line_cmd& end(bool on = true);
+Draw_line_cmd& edge_rect(bool on = true);      // 端头平切(现在的做法)
+Draw_line_cmd& edge_top(float size);           // 封边:上
+Draw_line_cmd& edge_middle(float size);        // 封边:中
+Draw_line_cmd& edge_bottom(float size);        // 封边:下
+Draw_line_cmd& edge_both(float size);          // 封边:上下一块(与 end 互斥)
 Draw_line_cmd& rotation(float radians, float center_x, float center_y);

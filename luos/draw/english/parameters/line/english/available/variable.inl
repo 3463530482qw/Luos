@@ -2,6 +2,7 @@ float x1{0.0f}, y1{0.0f};            // 线段起点
 float x2{10.0f}, y2{10.0f};          // 线段终点
 float thickness{1.0f};       //线宽
 float pixel_size{4.0f};      //像素化时一个方块的边长(画布单位)
+float edge_size{0.0f};       //封边大小:端头回缩量与三角形高度都按它算,<=0 就是不封边
 float rotate{0.0f};          // 旋转弧度
 float rox{10.0f}, roy{10.0f};        // 旋转中心
 std::array<uint8_t, 2> r{255, 255};  // 颜色与透明度都按 [起点, 终点] 两端给

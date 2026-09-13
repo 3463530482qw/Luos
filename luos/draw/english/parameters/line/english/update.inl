@@ -9,11 +9,12 @@ namespace Gnik_luos {
         // 填充单独成层:算好交给 Draw 排在全部线条之前,只填充不画线也行
         private_fill_inside();
         private_fill_outside();
+        private_edge_place();
         if (private_step.empty()) {
             return;
         }
         if (private_point.size() < 2) {
-            // 没走链条:画变量给的那一条
+            // 没走链条:画变量给的那一条,两头都是开放的端头
             private_u0 = 0.0f;
             private_u1 = 1.0f;
             private_path_length = std::sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
@@ -22,6 +23,8 @@ namespace Gnik_luos {
             private_eg = g;
             private_eb = b;
             private_ea = a;
+            private_cap_begin = private_edge_on;
+            private_cap_end = private_edge_on;
             private_segment(x1, y1, x2, y2);
             return;
         }
@@ -52,8 +55,13 @@ namespace Gnik_luos {
             passed += length;
             private_u1 = (private_path_length > 0.0f) ? passed / private_path_length : 1.0f;
             private_segment_colors(end, private_trailing || index == last);
+            // 端头只有整条路径的两个自由头,中间拐角不封
+            private_cap_begin = private_edge_on && index == 1;
+            private_cap_end = private_edge_on && index == last;
             private_segment(begin.x, begin.y, end.x, end.y);
         }
+        private_cap_begin = false;
+        private_cap_end = false;
         if (tailing) {
             private_dash_begin = passed;
             private_u0 = (private_path_length > 0.0f) ? passed / private_path_length : 0.0f;

@@ -17,3 +17,7 @@ void private_crossings(float y, std::vector<float>& out) const;
 int private_pixel_col(float x) const;
 void private_pixel_rect(int first_col, int last_col, int row, const std::array<uint8_t, 3>& color, float alpha);
 void private_pixel_cells(const std::array<std::array<float, 2>, 4>& corner, float u0, float u1);
+void private_edge_pick(bool& mode, float size);
+void private_edge_place();
+void private_edge_cap();
+void private_edge_triangle(const std::array<std::array<float, 2>, 4>& corner);

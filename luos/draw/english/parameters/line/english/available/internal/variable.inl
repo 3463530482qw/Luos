@@ -28,3 +28,10 @@ std::array<uint8_t, 2> private_eg{255, 255};
 std::array<uint8_t, 2> private_eb{255, 255};
 std::array<float, 2> private_ea{1.0f, 1.0f};
 bool private_trailing{false};                            // 链尾改过色
+bool private_edge_on{false};                             // 本次是否要封端头
+float private_cap_retract{0.0f};                         // 端头回缩量
+float private_cap_forward{0.0f};                         // 延伸点离回缩后端头多远
+float private_cap_lateral{0.0f};                         // 延伸点偏在线宽的上沿(-1)/中线(0)/下沿(+1)
+bool private_cap_notch{false};                           // 上下一块:端头挖一个三角形负形
+bool private_cap_begin{false};                           // 本段起点那一头要不要封
+bool private_cap_end{false};                             // 本段终点那一头要不要封
