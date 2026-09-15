@@ -16,4 +16,6 @@ namespace Gnik_luos {
 #include "english/method/internal/debug_message_callback.inl"
 #include "english/method/internal/create_debug_messenger.inl"
 #include "english/method/internal/create_instance.inl"
+#include "english/method/internal/rate_physical_device.inl"
+#include "english/method/internal/pick_physical_device.inl"
 #include "english/method/available/init.inl"
