@@ -1,7 +1,7 @@
 namespace Gnik_luos {
     Window::Window() {
-        // 窗口火山回指宿主:宽度/高度/画布比例/逻辑宽都从窗口自身取,初始化接口因此只剩一个参数
-        //window_vulkan.host = this;
+        *window_vulkan.pending_width = width;
+        *window_vulkan.pending_height = height;
     }
 
     Window::~Window() {

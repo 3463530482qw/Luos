@@ -3,7 +3,7 @@
 #include "english/parameters/time/main.hpp"
 #include "english/parameters/mouse/main.hpp"
 #include "english/parameters/key_board/main.hpp"
-//#include "english/parameters/window_vulkan/main.hpp"
+#include "english/parameters/window_vulkan/main.hpp"
 namespace Gnik_luos {
     class Window {
         public:
@@ -28,8 +28,8 @@ namespace Gnik_luos {
 #include "english/setting/setting.inl"
 #include "english/create.inl"
 //#include "english/bind_window.inl"
-//#include "english/mouse_update.inl"
-//#include "english/window_resize.inl"
+#include "english/mouse_update.inl"
+#include "english/window_resize.inl"
 #include "english/icon.inl"
 #include "english/run.inl"
 #include "english/close.inl"
