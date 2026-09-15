@@ -1,7 +1,8 @@
 namespace Gnik_luos {
     Window::Window() {
-        *window_vulkan.pending_width = width;
-        *window_vulkan.pending_height = height;
+        // pending 尺寸是借用宿主窗口成员的指针(自动跟随 resize),构造时只绑定,不解引用
+        window_vulkan.pending_width = &width;
+        window_vulkan.pending_height = &height;
     }
 
     Window::~Window() {
