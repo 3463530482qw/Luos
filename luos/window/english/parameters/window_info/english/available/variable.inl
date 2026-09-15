@@ -5,3 +5,6 @@ std::string icon;
 uint8_t display_index{0};
 int logic_width{1600};
 int logic_height{900};
+bool is_time{true};
+bool is_key{true};
+bool is_vulkan{false};

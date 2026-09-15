@@ -11,6 +11,9 @@ namespace Gnik_luos {
         #include "width_and_height.inl"
         name = window_settings_info.name;
         icon = window_settings_info.icon;
+        is_time = window_settings_info.is_time;
+        is_key = window_settings_info.is_key;
+        is_vulkan = window_settings_info.is_vulkan;
         return *this;
     }
     Window& Window::setting() {

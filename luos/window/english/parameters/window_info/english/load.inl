@@ -40,6 +40,18 @@ namespace Gnik_luos {
         if (!target_type.at_key("display_index").get_uint64().get(temporary_display_index)) {
             display_index = static_cast<uint8_t>(temporary_display_index);
         }
+
+        if (!target_type.at_key("time").get_bool().get(temporary_is_time)) {
+            is_time = temporary_is_time;
+        }
+
+        if (!target_type.at_key("key").get_bool().get(temporary_is_key)) {
+            is_key = temporary_is_key;
+        }
+
+        if (!target_type.at_key("vulkan").get_bool().get(temporary_is_vulkan)) {
+            is_vulkan = temporary_is_vulkan;
+        }
             
         return *this;
     }

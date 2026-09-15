@@ -8,3 +8,6 @@ int64_t temporary_logic_width{};
 int64_t temporary_logic_height{};
 std::string_view temporary_icon{};
 uint64_t temporary_display_index{};
+bool temporary_is_time{true};
+bool temporary_is_key{true};
+bool temporary_is_vulkan{false};

@@ -21,8 +21,6 @@ namespace Gnik_luos {
     };
     using 窗口 = Window;
 }
-// initialize 需要 Window 完整定义(参数全部取自宿主窗口),故在 Window 之后引入
-//#include "english/parameters/window_vulkan/english/initialize.inl"
 #include "english/position_adjustment/main.inl"
 //#include "english/resize.inl"
 #include "english/setting/setting.inl"
@@ -31,6 +29,8 @@ namespace Gnik_luos {
 #include "english/mouse_update.inl"
 #include "english/window_resize.inl"
 #include "english/icon.inl"
+#include "english/method/internal/event_handling.inl"
+#include "english/method/internal/router.inl"
 #include "english/run.inl"
 #include "english/close.inl"
 #include "main.inl"
