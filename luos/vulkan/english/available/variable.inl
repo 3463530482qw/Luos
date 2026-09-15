@@ -1,0 +1,1 @@
+vk::raii::Instance instance{nullptr};

@@ -1,0 +1,1 @@
+void init(Vulkan_info& vulkan_info);

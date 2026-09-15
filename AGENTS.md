@@ -45,7 +45,7 @@ namespace Gnik_luos {
     using 中文类型名 = 类型名;
 }
 #include "main.inl" //构建析构函数实现
-#include "english/function/public/接口函数实现"
-#include "english/function/internal/内部函数实现"
+#include "english/method/public/接口函数实现"
+#include "english/method/internal/内部函数实现"
 
 注:此结构为完整结构,可以进行省略,但额外添加视为错误.需要向前申明的地方写在具体的位置不要写在原类型定义的一堆#include里面
