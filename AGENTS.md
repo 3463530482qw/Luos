@@ -26,24 +26,26 @@ wiall用于#include标准头文件,第三方库,自定义大类,除了wiall其�
 污染了 include 路径(availabel),事后才手工修回.
 
 # 类标准定义
-include parameters(用到的数据结构体或子类)
-namespace youklx {
+include "english/parameters/数据结构体或子类名/main.hpp"
+namespace Gnik_luos {
     class 类型名 {
         public:
-            #include"en/api/var.inl"
+            #include"english/available/variable.inl"
             #include"中文/接口/变量.inl"
         public:
-            #include"en/api/function.inl"
+            #include"english/available/function.inl"
             #include"中文/接口/函数.inl"
         private:
-            #include"en/api/internal/var.inl"
-            #include"en/api/internal/function.inl"
+            #include"english/available/internal/variable.inl"
+            #include"english/available/internal/function.inl"
         public:
-            构建函数
-            析构函数
+            构建函数();
+            析构函数();
     };
     using 中文类型名 = 类型名;
 }
-include 函数实现
+#include "main.inl" //构建析构函数实现
+#include "english/function/public/接口函数实现"
+#include "english/function/internal/内部函数实现"
 
 注:此结构为完整结构,可以进行省略,但额外添加视为错误.需要向前申明的地方写在具体的位置不要写在原类型定义的一堆#include里面

@@ -10,4 +10,4 @@ bool isrun{true};
 Window_time time;
 window_mouse mouse;
 Key_board key;
-Window_vulkan window_vulkan;
+//Window_vulkan window_vulkan;

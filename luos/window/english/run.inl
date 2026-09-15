@@ -1,9 +1,9 @@
 namespace Gnik_luos {
     Window& Window::run() {
         time.update();
-        if (window_vulkan.is_initialized()) {
-            window_vulkan.draw_frame();
-        }
+        //if (window_vulkan.is_initialized()) {
+            //window_vulkan.draw_frame();
+        //}
         while (SDL_PollEvent(&pre_event_ptr)) {
             if (pre_event_ptr.window.windowID != 0 && pre_event_ptr.window.windowID != window_id) {
                 pre_event.push_back(pre_event_ptr);
@@ -17,10 +17,10 @@ namespace Gnik_luos {
                     isrun = false;
                     break;
                 case SDL_EVENT_MOUSE_MOTION:
-                    mouse_update(pre_event_ptr.motion.x, pre_event_ptr.motion.y); 
+                    //mouse_update(pre_event_ptr.motion.x, pre_event_ptr.motion.y); 
                     break;
                 case SDL_EVENT_WINDOW_RESIZED:
-                    window_resize(static_cast<float>(pre_event_ptr.window.data1), static_cast<float>(pre_event_ptr.window.data2));
+                    //window_resize(static_cast<float>(pre_event_ptr.window.data1), static_cast<float>(pre_event_ptr.window.data2));
                     break;
                 case 0x8000:
                     SDL_SetWindowIcon(id, static_cast<SDL_Surface*>(pre_event_ptr.user.data1));
