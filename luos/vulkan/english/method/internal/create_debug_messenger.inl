@@ -1,4 +1,5 @@
 namespace Gnik_luos {
+
     bool Vulkan::create_debug_messenger(Vulkan_info& vulkan_info) {
         auto available_layers = context.enumerateInstanceLayerProperties();
         for (const auto& layer : available_layers) {
@@ -22,4 +23,5 @@ namespace Gnik_luos {
         debug_create_info.setPNext(&validation_features);
         return true;
     }
+
 }

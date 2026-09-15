@@ -1,5 +1,5 @@
 namespace Gnik_luos {
-    #ifndef NDEBUG
+
         // 头文件内实现:static 收进本编译单元,避免多单元重复定义
         static VKAPI_ATTR vk::Bool32 VKAPI_CALL debug_message_callback(
             vk::DebugUtilsMessageSeverityFlagBitsEXT severity,
@@ -17,5 +17,5 @@ namespace Gnik_luos {
             }
             return vk::False;
         }
-    #endif
+
 }
