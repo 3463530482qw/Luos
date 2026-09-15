@@ -21,5 +21,26 @@ namespace Gnik_luos {
         #ifndef NDEBUG
             support_debug_utils = create_debug_messenger(vulkan_info);
         #endif
+
+        vk::InstanceCreateInfo create_info;
+        create_info.setPApplicationInfo(&application_info);
+        create_info.setEnabledExtensionCount(static_cast<uint32_t>(vulkan_info.extension.size()));
+        create_info.setPpEnabledExtensionNames(vulkan_info.extension.data());
+        if (!layers.empty()) {
+            create_info.setEnabledLayerCount(static_cast<uint32_t>(layers.size()));
+            create_info.setPpEnabledLayerNames(layers.data());
+        }
+
+        #ifndef NDEBUG
+            create_info.setPNext(&debug_create_info);
+        #endif
+
+        instance = vk::raii::Instance(context, create_info);
+
+        #ifndef NDEBUG
+            if (support_debug_utils) {
+                vk::raii::DebugUtilsMessengerEXT messenger(instance, debug_create_info);
+            }
+        #endif
     }
 }
