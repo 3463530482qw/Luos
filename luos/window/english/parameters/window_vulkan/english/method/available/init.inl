@@ -5,7 +5,9 @@ namespace Gnik_luos {
         }
         surface.create(*id, vulkan.instance);
         find_graphics_queue_family(vulkan.physical_device);
-        initialized = true;
+        
         vulkan.create_logical_device(graphics_queue_family);
+        command_pool.create(vulkan.device, graphics_queue_family);
+        initialized = true;
     }
 }
