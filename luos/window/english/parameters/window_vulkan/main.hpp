@@ -8,6 +8,8 @@ namespace Gnik_luos {
             #include "english/available/function.inl"
         private:
             #include "english/available/internal/variable.inl"
+            #include "english/available/internal/function.inl"
     };
 }
 #include "english/method/available/init.inl"
+#include "english/method/internal/find_graphics_queue_family.inl"

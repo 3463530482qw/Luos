@@ -19,3 +19,4 @@ namespace Gnik_luos {
 #include "english/method/internal/rate_physical_device.inl"
 #include "english/method/internal/pick_physical_device.inl"
 #include "english/method/available/init.inl"
+#include "english/method/available/create_logical_device.inl"

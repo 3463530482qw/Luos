@@ -5,6 +5,7 @@ namespace Gnik_luos {
         window_vulkan.pending_height = &height;
         window_vulkan.id = &id;
         private_run.push_back([this]() { router(); });
+        
     }
 
     Window::~Window() {

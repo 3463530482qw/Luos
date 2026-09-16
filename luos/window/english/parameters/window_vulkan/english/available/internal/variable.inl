@@ -1,0 +1,1 @@
+uint32_t graphics_queue_family{0};

@@ -4,6 +4,8 @@ namespace Gnik_luos {
             throw std::runtime_error("Window_vulkan::initialize => The window vulkan module has been initialized");
         }
         surface.create(*id, vulkan.instance);
+        find_graphics_queue_family(vulkan.physical_device);
         initialized = true;
+        vulkan.create_logical_device(graphics_queue_family);
     }
 }
