@@ -1,0 +1,1 @@
+void allocate(const vk::raii::Device& device, const vk::raii::CommandPool& command_pool, uint32_t count);

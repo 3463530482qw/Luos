@@ -8,5 +8,6 @@ namespace Gnik_luos {
         //render
 
         framebuffer.create(vulkan.device, renderpass.render_pass, swapchain.image_views, swapchain.extent);
+        command_buffer.allocate(vulkan.device, command_pool.command_pool, static_cast<uint32_t>(swapchain.image_views.size()));
     }
 }
