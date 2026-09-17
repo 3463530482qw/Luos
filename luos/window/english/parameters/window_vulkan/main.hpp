@@ -3,6 +3,9 @@
 #include "english/parameters/command_pool/main.hpp"
 #include "english/parameters/swapchain/main.hpp"
 #include "english/parameters/renderpass/main.hpp"
+#include "english/parameters/framebuffer/main.hpp"
+
+#include "english/parameters/line_render/main.hpp"
 namespace Gnik_luos {
     class Window_vulkan {
         public:
