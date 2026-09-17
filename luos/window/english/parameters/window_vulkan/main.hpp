@@ -5,6 +5,7 @@
 #include "english/parameters/renderpass/main.hpp"
 #include "english/parameters/framebuffer/main.hpp"
 #include "english/parameters/command_buffer/main.hpp"
+#include "english/parameters/synchronization/main.hpp"
 
 #include "english/parameters/line_render/main.hpp"
 namespace Gnik_luos {
@@ -24,3 +25,5 @@ namespace Gnik_luos {
 #include "english/method/available/init.inl"
 #include "english/method/internal/find_graphics_queue_family.inl"
 #include "english/method/internal/create_swapchain.inl"
+#include "english/method/internal/viewport_rect.inl"
+#include "english/method/internal/record_command_buffers.inl"

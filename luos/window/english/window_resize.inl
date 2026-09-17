@@ -3,6 +3,6 @@ namespace Gnik_luos {
         width = static_cast<uint32_t>(goal_width);
         height = static_cast<uint32_t>(goal_height);
         window_vulkan.viewport.rebuild();
-        //wvulkan.framebufferResized = true;
+        //window_vulkan.framebufferResized = true;
     }
 }
