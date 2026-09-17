@@ -1,4 +1,9 @@
 uint32_t width{0};
 uint32_t height{0};
+float* aspectratio{nullptr};
+float* logic_aspectratio{nullptr};
+uint32_t* window_width{nullptr};
+uint32_t* window_height{nullptr};
+uint32_t* window_logic_width{nullptr};
 int32_t cut_offset_width{0};
 int32_t cut_offset_height{0};

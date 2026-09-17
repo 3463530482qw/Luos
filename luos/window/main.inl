@@ -4,6 +4,11 @@ namespace Gnik_luos {
         window_vulkan.pending_width = &width;
         window_vulkan.pending_height = &height;
         window_vulkan.id = &id;
+        window_vulkan.viewport.aspectratio = &aspectratio;
+        window_vulkan.viewport.logic_aspectratio = &logic_aspectratio;
+        window_vulkan.viewport.window_width = &width;
+        window_vulkan.viewport.window_height = &height;
+        window_vulkan.viewport.window_logic_width = &logic_width;
         private_run.push_back([this]() { router(); });
         
     }
