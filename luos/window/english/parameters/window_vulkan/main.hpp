@@ -14,3 +14,4 @@ namespace Gnik_luos {
 }
 #include "english/method/available/init.inl"
 #include "english/method/internal/find_graphics_queue_family.inl"
+#include "english/method/internal/create_swapchain.inl"
