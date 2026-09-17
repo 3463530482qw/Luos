@@ -3,5 +3,6 @@ namespace Gnik_luos {
         viewport.rebuild();
         swapchain.create(vulkan.physical_device, vulkan.device);
         swapchain.create_image_views(vulkan.device);
+        renderpass.create(vulkan.device, swapchain.format);
     }
 }
