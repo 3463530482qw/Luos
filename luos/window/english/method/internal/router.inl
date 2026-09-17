@@ -1,5 +1,6 @@
 namespace Gnik_luos {
     void Window::router() {
+        private_run.clear();
         if (is_time) {
             private_run.push_back([&]() { time.update(); });
         }

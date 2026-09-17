@@ -5,64 +5,61 @@ namespace Gnik_luos {
         thread_quantity = static_cast<uint16_t>(haco - 2);
         for (uint16_t i = 0; i < thread_quantity; i++) {
             thread_pool.emplace_back([this](std::stop_token stto) {
+                std::function<void()> task;
                 while (!stto.stop_requested()) {
-                    size_t task_index = 0;
-                    uint32_t gen = 0;
                     {
                         std::unique_lock lock(mutex);
                         condition_variable.wait(lock, [this, &stto]() {
                             if (stto.stop_requested()) return true;
-                            if (update_outstanding.load(std::memory_order_acquire) > 0 &&
-                                update_claimed.load(std::memory_order_acquire) < update_tasks.size()) {
-                                return true;
+                            Phase p = phase.load(std::memory_order_acquire);
+                            if (p == Phase::UPDATE) {
+                                return update_claimed.load(std::memory_order_acquire) < update_quantity.load(std::memory_order_acquire);
                             }
-                            if (draw_outstanding.load(std::memory_order_acquire) > 0 &&
-                                draw_claimed.load(std::memory_order_acquire) < draw_tasks.size()) {
-                                return true;
+                            if (p == Phase::DRAW) {
+                                return draw_claimed.load(std::memory_order_acquire) < draw_quantity.load(std::memory_order_acquire);
                             }
                             return false;
                         });
                         if (stto.stop_requested()) return;
-                        gen = current_gen;
+
+                        Phase p = phase.load(std::memory_order_acquire);
+                        task = nullptr;
+                        if (p == Phase::UPDATE) {
+                            size_t task_index = update_claimed.fetch_add(1, std::memory_order_acq_rel);
+                            if (task_index < private_update_snapshot.size()) {
+                                task = std::move(private_update_snapshot[task_index]);
+                            }
+                        } else if (p == Phase::DRAW) {
+                            size_t task_index = draw_claimed.fetch_add(1, std::memory_order_acq_rel);
+                            if (task_index < private_draw_snapshot.size()) {
+                                task = std::move(private_draw_snapshot[task_index]);
+                            }
+                        }
+                        if (!task) continue;
+                        active_workers.fetch_add(1, std::memory_order_acq_rel);
                     }
 
-                    Phase p = phase.load(std::memory_order_acquire);
-                    bool worked = false;
-                    if (p == Phase::UPDATE) {
-                        task_index = update_claimed.fetch_add(1, std::memory_order_acq_rel);
-                        if (task_index < update_tasks.size()) {
-                            update_tasks[task_index]();
-                            worked = true;
-                        }
-                    } else if (p == Phase::DRAW) {
-                        task_index = draw_claimed.fetch_add(1, std::memory_order_acq_rel);
-                        if (task_index < draw_tasks.size()) {
-                            draw_tasks[task_index]();
-                            worked = true;
-                        }
-                    }
-                    if (!worked) continue;
+                    task();
 
-                    if (p == Phase::UPDATE) {
-                        size_t done = update_completed.fetch_add(1, std::memory_order_acq_rel) + 1;
-                        if (done == update_tasks.size()) {
-                            {
-                                std::lock_guard lock(mutex);
-                                update_outstanding.store(0, std::memory_order_release);
-                                update_done_gen = gen;
+                    {
+                        std::lock_guard lock(mutex);
+                        task = nullptr;
+                        Phase p = phase.load(std::memory_order_acquire);
+                        if (p == Phase::UPDATE) {
+                            size_t done = update_completed.fetch_add(1, std::memory_order_acq_rel) + 1;
+                            if (done == update_quantity.load(std::memory_order_acquire)) {
+                                update_done_gen = current_gen;
+                                phase.store(Phase::IDLE, std::memory_order_release);
                             }
-                            condition_variable.notify_all();
-                        }
-                    } else if (p == Phase::DRAW) {
-                        size_t done = draw_completed.fetch_add(1, std::memory_order_acq_rel) + 1;
-                        if (done == draw_tasks.size()) {
-                            {
-                                std::lock_guard lock(mutex);
-                                draw_outstanding.store(0, std::memory_order_release);
-                                draw_done_gen = gen;
+                        } else if (p == Phase::DRAW) {
+                            size_t done = draw_completed.fetch_add(1, std::memory_order_acq_rel) + 1;
+                            if (done == draw_quantity.load(std::memory_order_acquire)) {
+                                draw_done_gen = current_gen;
+                                phase.store(Phase::IDLE, std::memory_order_release);
                             }
-                            condition_variable.notify_all();
                         }
+                        active_workers.fetch_sub(1, std::memory_order_acq_rel);
+                        condition_variable.notify_all();
                     }
                 }
             });

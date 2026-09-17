@@ -1,4 +1,4 @@
-void dispatch(Phase next_phase, size_t task_quantity, uint32_t gen);
-void wait_update(uint32_t gen);
-void wait_draw(uint32_t gen);
+uint64_t dispatch_locked(Phase next_phase, size_t task_quantity);
+void wait_update(uint64_t gen);
+void wait_draw(uint64_t gen);
 Thread& wait();
