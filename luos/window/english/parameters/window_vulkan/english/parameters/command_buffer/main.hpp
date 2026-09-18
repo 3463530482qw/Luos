@@ -7,3 +7,5 @@ namespace Gnik_luos {
     };
 }
 #include "english/method/available/allocate.inl"
+#include "english/method/available/begin.inl"
+#include "english/method/available/begin_render_pass.inl"
