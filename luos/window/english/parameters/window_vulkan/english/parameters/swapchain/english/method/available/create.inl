@@ -6,7 +6,9 @@ namespace Gnik_luos {
 
         if (capabilities.minImageExtent.width == 0 || capabilities.minImageExtent.height == 0 ||
             capabilities.maxImageExtent.width == 0 || capabilities.maxImageExtent.height == 0) {
-            throw std::runtime_error(vk::OutOfDateKHRError("surface is not ready"));
+            // 最小化时表面能力归 0:必须原样抛 vk 的 OutOfDate,draw_frame 里那两个 catch 才接得住
+            // (包成 std::runtime_error 会被切片,异常直接冲出窗口循环)
+            throw vk::OutOfDateKHRError("surface is not ready");
         }
 
         vk::SurfaceFormatKHR chosen_format;

@@ -25,6 +25,10 @@ wiall用于#include标准头文件,第三方库,自定义大类,除了wiall其�
 记录:批量替换标识符要按整词或带分隔符匹配.曾用 substring 把 lable 换成 label,连 "available" 里的 lable 一起改掉,
 污染了 include 路径(availabel),事后才手工修回.
 
+记录:阁下说"装配进 X"这类话,指的是库内自己接(成员持借用指针、router 把任务推进 private_run,再由 run 执行),
+不是让应用从外部装钩子.曾把 window_vulkan 的引擎改成一律按参数传、又给窗口加了一层 bind_frame 钩子,
+两样都不是阁下的意思,都撤了.拿不准先问一句,别自行设计新接口.
+
 # 类标准定义
 include "english/parameters/数据结构体或子类名/main.hpp"
 namespace Gnik_luos {

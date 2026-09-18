@@ -1,5 +1,5 @@
 namespace Gnik_luos {
-    void Window_vulkan::submit_frame(Vulkan& vulkan_engine) {
+    void Window_vulkan::submit_frame() {
         uint32_t image_index = 0;
         vk::ResultValue<uint32_t> acquired = vk::ResultValue<uint32_t>(vk::Result::eSuccess, 0);
         try {
@@ -31,7 +31,7 @@ namespace Gnik_luos {
         submit_info.setSignalSemaphoreCount(1);
         submit_info.setPSignalSemaphores(&*synchronization.render_finished_per_image[image_index]);
 
-        vulkan_engine.graphics_queue.submit(submit_info, *synchronization.frame_fence);
+        vulkan->graphics_queue.submit(submit_info, *synchronization.frame_fence);
 
         vk::PresentInfoKHR present_info;
         present_info.setWaitSemaphoreCount(1);
@@ -43,7 +43,7 @@ namespace Gnik_luos {
         // 呈现期的尺寸失配同样只是"下帧重建",不应当作异常抛出
         vk::Result present_result = vk::Result::eSuccess;
         try {
-            present_result = vulkan_engine.graphics_queue.presentKHR(present_info);
+            present_result = vulkan->graphics_queue.presentKHR(present_info);
         } catch (const vk::OutOfDateKHRError&) {
             rebuild_flag = true;
             return;

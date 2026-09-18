@@ -1,8 +1,8 @@
 namespace Gnik_luos {
     void Vulkan_swapchain::reset() {
-        // 重建前先释放旧交换链,确保其图像句柄全部失效
-        swapchain.clear();
-        images.clear();
+        // 先放视图再放交换链:图像视图引用的是交换链的图像,反过来销毁等于让视图悬空
         image_views.clear();
+        images.clear();
+        swapchain.clear();
     }
 }
