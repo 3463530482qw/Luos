@@ -5,5 +5,6 @@ float* logic_aspectratio{nullptr};
 uint32_t* window_width{nullptr};
 uint32_t* window_height{nullptr};
 uint32_t* window_logic_width{nullptr};
+uint32_t* window_logic_height{nullptr};
 int32_t cut_offset_width{0};
 int32_t cut_offset_height{0};

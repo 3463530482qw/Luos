@@ -19,7 +19,11 @@ namespace Gnik_luos {
 
         synchronization.wait(vulkan->device);
 
-        // 本帧顶点上传(line_render.prepare)必须在录制之外,随 line_render 迁移接在此处
+        // 本帧顶点上传与推常量必须在录制之外,且此时上一帧的 GPU 工作已经结束(帧围栏已过)
+        line_render.prepare(
+            static_cast<float>(*viewport.window_logic_width),
+            static_cast<float>(*viewport.window_logic_height)
+        );
 
         // 与移植前一致:命令缓冲每帧重录(带单次提交标记,不能复用上一次的录制结果)
         record_command_buffers();

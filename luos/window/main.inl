@@ -9,6 +9,7 @@ namespace Gnik_luos {
         window_vulkan.viewport.window_width = &width;
         window_vulkan.viewport.window_height = &height;
         window_vulkan.viewport.window_logic_width = &logic_width;
+        window_vulkan.viewport.window_logic_height = &logic_height;
         private_run.push_back([this]() { router(); });
         
     }

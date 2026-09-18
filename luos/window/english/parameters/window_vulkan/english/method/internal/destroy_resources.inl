@@ -1,6 +1,6 @@
 namespace Gnik_luos {
     void Window_vulkan::destroy_resources() {
-        // 线条渲染的管线与顶点缓冲随 line_render 迁移接在此处
+        line_render.destroy();
         synchronization.image_available_per_frame.clear();
         synchronization.render_finished_per_image.clear();
         synchronization.frame_fence.clear();
