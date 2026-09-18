@@ -52,7 +52,33 @@ namespace Gnik_luos {
         if (!target_type.at_key("vulkan").get_bool().get(temporary_is_vulkan)) {
             is_vulkan = temporary_is_vulkan;
         }
-            
+
+        // 嵌在 window_info 里的两个子段:线条渲染的着色器名
+        if (!target_type.at_key("line_render").get_object().at_key("vert").get_string().get(temporary_line_render_vert)) {
+            line_render_vert = std::string(temporary_line_render_vert);
+        }
+
+        if (!target_type.at_key("line_render").get_object().at_key("frag").get_string().get(temporary_line_render_frag)) {
+            line_render_frag = std::string(temporary_line_render_frag);
+        }
+
+        // 子段:清屏色
+        if (!target_type.at_key("vulkan_clear_value").get_object().at_key("red").get_double().get(temporary_vulkan_clear_red)) {
+            vulkan_clear_red = static_cast<float>(temporary_vulkan_clear_red);
+        }
+
+        if (!target_type.at_key("vulkan_clear_value").get_object().at_key("green").get_double().get(temporary_vulkan_clear_green)) {
+            vulkan_clear_green = static_cast<float>(temporary_vulkan_clear_green);
+        }
+
+        if (!target_type.at_key("vulkan_clear_value").get_object().at_key("blue").get_double().get(temporary_vulkan_clear_blue)) {
+            vulkan_clear_blue = static_cast<float>(temporary_vulkan_clear_blue);
+        }
+
+        if (!target_type.at_key("vulkan_clear_value").get_object().at_key("alpha").get_double().get(temporary_vulkan_clear_alpha)) {
+            vulkan_clear_alpha = static_cast<float>(temporary_vulkan_clear_alpha);
+        }
+
         return *this;
     }
 }
