@@ -10,3 +10,4 @@ Vulkan_renderpass renderpass;
 Vulkan_framebuffer framebuffer;
 Vulkan_command_buffer command_buffer;
 Vulkan_synchronization synchronization;
+Vulkan_line_render line_render;

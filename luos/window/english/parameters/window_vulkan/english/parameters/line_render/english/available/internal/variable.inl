@@ -1,0 +1,1 @@
+vk::Extent2D frame_extent{0, 0};

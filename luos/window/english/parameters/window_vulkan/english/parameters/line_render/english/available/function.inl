@@ -1,0 +1,1 @@
+void create(const vk::raii::RenderPass& render_pass, vk::Extent2D& swapchain_extent);
