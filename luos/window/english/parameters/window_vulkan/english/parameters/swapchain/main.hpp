@@ -10,3 +10,4 @@ namespace Gnik_luos {
 }
 #include "english/method/available/create.inl"
 #include "english/method/available/create_image_views.inl"
+#include "english/method/available/reset.inl"

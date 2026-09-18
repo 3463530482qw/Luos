@@ -7,3 +7,4 @@ namespace Gnik_luos {
     };
 }
 #include "english/method/available/create.inl"
+#include "english/method/available/wait.inl"

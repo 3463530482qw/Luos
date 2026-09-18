@@ -9,3 +9,5 @@ namespace Gnik_luos {
 #include "english/method/available/allocate.inl"
 #include "english/method/available/begin.inl"
 #include "english/method/available/begin_render_pass.inl"
+#include "english/method/available/set_viewport.inl"
+#include "english/method/available/end.inl"

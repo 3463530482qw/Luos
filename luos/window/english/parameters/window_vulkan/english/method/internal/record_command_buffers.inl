@@ -7,10 +7,9 @@ namespace Gnik_luos {
         for (uint32_t index = 0; index < static_cast<uint32_t>(command_buffer.command_buffers.size()); index++) {
             command_buffer.begin(index);
             command_buffer.begin_render_pass(index, renderpass.render_pass, framebuffer.framebuffers[index], area, renderpass.clear_value);
-            //command_buffer.set_viewport(index, area, area);
-            // 绘制命令由此处录制,着色器管线接入后写在 set_viewport 之后
-            //line_render.draw(command_buffer.command_buffers[index]);
-            //command_buffer.end(index);
+            command_buffer.set_viewport(index, area, area);
+            // 绘制命令由此处录制,线条随 line_render 迁移接在 set_viewport 之后
+            command_buffer.end(index);
         }
     }
 }

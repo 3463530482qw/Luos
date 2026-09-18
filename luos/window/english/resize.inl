@@ -20,7 +20,7 @@ namespace Gnik_luos {
         height = h;
         // 窗口比例变了也不改 aspectratio:视口仍按画布比例取内接矩形,余量留灰边
         window_vulkan.viewport.rebuild();
-        window_vulkan.request_rebuild(width, height, aspectratio);
+        window_vulkan.request_rebuild();
         return *this;
     }
 

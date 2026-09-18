@@ -19,11 +19,18 @@ namespace Gnik_luos {
             #include "english/available/internal/function.inl"
         public:
             Window_vulkan();
+            ~Window_vulkan();
     };
 }
 #include "english/method/available/main.inl"
 #include "english/method/available/init.inl"
+#include "english/method/available/request_rebuild.inl"
+#include "english/method/available/draw_frame.inl"
+#include "english/method/available/destroy.inl"
 #include "english/method/internal/find_graphics_queue_family.inl"
 #include "english/method/internal/create_swapchain.inl"
+#include "english/method/internal/rebuild.inl"
+#include "english/method/internal/destroy_resources.inl"
 #include "english/method/internal/viewport_rect.inl"
 #include "english/method/internal/record_command_buffers.inl"
+#include "english/method/internal/submit_frame.inl"

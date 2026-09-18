@@ -1,4 +1,4 @@
-vk::SurfaceKHR* surface;
+vk::raii::SurfaceKHR* surface;
 uint32_t* width;
 uint32_t* height;
 vk::Format format{vk::Format::eUndefined};
