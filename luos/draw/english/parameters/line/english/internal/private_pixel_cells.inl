@@ -65,7 +65,7 @@ namespace Gnik_luos {
                 if (length2 > 0.0f && u0 != u1) {
                     u = u0 + (u1 - u0) * ((point[0] - ax) * dx + (point[1] - ay) * dy) / length2;
                 }
-                private_vertex.push_back(Vertex{point[0], point[1], u, 0.0f});
+                private_vertex.push_back(Vertex{point[0], point[1], 0.0f, u, 0.0f});
             }
         }
     }

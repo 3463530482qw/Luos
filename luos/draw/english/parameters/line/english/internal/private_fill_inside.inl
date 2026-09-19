@@ -43,12 +43,12 @@ namespace Gnik_luos {
         float alpha = inside_alpha;
         auto emit = [&](float ax, float ay, float bx, float by, float cx, float cy, float dx, float dy) {
             const Vertex corner[6] = {
-                {ax, ay, 0.0f, 0.0f, red, green, blue, alpha},
-                {bx, by, 0.0f, 0.0f, red, green, blue, alpha},
-                {cx, cy, 0.0f, 0.0f, red, green, blue, alpha},
-                {ax, ay, 0.0f, 0.0f, red, green, blue, alpha},
-                {cx, cy, 0.0f, 0.0f, red, green, blue, alpha},
-                {dx, dy, 0.0f, 0.0f, red, green, blue, alpha}
+                {ax, ay, 0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+                {bx, by, 0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+                {cx, cy, 0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+                {ax, ay, 0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+                {cx, cy, 0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+                {dx, dy, 0.0f, 0.0f, 0.0f, red, green, blue, alpha}
             };
             for (const Vertex& point : corner) {
                 private_fill_vertex.push_back(point);

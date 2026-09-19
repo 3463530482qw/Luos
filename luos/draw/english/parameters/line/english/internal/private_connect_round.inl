@@ -61,9 +61,9 @@ namespace Gnik_luos {
                 y = center_y + radius * std::sin(angle);
             }
             Vertex slice[3] = {
-                {bx, by, private_u0, 0.0f},
-                {previous_x, previous_y, private_u0, 0.0f},
-                {x, y, private_u0, 0.0f}
+                {bx, by, 0.0f, private_u0, 0.0f},
+                {previous_x, previous_y, 0.0f, private_u0, 0.0f},
+                {x, y, 0.0f, private_u0, 0.0f}
             };
             for (int i = 0; i < 3; i++) {
                 private_vertex.push_back(slice[i]);

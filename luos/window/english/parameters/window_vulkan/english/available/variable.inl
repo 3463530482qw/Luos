@@ -7,6 +7,7 @@ Vulkan_command_pool command_pool;
 bool rebuild_flag{false};
 Vulkan_swapchain swapchain;
 Vulkan_renderpass renderpass;
+Vulkan_depth depth;
 Vulkan_framebuffer framebuffer;
 Vulkan_command_buffer command_buffer;
 Vulkan_synchronization synchronization;

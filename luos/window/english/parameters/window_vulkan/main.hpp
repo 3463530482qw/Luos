@@ -3,6 +3,7 @@
 #include "english/parameters/command_pool/main.hpp"
 #include "english/parameters/swapchain/main.hpp"
 #include "english/parameters/renderpass/main.hpp"
+#include "english/parameters/depth/main.hpp"
 #include "english/parameters/framebuffer/main.hpp"
 #include "english/parameters/command_buffer/main.hpp"
 #include "english/parameters/synchronization/main.hpp"

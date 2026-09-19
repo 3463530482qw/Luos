@@ -5,7 +5,8 @@ void begin_render_pass(
     const vk::raii::RenderPass& render_pass,
     const vk::raii::Framebuffer& framebuffer,
     vk::Rect2D& render_area,
-    vk::ClearValue& clear_value
+    vk::ClearValue& clear_value,
+    vk::ClearValue& depth_clear_value
 );
 void set_viewport(uint32_t index, vk::Rect2D viewport_area, vk::Rect2D scissor_area);
 void end(uint32_t index);

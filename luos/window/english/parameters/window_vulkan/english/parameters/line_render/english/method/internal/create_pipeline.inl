@@ -21,16 +21,16 @@ namespace Gnik_luos {
         stages[1].setModule(*fragment_shader);
         stages[1].setPName("main");
 
-        // 顶点输入:Vertex{x,y,u,v,r,g,b,a} → pos(2)+uv(2)+color(4)
+        // 顶点输入:Vertex{x,y,z,u,v,r,g,b,a} → pos(3)+uv(2)+color(4)
         vk::VertexInputBindingDescription binding_description;
         binding_description.setBinding(0);
         binding_description.setStride(sizeof(Vertex));
         binding_description.setInputRate(vk::VertexInputRate::eVertex);
 
         std::array<vk::VertexInputAttributeDescription, 3> attributes;
-        attributes[0].setLocation(0); attributes[0].setBinding(0); attributes[0].setFormat(vk::Format::eR32G32Sfloat); attributes[0].setOffset(0);
-        attributes[1].setLocation(1); attributes[1].setBinding(0); attributes[1].setFormat(vk::Format::eR32G32Sfloat); attributes[1].setOffset(2 * sizeof(float));
-        attributes[2].setLocation(2); attributes[2].setBinding(0); attributes[2].setFormat(vk::Format::eR32G32B32A32Sfloat); attributes[2].setOffset(4 * sizeof(float));
+        attributes[0].setLocation(0); attributes[0].setBinding(0); attributes[0].setFormat(vk::Format::eR32G32B32Sfloat); attributes[0].setOffset(0);
+        attributes[1].setLocation(1); attributes[1].setBinding(0); attributes[1].setFormat(vk::Format::eR32G32Sfloat); attributes[1].setOffset(3 * sizeof(float));
+        attributes[2].setLocation(2); attributes[2].setBinding(0); attributes[2].setFormat(vk::Format::eR32G32B32A32Sfloat); attributes[2].setOffset(5 * sizeof(float));
 
         vk::PipelineVertexInputStateCreateInfo vertex_input;
         vertex_input.setVertexBindingDescriptionCount(1);
@@ -59,6 +59,15 @@ namespace Gnik_luos {
         vk::PipelineMultisampleStateCreateInfo multisample;
         multisample.setSampleShadingEnable(false);
         multisample.setRasterizationSamples(vk::SampleCountFlagBits::e1);
+
+        // 深度:比较用 LessOrEqual 而不是 Less —— 同一 z 上按绘制顺序后者覆盖,
+        // 于是 2D(全部 z=0)的填充在下、线条在上的层序照旧,三维内容又能被 z 分出前后
+        vk::PipelineDepthStencilStateCreateInfo depth_stencil;
+        depth_stencil.setDepthTestEnable(true);
+        depth_stencil.setDepthWriteEnable(true);
+        depth_stencil.setDepthCompareOp(vk::CompareOp::eLessOrEqual);
+        depth_stencil.setDepthBoundsTestEnable(false);
+        depth_stencil.setStencilTestEnable(false);
 
         // 线条按常规 alpha 混合叠在场景上
         vk::PipelineColorBlendAttachmentState blend_attachment;
@@ -101,6 +110,7 @@ namespace Gnik_luos {
         pipeline_info.setPViewportState(&viewport_state);
         pipeline_info.setPRasterizationState(&rasterizer);
         pipeline_info.setPMultisampleState(&multisample);
+        pipeline_info.setPDepthStencilState(&depth_stencil);
         pipeline_info.setPColorBlendState(&color_blend);
         pipeline_info.setPDynamicState(&dynamic_state);
         pipeline_info.setLayout(*pipeline_layout);

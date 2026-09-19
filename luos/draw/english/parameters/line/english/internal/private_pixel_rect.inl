@@ -12,12 +12,12 @@ namespace Gnik_luos {
         float green = color[1] / 255.0f;
         float blue = color[2] / 255.0f;
         const Vertex corner[6] = {
-            {left, top,    0.0f, 0.0f, red, green, blue, alpha},
-            {right, top,   0.0f, 0.0f, red, green, blue, alpha},
-            {right, bottom, 0.0f, 0.0f, red, green, blue, alpha},
-            {left, top,    0.0f, 0.0f, red, green, blue, alpha},
-            {right, bottom, 0.0f, 0.0f, red, green, blue, alpha},
-            {left, bottom, 0.0f, 0.0f, red, green, blue, alpha}
+            {left, top,    0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+            {right, top,   0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+            {right, bottom, 0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+            {left, top,    0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+            {right, bottom, 0.0f, 0.0f, 0.0f, red, green, blue, alpha},
+            {left, bottom, 0.0f, 0.0f, 0.0f, red, green, blue, alpha}
         };
         for (const Vertex& point : corner) {
             private_fill_vertex.push_back(point);

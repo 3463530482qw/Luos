@@ -1,1 +1,1 @@
-void create(const vk::raii::Device& device, vk::Format format);
+void create(const vk::raii::Device& device, vk::Format format, vk::Format depth_format);

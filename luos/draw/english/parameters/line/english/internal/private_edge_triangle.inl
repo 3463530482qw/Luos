@@ -6,7 +6,7 @@ namespace Gnik_luos {
             return;
         }
         for (int index = 0; index < 3; index++) {
-            private_vertex.push_back(Vertex{corner[index][0], corner[index][1], private_u0, 0.0f});
+            private_vertex.push_back(Vertex{corner[index][0], corner[index][1], 0.0f, private_u0, 0.0f});
         }
     }
 }

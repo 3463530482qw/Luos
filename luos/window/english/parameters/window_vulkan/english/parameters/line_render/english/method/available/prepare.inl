@@ -21,6 +21,8 @@ namespace Gnik_luos {
         vertex_memory[vertex_frame].unmapMemory();
 
         // 逻辑画布 → NDC:视口已经落在窗口内接矩形上,矩阵只做画布到 NDC 的线性映射(y 向下)
+        // z 这一行是直通:顶点 z 就是 NDC 深度(0 最近、1 最远),所以只有落在 [0,1] 里的 z 才不被近远平面裁掉;
+        // 相机接入后改的就是这两行(换成视图与投影),深度附件与管线这边不再动
         push_constants = {};
         push_constants.mvp[0] = 2.0f / logic_width;
         push_constants.mvp[5] = 2.0f / logic_height;

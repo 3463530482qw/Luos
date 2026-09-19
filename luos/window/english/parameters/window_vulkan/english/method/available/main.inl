@@ -4,6 +4,7 @@ namespace Gnik_luos {
         swapchain.width = &viewport.width;
         swapchain.height = &viewport.height;
         line_render.vulkan = &vulkan;
+        depth.vulkan = &vulkan;
     }
 
     Window_vulkan::~Window_vulkan() {

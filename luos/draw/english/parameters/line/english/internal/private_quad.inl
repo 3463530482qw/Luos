@@ -12,10 +12,10 @@ namespace Gnik_luos {
             return;
         }
         Vertex corner[4] = {
-            {ax + private_nx, ay + private_ny, u0, 0.0f},
-            {bx + private_nx, by + private_ny, u1, 0.0f},
-            {bx - private_nx, by - private_ny, u1, 0.0f},
-            {ax - private_nx, ay - private_ny, u0, 0.0f}
+            {ax + private_nx, ay + private_ny, 0.0f, u0, 0.0f},
+            {bx + private_nx, by + private_ny, 0.0f, u1, 0.0f},
+            {bx - private_nx, by - private_ny, 0.0f, u1, 0.0f},
+            {ax - private_nx, ay - private_ny, 0.0f, u0, 0.0f}
         };
         const int tri[6] = {0, 1, 2, 0, 2, 3};
         for (int i = 0; i < 6; i++) {

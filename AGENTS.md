@@ -34,6 +34,11 @@ wiall用于#include标准头文件,第三方库,自定义大类,除了wiall其�
 (见 work_cache 二十七).库里既有的中文目录(窗口配置信息/创建信息/时间等历史文件)保持原样,
 别顺手补、也别顺手删.曾给新写的两个配置类加了中文别名与中文目录,被阁下指出后清掉.
 
+记录:片段改完要回读整段核对格式.曾用带换行的 old_string 做替换,把 depth/main.hpp 的
+"class Vulkan_depth {" 与下一行 "public:" 粘成一行(换行被吃掉),文件看着是乱的;同一处还顺手多写了
+`class Vulkan;`(Vulkan 由 luos/main.hpp 在 window 之前定义,line_render 与 depth 直接用 `Vulkan**` 就行),
+两处都被阁下指出.前向声明只写真正需要的,别写成多余的一堆.
+
 # 类标准定义
 include "english/parameters/数据结构体或子类名/main.hpp"
 namespace Gnik_luos {

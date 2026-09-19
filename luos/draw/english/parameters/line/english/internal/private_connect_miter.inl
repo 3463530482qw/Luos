@@ -8,7 +8,7 @@ namespace Gnik_luos {
         const int order[6] = {0, 1, 2, 0, 2, 3};
         for (int index = 0; index < 6; index++) {
             const std::array<float, 2>& point = private_corner[order[index]];
-            private_vertex.push_back(Vertex{point[0], point[1], private_u0, 0.0f});
+            private_vertex.push_back(Vertex{point[0], point[1], 0.0f, private_u0, 0.0f});
         }
     }
 }

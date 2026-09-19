@@ -6,6 +6,7 @@ namespace Gnik_luos {
         synchronization.frame_fence.clear();
         command_buffer.command_buffers.clear();
         framebuffer.framebuffers.clear();
+        depth.destroy();
         swapchain.reset();
         command_pool.command_pool.clear();
         renderpass.render_pass.clear();
