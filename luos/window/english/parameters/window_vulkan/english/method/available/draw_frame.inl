@@ -24,6 +24,9 @@ namespace Gnik_luos {
             static_cast<float>(*viewport.window_logic_width),
             static_cast<float>(*viewport.window_logic_height)
         );
+        ground.prepare(
+            static_cast<float>(*viewport.window_logic_width) / static_cast<float>(*viewport.window_logic_height)
+        );
 
         // 与移植前一致:命令缓冲每帧重录(带单次提交标记,不能复用上一次的录制结果)
         record_command_buffers();

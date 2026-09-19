@@ -9,6 +9,7 @@
 #include "english/parameters/synchronization/main.hpp"
 
 #include "english/parameters/line_render/main.hpp"
+#include "english/parameters/ground/main.hpp"
 namespace Gnik_luos {
     class Window_vulkan {
         public:

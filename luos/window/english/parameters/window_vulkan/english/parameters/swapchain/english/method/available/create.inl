@@ -45,6 +45,12 @@ namespace Gnik_luos {
             preferred_image_count = capabilities.maxImageCount;
         }
 
+        // 颜色附件是必需的;顺手带上 eTransferSrc(回读/截图要用),表面不支持就只留颜色附件
+        vk::ImageUsageFlags image_usage = vk::ImageUsageFlagBits::eColorAttachment;
+        if (capabilities.supportedUsageFlags & vk::ImageUsageFlagBits::eTransferSrc) {
+            image_usage |= vk::ImageUsageFlagBits::eTransferSrc;
+        }
+
         vk::SwapchainCreateInfoKHR create_info;
         create_info.setSurface(*surface);
         create_info.setMinImageCount(preferred_image_count);
@@ -52,7 +58,7 @@ namespace Gnik_luos {
         create_info.setImageColorSpace(chosen_format.colorSpace);
         create_info.setImageExtent(extent);
         create_info.setImageArrayLayers(1);
-        create_info.setImageUsage(vk::ImageUsageFlagBits::eColorAttachment);
+        create_info.setImageUsage(image_usage);
         create_info.setImageSharingMode(vk::SharingMode::eExclusive);
         create_info.setPreTransform(capabilities.currentTransform);
         create_info.setCompositeAlpha(vk::CompositeAlphaFlagBitsKHR::eOpaque);

@@ -1,0 +1,1 @@
+Vulkan_info& batch_load(const simdjson::dom::element& json, std::string_view type);
