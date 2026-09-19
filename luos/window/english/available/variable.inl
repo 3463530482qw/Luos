@@ -11,6 +11,7 @@ bool isrun{true};
 Window_time time;
 window_mouse mouse;
 Key_board key;
+Camera camera;
 Window_vulkan window_vulkan;
 bool is_time;
 bool is_key;

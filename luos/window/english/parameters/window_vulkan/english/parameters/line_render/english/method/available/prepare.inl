@@ -20,16 +20,20 @@ namespace Gnik_luos {
         std::memcpy(mapped, vertex.data(), bytes);
         vertex_memory[vertex_frame].unmapMemory();
 
-        // 逻辑画布 → NDC:视口已经落在窗口内接矩形上,矩阵只做画布到 NDC 的线性映射(y 向下)
-        // z 这一行是直通:顶点 z 就是 NDC 深度(0 最近、1 最远),所以只有落在 [0,1] 里的 z 才不被近远平面裁掉;
-        // 相机接入后改的就是这两行(换成视图与投影),深度附件与管线这边不再动
+        // 投影:接了相机就按相机算(正交档 = 画布 → NDC,z 直通深度;透视档 = 视图 × 透视);
+        // 没接相机时沿用画布 → NDC 的线性映射(y 向下),与加相机之前逐项一致
         push_constants = {};
-        push_constants.mvp[0] = 2.0f / logic_width;
-        push_constants.mvp[5] = 2.0f / logic_height;
-        push_constants.mvp[10] = 1.0f;
-        push_constants.mvp[12] = -1.0f;
-        push_constants.mvp[13] = -1.0f;
-        push_constants.mvp[15] = 1.0f;
+        if (camera != nullptr) {
+            Matrix4 matrix = camera->view_projection(logic_width / logic_height);
+            std::memcpy(push_constants.mvp, matrix.m, sizeof(float) * 16);
+        } else {
+            push_constants.mvp[0] = 2.0f / logic_width;
+            push_constants.mvp[5] = 2.0f / logic_height;
+            push_constants.mvp[10] = 1.0f;
+            push_constants.mvp[12] = -1.0f;
+            push_constants.mvp[13] = -1.0f;
+            push_constants.mvp[15] = 1.0f;
+        }
         push_constants.screen_w = static_cast<float>(frame_extent.width);
         push_constants.screen_h = static_cast<float>(frame_extent.height);
         push_constants.snap_pixel = snap_pixel ? 1.0f : 0.0f;
