@@ -11,7 +11,8 @@ bool isrun{true};
 Window_time time;
 window_mouse mouse;
 Key_board key;
-Camera camera;
+Camera& camera;   // 相机子模块:实体放在 window_vulkan 里(与渲染模块同处构造一次绑死),这里只留引用
+Draw& drawer;     // 绘制器:实体同样在 window_vulkan 里,窗口每帧把可见矩形交给它
 Window_vulkan window_vulkan;
 bool is_time;
 bool is_key;

@@ -1,4 +1,5 @@
 void find_graphics_queue_family(vk::raii::PhysicalDevice& physical_device);
+Vulkan& vulkan_engine();
 void create_swapchain(Vulkan& vulkan_engine);
 void rebuild();
 void destroy_resources();

@@ -1,6 +1,6 @@
 namespace Gnik_luos {
     void Vulkan_ground::draw(const vk::raii::CommandBuffer& command_buffer) {
-        if (pipeline == nullptr || !enabled || camera == nullptr) {
+        if (pipeline == nullptr || !enabled) {
             return;
         }
         command_buffer.bindPipeline(vk::PipelineBindPoint::eGraphics, *pipeline);

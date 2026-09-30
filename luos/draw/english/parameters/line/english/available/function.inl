@@ -1,4 +1,5 @@
 void update();   // 由 Draw::draw 调用
+void set_view(const Rect& view);   // 本帧的可见矩形:外部填充按它留洞
 const std::vector<Vertex>& vertex() const;
 const std::vector<Vertex>& fill_vertex() const;   // 填充单独一层,由 Draw::draw 排在全部线条之前
 // 链式设置:返回自身并置更新标志

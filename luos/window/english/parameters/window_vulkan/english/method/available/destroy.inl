@@ -5,8 +5,8 @@ namespace Gnik_luos {
         }
         initialized = false;
 
-        vulkan->device.waitIdle();
+        vulkan_engine().device.waitIdle();
         destroy_resources();
-        vulkan = nullptr;   // 解绑借用,火山仍由应用持有
+        // 火山仍由应用持有与销毁,这里只把自己标成未初始化
     }
 }

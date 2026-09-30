@@ -6,6 +6,7 @@ namespace Gnik_luos {
         }
         if (is_vulkan) {
             if (window_vulkan.initialized) {
+                private_run.push_back([&]() { sync_draw(); });
                 private_run.push_back([&]() { window_vulkan.draw_frame(); });
             } else {
                 throw std::runtime_error(std::string("Window::router => Vulkan not initialized"));

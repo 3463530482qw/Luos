@@ -15,7 +15,11 @@ namespace Gnik_luos {
 }
 //几何主干:路由挑管线,update 跑一整条路径,段与段之间靠 private_segment 串起来
 #include "english/internal/router.inl"
+#include "english/internal/set_view.inl"
 #include "english/internal/update.inl"
+#include "english/internal/private_measure_path.inl"
+#include "english/internal/private_advance_path.inl"
+#include "english/internal/private_close_loop.inl"
 #include "english/internal/private_segment.inl"
 #include "english/internal/private_segment_colors.inl"
 #include "english/internal/private_endpoint.inl"
@@ -41,6 +45,8 @@ namespace Gnik_luos {
 //填充:内部/外部,取交点与梯形带的两套私有工具
 #include "english/internal/private_fill_inside.inl"
 #include "english/internal/private_fill_outside.inl"
+#include "english/internal/private_fill_outside_pixel.inl"
+#include "english/internal/private_fill_outside_band.inl"
 #include "english/internal/private_band_spans.inl"
 #include "english/internal/private_crossings.inl"
 //以后接上:把路径本身的拐角切成圆弧(动的是中心线与填充,不是只动线条外角)

@@ -1,6 +1,6 @@
 namespace Gnik_luos {
     void Draw::draw(Draw_line_cmd& cmd) {
-        cmd.camera = private_camera;
+        cmd.set_view(private_view);
         if (cmd.cmd_update) {
             cmd.update();
             cmd.cmd_update = false;

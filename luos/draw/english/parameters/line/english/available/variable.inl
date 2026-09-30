@@ -17,6 +17,6 @@ float inside_alpha{0.0f};                        // 内部填充透明度,和线
 std::array<uint8_t, 3> outside_color{0, 0, 0};   // 外部填充 rgb
 float outside_alpha{0.0f};                       // 外部填充透明度
 Line_cmd_label label{};
-Camera* camera{nullptr};   // 外部填充要知道相机画面,由 Draw::bind_camera 接上
+Rect private_view{};   // 本条命令的可见矩形:每次 draw 由 Draw 交下来,外部填充按它留洞
 bool ended{false};   //路径首尾封口:末点没回到起点就补一段接回去
 bool cmd_update{true}; //用于缓存更新，调用函数后设为true计算完成后设为flase

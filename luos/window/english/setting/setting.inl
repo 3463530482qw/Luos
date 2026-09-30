@@ -8,18 +8,17 @@ namespace Gnik_luos {
         }
         display_index = (window_settings_info.display_index < displays.size()) ? window_settings_info.display_index : 0;
         mode = SDL_GetCurrentDisplayMode(displays[display_index]);
-        #include "width_and_height.inl"
+        apply_window_size(window_settings_info);
         name = window_settings_info.name;
         icon = window_settings_info.icon;
         is_time = window_settings_info.is_time;
         is_key = window_settings_info.is_key;
         is_vulkan = window_settings_info.is_vulkan;
 
-        // 画布尺寸随配置走,相机也跟着重新居中(应用要在 setting 之后再摆相机)
-        camera.canvas_width = static_cast<float>(logic_width);
-        camera.canvas_height = static_cast<float>(logic_height);
-        camera.x = camera.canvas_width * 0.5f;
-        camera.y = camera.canvas_height * 0.5f;
+        // 画布尺寸随配置走:取景范围与视口都跟着新的画布口径重算(实体与绑定在构造期已定)
+        camera.canvas_width = static_cast<double>(logic_width);
+        camera.canvas_height = static_cast<double>(logic_height);
+        window_vulkan.update_viewport();
 
         // 线条渲染的着色器名与清屏色(窗口配置信息里那两个子段),交给 window_vulkan 用
         window_vulkan.line_render.vertex_shader_file = window_settings_info.line_render_vert;

@@ -1,8 +1,13 @@
 namespace Gnik_luos {
-    void Vulkan_swapchain::create(const vk::raii::PhysicalDevice& physical_device, const vk::raii::Device& device) {
-        auto capabilities = physical_device.getSurfaceCapabilitiesKHR(*surface);
-        auto formats = physical_device.getSurfaceFormatsKHR(*surface);
-        auto present_modes = physical_device.getSurfacePresentModesKHR(*surface);
+    void Vulkan_swapchain::create(
+        const Vulkan_surface& surface,
+        const Vulkan_viewport& viewport,
+        const vk::raii::PhysicalDevice& physical_device,
+        const vk::raii::Device& device
+    ) {
+        auto capabilities = physical_device.getSurfaceCapabilitiesKHR(surface.surface);
+        auto formats = physical_device.getSurfaceFormatsKHR(surface.surface);
+        auto present_modes = physical_device.getSurfacePresentModesKHR(surface.surface);
 
         if (capabilities.minImageExtent.width == 0 || capabilities.minImageExtent.height == 0 ||
             capabilities.maxImageExtent.width == 0 || capabilities.maxImageExtent.height == 0) {
@@ -37,8 +42,9 @@ namespace Gnik_luos {
             }
         }
 
-        extent.width = std::clamp(*width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
-        extent.height = std::clamp(*height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
+        // 交换链尺寸取视口(窗口内接矩形):两边都由视口模块保证不为 0
+        extent.width = std::clamp(viewport.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
+        extent.height = std::clamp(viewport.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
 
         preferred_image_count = capabilities.minImageCount + 1;
         if (capabilities.maxImageCount > 0 && preferred_image_count > capabilities.maxImageCount) {
@@ -52,7 +58,7 @@ namespace Gnik_luos {
         }
 
         vk::SwapchainCreateInfoKHR create_info;
-        create_info.setSurface(*surface);
+        create_info.setSurface(surface.surface);
         create_info.setMinImageCount(preferred_image_count);
         create_info.setImageFormat(chosen_format.format);
         create_info.setImageColorSpace(chosen_format.colorSpace);
@@ -66,6 +72,5 @@ namespace Gnik_luos {
         create_info.setClipped(true);
 
         swapchain = vk::raii::SwapchainKHR(device, create_info);
-        images = swapchain.getImages();
     }
 }

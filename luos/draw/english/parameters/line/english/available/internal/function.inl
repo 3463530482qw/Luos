@@ -1,4 +1,7 @@
 void router();
+void private_measure_path(bool tailing);   // 整条路径的弧长
+double private_advance_path();             // 逐段推进管线,返回累计弧长
+void private_close_loop(double passed, bool tailing);   // 末点接回起点那一段
 void private_segment(float start_x, float start_y, float end_x, float end_y);
 void private_segment_colors(const Line_point& point, bool open);
 void private_endpoint();
@@ -14,6 +17,8 @@ void private_gradient();
 void private_single_color();
 void private_fill_inside();
 void private_fill_outside();
+void private_fill_outside_pixel(float view_left, float view_top, float view_right, float view_bottom);
+void private_fill_outside_band(float view_left, float view_top, float view_right, float view_bottom);
 void private_band_spans(float top, float bottom, std::vector<std::array<float, 2>>& out) const;
 void private_crossings(float y, std::vector<float>& out) const;
 int private_pixel_col(float x) const;

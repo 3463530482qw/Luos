@@ -1,7 +1,6 @@
 namespace Gnik_luos {
     void Window_vulkan::create_swapchain(Vulkan& vulkan_engine) {
-        viewport.rebuild();
-        swapchain.create(vulkan_engine.physical_device, vulkan_engine.device);
+        swapchain.create(surface, viewport, vulkan_engine.physical_device, vulkan_engine.device);
         swapchain.create_image_views(vulkan_engine.device);
 
         // 深度图跟着交换链尺寸走,且要在渲染通道之前建:渲染通道的深度附件格式取自它

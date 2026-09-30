@@ -1,5 +1,7 @@
 namespace Gnik_luos {
+    // 交换链图像只在建视图时用一次,直接现取:少留一份会随交换链失效的成员
     void Vulkan_swapchain::create_image_views(const vk::raii::Device& device) {
+        const std::vector<vk::Image> images = swapchain.getImages();
         image_views.clear();
         image_views.reserve(images.size());
 

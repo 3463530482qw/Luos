@@ -1,5 +1,5 @@
-Vulkan** vulkan{nullptr};   // 火山由窗口火山借用,地面管线跟着设备建
-Camera* camera{nullptr};    // 相机:由 Window 构造时接上,地面按它定位与投影
+Vulkan** vulkan_source{nullptr};   // 指向窗口火山的火山借用指针:接上后一直有效   // 火山由窗口火山在构造后接上;项目内部一律走 vulkan()
+Camera& camera;             // 相机子模块(窗口火山持有):构造期绑死,不再判空
 
 bool enabled{true};         // 总开关(默认开),值由窗口火山从火山初始化配置抄进来
 std::string vertex_shader_file{"ground.vert.spv"};

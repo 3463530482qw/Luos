@@ -1,5 +1,5 @@
-Vulkan** vulkan{nullptr};
-Camera* camera{nullptr};   // 相机:由 Window 构造时接上,投影按它算;没接就退回画布缩放
+Vulkan** vulkan_source{nullptr};   // 指向窗口火山的火山借用指针:接上后一直有效   // 火山由窗口火山在构造后接上;项目内部一律走 vulkan()
+Camera& camera;   // 相机子模块(窗口火山持有):构造期绑死,不再判空
 // 着色器文件名:由 Window_vulkan 在每次建交换链时从渲染配置抄进来(create_pipeline 用)
 // 名字带 file 后缀,免得和 create_pipeline 里那两个 ShaderModule 局部变量撞名
 std::string vertex_shader_file{"line.vert.spv"};

@@ -1,26 +1,14 @@
 namespace Gnik_luos {
-    Window::Window() {
-        // pending 尺寸是借用宿主窗口成员的指针(自动跟随 resize),构造时只绑定,不解引用
-        window_vulkan.pending_width = &width;
-        window_vulkan.pending_height = &height;
-        window_vulkan.id = &id;
-        window_vulkan.viewport.aspectratio = &aspectratio;
-        window_vulkan.viewport.logic_aspectratio = &logic_aspectratio;
-        window_vulkan.viewport.window_width = &width;
-        window_vulkan.viewport.window_height = &height;
-        window_vulkan.viewport.window_logic_width = &logic_width;
-        window_vulkan.viewport.window_logic_height = &logic_height;
+    Window::Window() : camera(window_vulkan.camera), drawer(window_vulkan.drawer) {
+        // 相机是窗口的子模块:默认取景的画布尺寸取字段初始值,应用设置配置后会再同步一次
+        camera.canvas_width = static_cast<double>(logic_width);
+        camera.canvas_height = static_cast<double>(logic_height);
 
-        // 相机交给线条渲染用(借用),默认摆在画布中心:正交档下与"画布左上角是世界原点"的老口径等价
-        window_vulkan.line_render.camera = &camera;
-        window_vulkan.ground.camera = &camera;
-        camera.canvas_width = static_cast<float>(logic_width);
-        camera.canvas_height = static_cast<float>(logic_height);
-        camera.x = camera.canvas_width * 0.5f;
-        camera.y = camera.canvas_height * 0.5f;
+        // 视口量按"用的时候现取"的方式交给 window_vulkan:只交出宿主窗口的位置,不落下成员指针
+        window_vulkan.host = this;
+        window_vulkan.id = &id;   // 表面创建要窗口句柄:交出成员地址,窗口活多久它就在多久
 
         private_run.push_back([this]() { router(); });
-        
     }
 
     Window::~Window() {

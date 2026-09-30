@@ -22,7 +22,7 @@ namespace Gnik_luos {
         image_info.setSharingMode(vk::SharingMode::eExclusive);
         image_info.setInitialLayout(vk::ImageLayout::eUndefined);
 
-        image = vk::raii::Image((*vulkan)->device, image_info);
+        image = vk::raii::Image(vulkan().device, image_info);
 
         vk::MemoryRequirements requirement = image.getMemoryRequirements();
         vk::MemoryAllocateInfo allocate_info;
@@ -31,7 +31,7 @@ namespace Gnik_luos {
             requirement.memoryTypeBits,
             vk::MemoryPropertyFlagBits::eDeviceLocal
         ));
-        memory = vk::raii::DeviceMemory((*vulkan)->device, allocate_info);
+        memory = vk::raii::DeviceMemory(vulkan().device, allocate_info);
         image.bindMemory(*memory, 0);
 
         // 深度图不带模板时只有深度那一面;带模板的格式(回退档)两面都要写进视图
@@ -48,6 +48,6 @@ namespace Gnik_luos {
             .setAspectMask(aspect)
             .setLevelCount(1)
             .setLayerCount(1));
-        view = vk::raii::ImageView((*vulkan)->device, view_info);
+        view = vk::raii::ImageView(vulkan().device, view_info);
     }
 }

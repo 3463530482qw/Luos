@@ -6,7 +6,7 @@ namespace Gnik_luos {
         buffer_info.setSharingMode(vk::SharingMode::eExclusive);
 
         for (uint32_t index = 0; index < 2; index++) {
-            vertex_buffer[index] = vk::raii::Buffer((*vulkan)->device, buffer_info);
+            vertex_buffer[index] = vk::raii::Buffer(vulkan().device, buffer_info);
             vk::MemoryRequirements requirement = vertex_buffer[index].getMemoryRequirements();
             vk::MemoryAllocateInfo allocate_info;
             allocate_info.setAllocationSize(requirement.size);
@@ -14,7 +14,7 @@ namespace Gnik_luos {
                 requirement.memoryTypeBits,
                 vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent
             ));
-            vertex_memory[index] = vk::raii::DeviceMemory((*vulkan)->device, allocate_info);
+            vertex_memory[index] = vk::raii::DeviceMemory(vulkan().device, allocate_info);
             vertex_buffer[index].bindMemory(*vertex_memory[index], 0);
         }
         vertex_capacity = bytes;

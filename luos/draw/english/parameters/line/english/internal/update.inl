@@ -1,4 +1,6 @@
 namespace Gnik_luos {
+    // 一整条路径的重算:路由 → 清缓存 → 量弧长 → 逐段推进 → 补首尾接头
+    // 各步的细节分别在 private_measure_path / private_advance_path / private_close_loop 里
     void Draw_line_cmd::update() {
         router();
         private_vertex.clear();
@@ -30,47 +32,16 @@ namespace Gnik_luos {
             private_segment(x1, y1, x2, y2);
             return;
         }
+
         const Line_point& head = private_path.front();
         const Line_point& tail = private_path.back();
-        // 收尾:末点没回到起点时补一段末点→起点
-        float tail_dx = head.x - tail.x;
-        float tail_dy = head.y - tail.y;
-        float tail_length = std::sqrt(tail_dx * tail_dx + tail_dy * tail_dy);
-        bool tailing = ended && tail_length > 0.0f;
-        private_path_length = tailing ? tail_length : 0.0f;
-        for (size_t index = 1; index < private_path.size(); index++) {
-            float dx = private_path[index].x - private_path[index - 1].x;
-            float dy = private_path[index].y - private_path[index - 1].y;
-            private_path_length += std::sqrt(dx * dx + dy * dy);
-        }
-        // 逐段跑管线:进度按累计弧长分配,虚线相位也顺着弧长接下去
-        const size_t last = private_path.size() - 1;
-        float passed = 0.0f;
-        for (size_t index = 1; index < private_path.size(); index++) {
-            const Line_point& begin = private_path[index - 1];
-            const Line_point& end = private_path[index];
-            float dx = end.x - begin.x;
-            float dy = end.y - begin.y;
-            float length = std::sqrt(dx * dx + dy * dy);
-            private_dash_begin = passed;
-            private_u0 = (private_path_length > 0.0f) ? passed / private_path_length : 0.0f;
-            passed += length;
-            private_u1 = (private_path_length > 0.0f) ? passed / private_path_length : 1.0f;
-            private_segment_colors(end, private_trailing || index == last);
-            // 端头只有整条路径的两个自由头,中间拐角不封
-            private_cap_begin = private_edge_on && index == 1;
-            private_cap_end = private_edge_on && index == last;
-            private_segment(begin.x, begin.y, end.x, end.y);
-        }
-        private_cap_begin = false;
-        private_cap_end = false;
-        if (tailing) {
-            private_dash_begin = passed;
-            private_u0 = (private_path_length > 0.0f) ? passed / private_path_length : 0.0f;
-            private_u1 = 1.0f;
-            private_segment_colors(head, true);
-            private_segment(tail.x, tail.y, head.x, head.y);
-        }
+        const double tail_dx = head.x - tail.x;
+        const double tail_dy = head.y - tail.y;
+        const bool tailing = ended && std::sqrt(tail_dx * tail_dx + tail_dy * tail_dy) > 0.0;
+        private_measure_path(tailing);
+        const double passed = private_advance_path();
+        private_close_loop(passed, tailing);
+
         // 首尾之间再补一个接头(末段或补出来的收尾段,与首段相接)
         if (!ended || !label.connected || label.dashed || !private_prev_valid || !private_first_valid) {
             return;

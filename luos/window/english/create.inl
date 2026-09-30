@@ -5,7 +5,7 @@ namespace Gnik_luos {
             throw std::runtime_error(std::string("Window::create => ") + SDL_GetError());
         }
         window_id = SDL_GetWindowID(id);
-        position_adjustment_positional(window_position::middle, window_position::middle);
+        anchor_to(Anchor_x::middle, Anchor_y::middle);   // 默认摆在屏幕正中
         return *this;
     }
 

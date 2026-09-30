@@ -1,5 +1,5 @@
+#include "english/parameters/input.inl"
 namespace Gnik_luos {
-    class Vulkan;
     class Vulkan_viewport {
         public:
             #include "english/available/variable.inl"

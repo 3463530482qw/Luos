@@ -1,4 +1,5 @@
 namespace Gnik_luos {
+    class Vulkan;
     class Vulkan_depth {
         public:
             #include "english/available/variable.inl"
@@ -8,6 +9,7 @@ namespace Gnik_luos {
             #include "english/available/internal/function.inl"
     };
 }
+#include "english/method/available/main.inl"
 #include "english/method/available/create.inl"
 #include "english/method/available/destroy.inl"
 #include "english/method/internal/pick_format.inl"

@@ -3,6 +3,8 @@
 #include "english/parameters/time/main.hpp"
 #include "english/parameters/mouse/main.hpp"
 #include "english/parameters/key_board/main.hpp"
+#include "english/parameters/anchor/main.hpp"
+#include "english/parameters/camera/main.hpp"
 #include "english/parameters/window_vulkan/main.hpp"
 namespace Gnik_luos {
     class Window {
@@ -22,10 +24,14 @@ namespace Gnik_luos {
     using 窗口 = Window;
 }
 #include "english/position_adjustment/main.inl"
-//#include "english/resize.inl"
+#include "english/resize.inl"
+#include "english/resize_i.inl"
+#include "english/resize_d.inl"
+#include "english/setting/apply_window_size.inl"
 #include "english/setting/setting.inl"
 #include "english/create.inl"
-#include "english/bind_window.inl"
+#include "english/sync_viewport.inl"
+#include "english/sync_draw.inl"
 #include "english/mouse_update.inl"
 #include "english/window_resize.inl"
 #include "english/icon.inl"

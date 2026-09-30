@@ -1,6 +1,8 @@
 Vulkan_viewport viewport;
-uint32_t *pending_width, *pending_height;
-SDL_Window** id;
+Camera camera;    // 相机子模块:就放在使用它的渲染模块前头,构造顺序即绑定顺序
+Draw drawer;      // 绘制器:顶点出路由 attach_draw 接上,可见矩形由 Window 每帧交过来
+Window* host{nullptr};   // 宿主窗口:视口量按"用的时候现取"从这里读,不落下成员指针
+SDL_Window** id;         // 窗口句柄的位置(表面创建要用)
 bool initialized{false};
 Vulkan_surface surface;
 Vulkan_command_pool command_pool;

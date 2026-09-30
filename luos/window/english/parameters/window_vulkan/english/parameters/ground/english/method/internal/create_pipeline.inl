@@ -6,12 +6,12 @@ namespace Gnik_luos {
         vk::ShaderModuleCreateInfo vertex_info;
         vertex_info.setCodeSize(vertex_code.size() * sizeof(uint32_t));
         vertex_info.setPCode(vertex_code.data());
-        vk::raii::ShaderModule vertex_shader((*vulkan)->device, vertex_info);
+        vk::raii::ShaderModule vertex_shader(vulkan().device, vertex_info);
 
         vk::ShaderModuleCreateInfo fragment_info;
         fragment_info.setCodeSize(fragment_code.size() * sizeof(uint32_t));
         fragment_info.setPCode(fragment_code.data());
-        vk::raii::ShaderModule fragment_shader((*vulkan)->device, fragment_info);
+        vk::raii::ShaderModule fragment_shader(vulkan().device, fragment_info);
 
         vk::PipelineShaderStageCreateInfo stages[2];
         stages[0].setStage(vk::ShaderStageFlagBits::eVertex);
@@ -85,7 +85,7 @@ namespace Gnik_luos {
         vk::PipelineLayoutCreateInfo layout_info;
         layout_info.setPushConstantRangeCount(1);
         layout_info.setPPushConstantRanges(&push_range);
-        pipeline_layout = vk::raii::PipelineLayout((*vulkan)->device, layout_info);
+        pipeline_layout = vk::raii::PipelineLayout(vulkan().device, layout_info);
 
         vk::GraphicsPipelineCreateInfo pipeline_info;
         pipeline_info.setStageCount(2);
@@ -100,6 +100,6 @@ namespace Gnik_luos {
         pipeline_info.setPDynamicState(&dynamic_state);
         pipeline_info.setLayout(*pipeline_layout);
         pipeline_info.setRenderPass(*render_pass);
-        pipeline = vk::raii::Pipeline((*vulkan)->device, nullptr, pipeline_info);
+        pipeline = vk::raii::Pipeline(vulkan().device, nullptr, pipeline_info);
     }
 }
