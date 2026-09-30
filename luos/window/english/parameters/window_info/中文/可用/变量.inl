@@ -5,3 +5,16 @@ std::string& 图标{icon};
 uint8_t& 显示器索引{display_index};
 int& 逻辑宽{logic_width};
 int& 逻辑高{logic_height};
+// camera 子段
+bool& 相机已配置{has_camera};
+bool& 透视{camera_is_perspective};
+double& 相机x{camera_x};
+double& 相机y{camera_y};
+double& 相机z{camera_z};
+double& 相机旋转x{camera_rotation_x};
+double& 相机旋转y{camera_rotation_y};
+double& 相机旋转z{camera_rotation_z};
+double& 视场角{camera_fov};
+double& 近平{camera_near_plane};
+double& 远平{camera_far_plane};
+double& 缩放{camera_zoom};

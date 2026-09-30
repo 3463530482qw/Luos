@@ -17,3 +17,7 @@ double temporary_vulkan_clear_red{};
 double temporary_vulkan_clear_green{};
 double temporary_vulkan_clear_blue{};
 double temporary_vulkan_clear_alpha{};
+// camera 子段:camera 键不存在时这个对象为空,at_key 全部取不到,于是整段照旧用默认值
+simdjson::dom::object camera_object{};
+bool temporary_camera_is_perspective{false};
+double temporary_camera_value{};

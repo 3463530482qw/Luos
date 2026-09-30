@@ -79,6 +79,9 @@ namespace Gnik_luos {
             vulkan_clear_alpha = static_cast<float>(temporary_vulkan_clear_alpha);
         }
 
+        // 子段:相机初始取景(没有这段就保持默认值)
+        private_load_camera();
+
         return *this;
     }
 }
