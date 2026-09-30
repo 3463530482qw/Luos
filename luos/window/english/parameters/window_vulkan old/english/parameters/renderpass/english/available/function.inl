@@ -1,1 +1,0 @@
-void create(const vk::raii::Device& device, vk::Format format);

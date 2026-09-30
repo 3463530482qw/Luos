@@ -1,1 +1,0 @@
-vk::SurfaceKHR surface{nullptr};
