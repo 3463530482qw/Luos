@@ -13,7 +13,7 @@ namespace Gnik_luos {
                 canvas.z
             };
         }
-        const Ground_hit hit = intersect_ground(ray);
+        const Ground_hit hit = World::intersect_ground(ray);
         return hit.valid ? hit.point.position : Vector3{};
     }
 }

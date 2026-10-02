@@ -8,6 +8,7 @@ std::string icon;
 std::string name{"a window"};
 SDL_Window* id{nullptr};
 bool isrun{true};
+World world;      // 世界坐标子模块:世界空间的约定与射线求交
 Window_time time;
 window_mouse mouse;
 Key_board key;

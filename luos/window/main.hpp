@@ -4,6 +4,7 @@
 #include "english/parameters/mouse/main.hpp"
 #include "english/parameters/key_board/main.hpp"
 #include "english/parameters/anchor/main.hpp"
+#include "english/parameters/world/main.hpp"
 #include "english/parameters/camera/main.hpp"
 #include "english/parameters/window_vulkan/main.hpp"
 namespace Gnik_luos {

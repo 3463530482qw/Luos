@@ -4,7 +4,6 @@
 
 #include "luos/image/main.hpp"
 #include "luos/math/main.hpp"
-#include "luos/world/main.hpp"
 #include "luos/vulkan/main.hpp"
 #include "luos/draw/main.hpp"
 #include "luos/window/main.hpp"

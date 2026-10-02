@@ -5,8 +5,17 @@
 //   - 旋转按度;三个旋转都为 0 时相机看向 -z
 //   - 世界量一律 double;只在出顶点与写 GPU 推常量时才收窄成 float
 // 正交与透视只是同一套 3D 数据的两种取景,数据本身不随档位改变。
-#include "english/parameters/world_point.inl"
-#include "english/parameters/canvas_rect.inl"
-#include "english/parameters/world_ray.inl"
-#include "english/parameters/ground_hit.inl"
+#include "english/available/world_point.inl"
+#include "english/available/world_ray.inl"
+#include "english/available/canvas_rect.inl"
+#include "english/available/ground_hit.inl"
+namespace Gnik_luos {
+    class World {
+        public:
+            #include "english/available/variable.inl"
+        public:
+            #include "english/available/function.inl"
+            #include "中文/可用/函数.inl"
+    };
+}
 #include "english/method/intersect_ground.inl"
