@@ -20,10 +20,9 @@ namespace Gnik_luos {
         std::memcpy(mapped, vertex.data(), bytes);
         vertex_memory[vertex_frame].unmapMemory();
 
-        // 投影只由相机给:世界 → 裁剪在相机里算完(double),这里收窄成推常量要的 float
+        // 投影只由相机给:画布口径的"世界 → 裁剪"闭式矩阵
         push_constants = {};
-        std::array<float, 16> packed = to_float16(camera.view_projection());
-        std::memcpy(push_constants.mvp, packed.data(), packed.size() * sizeof(float));
+        camera.canvas_clip_matrix(push_constants.mvp);
         push_constants.screen_w = static_cast<float>(frame_extent.width);
         push_constants.screen_h = static_cast<float>(frame_extent.height);
         push_constants.snap_pixel = snap_pixel ? 1.0f : 0.0f;

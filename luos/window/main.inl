@@ -1,5 +1,5 @@
 namespace Gnik_luos {
-    Window::Window() : camera(window_vulkan.camera), drawer(window_vulkan.drawer) {
+    Window::Window() : window_vulkan(drawer), camera(window_vulkan.camera), drawer(window_vulkan.drawer) {
         // 相机是窗口的子模块:默认取景的画布尺寸取字段初始值,应用设置配置后会再同步一次
         camera.canvas_width = static_cast<double>(logic_width);
         camera.canvas_height = static_cast<double>(logic_height);

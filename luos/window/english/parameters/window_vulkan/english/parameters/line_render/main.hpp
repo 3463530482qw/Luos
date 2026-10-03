@@ -1,5 +1,5 @@
-#include "english/parameters/push_constants.inl"
-// 顶点格式 Vertex 由 draw 模块定义(luos/main.hpp 里 draw 先于 window 引入),线条管线只用不改
+﻿#include "english/parameters/push_constants.inl"
+// 顶点格式 Vertex 由 draw 子模块定义(window\parameters\draw 先于本模块引入),线条管线只用不改
 namespace Gnik_luos {
     class Vulkan;
     class Vulkan_line_render {

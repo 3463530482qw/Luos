@@ -10,4 +10,5 @@ Window& resize(int w, int h);
 Window& resize(float w, float h);
 Window& set_icon(Information_image image);
 Window& run();
+Window& draw();   // 每帧把可见矩形交给绘制器,再由绘制器检查与重算本轮登记的命令
 Window& close();

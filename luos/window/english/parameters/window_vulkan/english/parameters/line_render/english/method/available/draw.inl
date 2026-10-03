@@ -1,4 +1,4 @@
-namespace Gnik_luos {
+﻿namespace Gnik_luos {
     void Vulkan_line_render::draw(const vk::raii::CommandBuffer& command_buffer) {
         if (pipeline == nullptr || vertex_count == 0) {
             return;

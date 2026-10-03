@@ -1,4 +1,4 @@
-#include "english/parameters/viewport/main.hpp"
+﻿#include "english/parameters/viewport/main.hpp"
 #include "english/parameters/surface/main.hpp"
 #include "english/parameters/command_pool/main.hpp"
 #include "english/parameters/swapchain/main.hpp"
@@ -20,7 +20,7 @@ namespace Gnik_luos {
             #include "english/available/internal/variable.inl"
             #include "english/available/internal/function.inl"
         public:
-            Window_vulkan();
+            Window_vulkan(Draw& draw_layer);   // 绘制器实体归窗口,构造期绑死
             ~Window_vulkan();
     };
 }

@@ -18,8 +18,10 @@ namespace Gnik_luos {
         // 画布尺寸随配置走:取景范围与视口都跟着新的画布口径重算(实体与绑定在构造期已定)
         camera.canvas_width = static_cast<double>(logic_width);
         camera.canvas_height = static_cast<double>(logic_height);
-        // 相机子模块的初始取景:window_info 里写了 camera 段就用它,没写就保持默认(正交、位置 (0,0,0))
+        // 相机子模块的初始取景:window_info 里写了 camera 段就用它,没写就保持相机自己的默认
         camera.apply(window_settings_info);
+        // 站位 z >= 0(含把 z 写成 0 的配置)视为要默认贴合:画布与逻辑窗口一一对应
+        camera.apply_default();
         window_vulkan.update_viewport();
 
         // 线条渲染的着色器名与清屏色(窗口配置信息里那两个子段),交给 window_vulkan 用

@@ -12,7 +12,8 @@ namespace Gnik_luos {
         Rotation_basis basis;
         basis.right = {cc * cb, sc * cb, -sb};
         basis.up = {cc * sb * sa - sc * ca, sc * sb * sa + cc * ca, cb * sa};
-        basis.forward = {-(cc * sb * ca + sc * sa), -(sc * sb * ca - cc * sa), -(cb * ca)};
+        // 零旋转看向 +z(画布口径:x 向右、y 向上、z 向前,世界量与屏幕都同向)
+        basis.forward = {cc * sb * ca + sc * sa, sc * sb * ca - cc * sa, cb * ca};
         return basis;
     }
 }

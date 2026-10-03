@@ -1,6 +1,6 @@
 namespace Gnik_luos {
-    // 我当前显示的世界矩形 = 画布:矩形左下角贴世界原点(默认位置时就是世界原点)
-    // 判定"是否默认位置"用三个分量,避免把 (0,0,0) 当成哨兵值 —— 相机站在原点是合法位置
+    // 我的取景范围:世界矩形,尺寸是画布尺寸按 zoom 缩放后的结果,xy 跟着站位走
+    // 正交档它就是取景框本身;透视档只作"画布口径"的换算基准(屏幕↔画布、视口比例都按它)
     Canvas_rect Camera::canvas_rect() const {
         const double scale = (zoom > zoom_min) ? zoom : 1.0;
         const double width = canvas_width / scale;

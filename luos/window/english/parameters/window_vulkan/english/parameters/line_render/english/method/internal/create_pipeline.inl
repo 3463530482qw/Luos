@@ -1,4 +1,4 @@
-namespace Gnik_luos {
+﻿namespace Gnik_luos {
     void Vulkan_line_render::create_pipeline(const vk::raii::RenderPass& render_pass) {
         std::vector<uint32_t> vertex_code = load_shader(vertex_shader_file.c_str());
         std::vector<uint32_t> fragment_code = load_shader(fragment_shader_file.c_str());

@@ -1,6 +1,5 @@
-void mouse_update(float mouse_x, float mouse_y);
+﻿void mouse_update(float mouse_x, float mouse_y);
 void window_resize(float goal_width, float goal_height);
 void apply_window_size(const Window_settings_info& window_settings_info);
-void sync_draw();
 void router();
 void event_handling();

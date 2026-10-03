@@ -13,6 +13,8 @@ namespace Gnik_luos {
     };
 }
 #include "english/method/available/canvas_rect.inl"
+#include "english/method/available/canvas_clip_matrix.inl"
+#include "english/method/available/apply_default.inl"
 #include "english/method/available/rect.inl"
 #include "english/method/available/view_matrix.inl"
 #include "english/method/available/projection_view_space.inl"
@@ -27,3 +29,4 @@ namespace Gnik_luos {
 #include "english/method/internal/view_direction.inl"
 #include "english/method/internal/perspective_matrix.inl"
 #include "english/method/internal/orthographic_matrix.inl"
+#include "english/method/internal/fit_distance.inl"
