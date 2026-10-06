@@ -1,7 +1,4 @@
-// Line 的参数与门面:参数是命令自己的,实现按方法拆在 english\ 下
 namespace Gnik_luos {
-    class Line;
-    #include "english/parameters/line_route.inl"
     class Line {
         public:
             #include "english/available/variable.inl"
@@ -11,7 +8,9 @@ namespace Gnik_luos {
             #include "english/available/internal/variable.inl"
             #include "english/available/internal/function.inl"
     };
+    using 线 = Line;
 }
+#include "english/line_empty.inl"
 //路由装配:按脏标记定步骤,update 顺次跑步骤出顶点
 #include "english/internal/router.inl"
 #include "english/internal/update.inl"
