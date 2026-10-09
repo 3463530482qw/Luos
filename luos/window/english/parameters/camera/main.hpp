@@ -14,7 +14,6 @@ namespace Gnik_luos {
 }
 #include "english/method/available/canvas_rect.inl"
 #include "english/method/available/apply_default.inl"
-#include "english/method/available/rect.inl"
 #include "english/method/available/view_matrix.inl"
 #include "english/method/available/projection_view_space.inl"
 #include "english/method/available/view_projection.inl"
@@ -24,7 +23,6 @@ namespace Gnik_luos {
 #include "english/method/available/canvas_uv.inl"
 #include "english/method/internal/aspect.inl"
 #include "english/method/internal/rotation_basis.inl"
-#include "english/method/internal/view_origin.inl"
 #include "english/method/internal/view_direction.inl"
 #include "english/method/internal/perspective_matrix.inl"
 #include "english/method/internal/orthographic_matrix.inl"

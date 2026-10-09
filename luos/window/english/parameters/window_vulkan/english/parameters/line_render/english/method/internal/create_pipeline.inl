@@ -1,4 +1,4 @@
-﻿namespace Gnik_luos {
+namespace Gnik_luos {
     void Vulkan_line_render::create_pipeline(const vk::raii::RenderPass& render_pass) {
         std::vector<uint32_t> vertex_code = load_shader(vertex_shader_file.c_str());
         std::vector<uint32_t> fragment_code = load_shader(fragment_shader_file.c_str());
@@ -52,7 +52,9 @@
         rasterizer.setRasterizerDiscardEnable(false);
         rasterizer.setPolygonMode(vk::PolygonMode::eFill);
         rasterizer.setLineWidth(1.0f);
-        rasterizer.setCullMode(vk::CullModeFlagBits::eNone);
+        // 线条是闭合的立体盒子(见 Line::private_box 的面表,绕序朝外),所以剔背面:
+        // 背对相机的面本来就被前脸挡住,剔掉只省光栅化;alpha < 1 的线也不会被前后两面叠混一次
+        rasterizer.setCullMode(vk::CullModeFlagBits::eBack);
         rasterizer.setFrontFace(vk::FrontFace::eClockwise);
         rasterizer.setDepthBiasEnable(false);
 
