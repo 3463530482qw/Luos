@@ -1,6 +1,6 @@
 namespace Gnik_luos {
     // 八个角:两端各四个,截面沿局部 x/y 各摊半个几何值;六个面各拆两个三角形
-    void Line::private_box() {
+    void Line::private_box(size_t offset) {
         const double half_x = size_x * 0.5;
         const double half_y = size_y * 0.5;
         const double side_scale[4]{-half_x, half_x, half_x, -half_x};
@@ -31,7 +31,7 @@ namespace Gnik_luos {
         };
         const int triangle[6]{0, 1, 2, 0, 2, 3};
         const float progress[2]{0.0f, 1.0f};
-        size_t target = 0;
+        size_t target = offset;   // 这一段在折线顶点表里的落点
         for (int index = 0; index < 6; index++) {
             for (int step = 0; step < 6; step++) {
                 const int* point = face[index][triangle[step]];

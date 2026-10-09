@@ -11,7 +11,7 @@ namespace Gnik_luos {
     };
     using 线 = Line;
 }
-#include "english/line_empty.inl"
+#include "english/line_segment_count.inl"
 //路由装配:按脏标记定步骤,update 顺次跑步骤出顶点
 #include "english/internal/router.inl"
 #include "english/internal/update.inl"
@@ -21,6 +21,11 @@ namespace Gnik_luos {
 #include "english/internal/private_rotate_vector.inl"
 #include "english/internal/private_box.inl"
 #include "english/internal/private_rgba.inl"
+#include "english/internal/private_read_point.inl"
+#include "english/internal/private_read_size.inl"
+#include "english/internal/private_read_rotation_point.inl"
+#include "english/internal/private_read_rotation.inl"
+#include "english/internal/private_read_rgba.inl"
 //链式设置
 #include "english/from.inl"
 #include "english/to.inl"
@@ -28,5 +33,7 @@ namespace Gnik_luos {
 #include "english/rotation_point.inl"
 #include "english/rotation.inl"
 #include "english/rgba.inl"
+//json 加载
+#include "english/batch_load.inl"
 //对外查询
 #include "english/vertex.inl"

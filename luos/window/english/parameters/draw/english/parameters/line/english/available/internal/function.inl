@@ -1,7 +1,12 @@
 void private_rebuild_route();
 void private_run_route();
-void private_build_frame();
+void private_build_frame(size_t index);
 void private_rotate();
 Vector3 private_rotate_vector(const Vector3& value, const Vector3& pivot) const;
-void private_box();
+void private_box(size_t offset);
 void private_rgba();
+bool private_read_point(const simdjson::dom::element& source, Vector3& target);
+void private_read_size(const simdjson::dom::element& source);
+void private_read_rotation_point(const simdjson::dom::element& source);
+void private_read_rotation(const simdjson::dom::element& source);
+void private_read_rgba(const simdjson::dom::element& source);

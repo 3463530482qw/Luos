@@ -1,8 +1,8 @@
 namespace Gnik_luos {
     // 线段方向当局部 z:长度与截面坐标系(局部 x/y)在这一步落定,旋转不改它
-    void Line::private_build_frame() {
-        const Vector3 start{x1, y1, z1};
-        const Vector3 end{x2, y2, z2};
+    void Line::private_build_frame(size_t index) {   // 只按点序列里这一段的两个端点算
+        const Vector3 start = private_point[index];
+        const Vector3 end = private_point[index + 1];
         private_start = start;
         private_end = end;
         const Vector3 direction{end.x - start.x, end.y - start.y, end.z - start.z};
