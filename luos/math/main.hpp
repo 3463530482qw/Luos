@@ -3,6 +3,8 @@
 #include "english/parameters/matrix4.inl"
 #include "english/parameters/rect.inl"
 #include "english/method/dot.inl"
+#include "english/method/cross.inl"
+#include "english/method/normalize.inl"
 #include "english/method/multiply.inl"
 #include "english/method/transform.inl"
 #include "english/method/to_float16.inl"

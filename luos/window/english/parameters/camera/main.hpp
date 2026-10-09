@@ -13,7 +13,6 @@ namespace Gnik_luos {
     };
 }
 #include "english/method/available/canvas_rect.inl"
-#include "english/method/available/canvas_clip_matrix.inl"
 #include "english/method/available/apply_default.inl"
 #include "english/method/available/rect.inl"
 #include "english/method/available/view_matrix.inl"

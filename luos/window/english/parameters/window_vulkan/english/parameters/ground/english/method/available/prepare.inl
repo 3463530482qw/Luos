@@ -9,9 +9,10 @@ namespace Gnik_luos {
         const double height = std::fabs(camera.position.position.y);
         const double radius = std::max(static_cast<double>(fade_distance) * 1.5, height * 4.0);
 
-        // 投影只由相机给:画布口径的"世界 → 裁剪"闭式矩阵(与线条渲染同一口径)
+        // 投影只由相机给:与线条渲染同一份 view × projection,地面因此和线条共用一个深度
         push_constants = {};
-        camera.canvas_clip_matrix(push_constants.mvp);
+        const std::array<float, 16> mvp = to_float16(camera.view_projection());
+        std::memcpy(push_constants.mvp, mvp.data(), sizeof(push_constants.mvp));
         for (int index = 0; index < 4; index++) {
             push_constants.minor_color[index] = minor_color[index];
             push_constants.major_color[index] = major_color[index];

@@ -1,5 +1,7 @@
 void private_rebuild_route();
 void private_run_route();
-void private_direction();
-void private_quad();
+void private_build_frame();
+void private_rotate();
+Vector3 private_rotate_vector(const Vector3& value, const Vector3& pivot) const;
+void private_box();
 void private_rgba();

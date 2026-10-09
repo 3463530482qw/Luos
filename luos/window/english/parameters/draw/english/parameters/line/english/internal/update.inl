@@ -3,12 +3,10 @@ namespace Gnik_luos {
         if (!dirty) {
             return;   // 参数没动:顶点还是上一次算的,不重算
         }
-        private_dx = x2 - x1;
-        private_dy = y2 - y1;
-        private_length = std::sqrt(private_dx * private_dx + private_dy * private_dy);
+        private_build_frame();   // 轴与截面坐标系先落定:退化判定要用长度,路由里的旋转与摊角都要用它
         cache.clear();
-        if (!line_empty(private_length, thickness)) {
-            cache.resize(6);   // 一条线一个四边形:两个三角形六个顶点
+        if (!line_empty(private_length, size_x, size_y)) {
+            cache.resize(36);   // 一个立体:六个面十二个三角形
         }
         private_rebuild_route();
         private_run_route();
