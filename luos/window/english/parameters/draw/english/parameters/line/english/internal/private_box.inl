@@ -30,7 +30,8 @@ namespace Gnik_luos {
             {{0, 1}, {1, 1}, {1, 0}, {0, 0}}
         };
         const int triangle[6]{0, 1, 2, 0, 2, 3};
-        const float progress[2]{0.0f, 1.0f};
+        const float progress[2]{static_cast<float>(private_u0), static_cast<float>(private_u1)};
+        const float section[4]{0.0f, 0.0f, 1.0f, 1.0f};   // 截面局部 y 的两侧:up_scale 为负的两个角是 0,为正的两个角是 1
         size_t target = offset;   // 这一段在折线顶点表里的落点
         for (int index = 0; index < 6; index++) {
             for (int step = 0; step < 6; step++) {
@@ -41,7 +42,7 @@ namespace Gnik_luos {
                 vertex.y = static_cast<float>(position.y);
                 vertex.z = static_cast<float>(position.z);
                 vertex.u = progress[point[0]];
-                vertex.v = 0.0f;
+                vertex.v = section[point[1]];
             }
         }
     }

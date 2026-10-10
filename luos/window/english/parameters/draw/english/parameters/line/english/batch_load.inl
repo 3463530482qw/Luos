@@ -39,6 +39,8 @@ namespace Gnik_luos {
                 private_read_rotation(item.value);
             } else if (item.key == "rgba") {
                 private_read_rgba(item.value);
+            } else if (item.key == "texture") {
+                private_read_texture(item.value);
             }
         }
 

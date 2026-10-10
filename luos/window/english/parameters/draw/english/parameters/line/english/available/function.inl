@@ -8,3 +8,4 @@ Line& size(float x_value, float y_value);
 Line& rotation_point(float x, float y, float z);
 Line& rotation(float x, float y, float z);
 Line& rgba(uint8_t red, uint8_t green, uint8_t blue, float alpha = 1.0f);
+Line& texture(bool value);   // true 走贴图色,false 走 rgba

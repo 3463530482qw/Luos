@@ -8,6 +8,15 @@ namespace Gnik_luos {
         for (const Vector3& point : to_point) {
             private_point.push_back(point);
         }
+        private_total_length = 0.0;
+        for (size_t index = 1; index < private_point.size(); index++) {
+            const Vector3& start = private_point[index - 1];
+            const Vector3& end = private_point[index];
+            const double x = end.x - start.x;
+            const double y = end.y - start.y;
+            const double z = end.z - start.z;
+            private_total_length += std::sqrt(x * x + y * y + z * z);   // uv 的 u 按整条折线的长度归一
+        }
         cache.clear();
         const size_t segment_count = line_segment_count(private_point, size_x, size_y);
         if (segment_count > 0) {

@@ -21,16 +21,17 @@ namespace Gnik_luos {
         stages[1].setModule(*fragment_shader);
         stages[1].setPName("main");
 
-        // 顶点输入:Vertex{x,y,z,u,v,r,g,b,a} → pos(3)+uv(2)+color(4)
+        // 顶点输入:Vertex{x,y,z,u,v,r,g,b,a,use_texture} → pos(3)+uv(2)+color(4)+贴图开关(1)
         vk::VertexInputBindingDescription binding_description;
         binding_description.setBinding(0);
         binding_description.setStride(sizeof(Vertex));
         binding_description.setInputRate(vk::VertexInputRate::eVertex);
 
-        std::array<vk::VertexInputAttributeDescription, 3> attributes;
+        std::array<vk::VertexInputAttributeDescription, 4> attributes;
         attributes[0].setLocation(0); attributes[0].setBinding(0); attributes[0].setFormat(vk::Format::eR32G32B32Sfloat); attributes[0].setOffset(0);
         attributes[1].setLocation(1); attributes[1].setBinding(0); attributes[1].setFormat(vk::Format::eR32G32Sfloat); attributes[1].setOffset(3 * sizeof(float));
         attributes[2].setLocation(2); attributes[2].setBinding(0); attributes[2].setFormat(vk::Format::eR32G32B32A32Sfloat); attributes[2].setOffset(5 * sizeof(float));
+        attributes[3].setLocation(3); attributes[3].setBinding(0); attributes[3].setFormat(vk::Format::eR32Sfloat); attributes[3].setOffset(9 * sizeof(float));
 
         vk::PipelineVertexInputStateCreateInfo vertex_input;
         vertex_input.setVertexBindingDescriptionCount(1);
@@ -93,13 +94,14 @@ namespace Gnik_luos {
         dynamic_state.setDynamicStateCount(static_cast<uint32_t>(dynamic_states.size()));
         dynamic_state.setPDynamicStates(dynamic_states.data());
 
-        // 线条不取贴图,管线布局不需要描述符集,只有推常量
         vk::PushConstantRange push_range;
         push_range.setStageFlags(vk::ShaderStageFlagBits::eVertex);
         push_range.setOffset(0);
         push_range.setSize(sizeof(Line_push_constants));
 
         vk::PipelineLayoutCreateInfo layout_info;
+        layout_info.setSetLayoutCount(1);
+        layout_info.setPSetLayouts(&*descriptor_layout);   // 线条贴图:片元阶段的组合图像采样器
         layout_info.setPushConstantRangeCount(1);
         layout_info.setPPushConstantRanges(&push_range);
         pipeline_layout = vk::raii::PipelineLayout(vulkan().device, layout_info);

@@ -13,3 +13,13 @@ std::array<vk::raii::Buffer, 2> vertex_buffer{nullptr, nullptr};        // 双�
 std::array<vk::raii::DeviceMemory, 2> vertex_memory{nullptr, nullptr};
 Line_push_constants push_constants{};
 bool snap_pixel{false};   // 顶点吸附到设备像素:线更硬,但缩放下线宽可能不匀
+
+// 线条贴图:一张 1×1 纯色图(0.4/0.4/0.4/1),顶点上的 use_texture 决定着色器取不取它
+vk::raii::Image texture_image{nullptr};
+vk::raii::DeviceMemory texture_memory{nullptr};
+vk::raii::ImageView texture_view{nullptr};
+vk::raii::Sampler texture_sampler{nullptr};
+vk::raii::DescriptorSetLayout descriptor_layout{nullptr};
+vk::raii::DescriptorPool descriptor_pool{nullptr};
+vk::raii::DescriptorSet descriptor_set{nullptr};
+bool texture_ready{false};   // 贴图从 UNDEFINED 换成只读布局的屏障只在第一次绘制前记一次

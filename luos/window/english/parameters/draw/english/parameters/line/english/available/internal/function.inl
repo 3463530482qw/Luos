@@ -10,3 +10,4 @@ void private_read_size(const simdjson::dom::element& source);
 void private_read_rotation_point(const simdjson::dom::element& source);
 void private_read_rotation(const simdjson::dom::element& source);
 void private_read_rgba(const simdjson::dom::element& source);
+void private_read_texture(const simdjson::dom::element& source);

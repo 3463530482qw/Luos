@@ -1,4 +1,4 @@
-﻿#include "english/parameters/push_constants.inl"
+#include "english/parameters/push_constants.inl"
 // 顶点格式 Vertex 由 draw 子模块定义(window\parameters\draw 先于本模块引入),线条管线只用不改
 namespace Gnik_luos {
     class Vulkan;
@@ -20,6 +20,8 @@ namespace Gnik_luos {
 #include "english/method/available/draw.inl"
 #include "english/method/available/destroy.inl"
 #include "english/method/internal/load_shader.inl"
+#include "english/method/internal/create_texture.inl"
+#include "english/method/internal/create_descriptor.inl"
 #include "english/method/internal/create_pipeline.inl"
 #include "english/method/internal/create_vertex_buffer.inl"
 #include "english/method/internal/find_memory_type.inl"

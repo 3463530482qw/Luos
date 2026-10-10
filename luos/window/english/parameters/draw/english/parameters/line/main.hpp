@@ -26,6 +26,7 @@ namespace Gnik_luos {
 #include "english/internal/private_read_rotation_point.inl"
 #include "english/internal/private_read_rotation.inl"
 #include "english/internal/private_read_rgba.inl"
+#include "english/internal/private_read_texture.inl"
 //链式设置
 #include "english/from.inl"
 #include "english/to.inl"
@@ -33,6 +34,7 @@ namespace Gnik_luos {
 #include "english/rotation_point.inl"
 #include "english/rotation.inl"
 #include "english/rgba.inl"
+#include "english/texture.inl"
 //json 加载
 #include "english/batch_load.inl"
 //对外查询
