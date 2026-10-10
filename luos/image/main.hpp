@@ -11,4 +11,6 @@ namespace Gnik_luos {
     using 图片 = Image;
 }
 #include "english/load.inl"
+#include "english/find.inl"
+#include "english/save.inl"
 #include "english/clear.inl"

@@ -1,4 +1,5 @@
 #include "english/parameters/vertex.inl"
+#include "english/parameters/line_span.inl"
 #include "english/parameters/line/main.hpp"
 namespace Gnik_luos {
     class Draw {
@@ -12,5 +13,6 @@ namespace Gnik_luos {
     using 绘制 = Draw;
 }
 #include "english/method/bind_vertex_sink.inl"
+#include "english/method/bind_span_sink.inl"
 #include "english/method/line.inl"
 #include "english/method/draw.inl"

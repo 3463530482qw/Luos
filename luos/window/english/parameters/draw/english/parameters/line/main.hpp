@@ -27,6 +27,7 @@ namespace Gnik_luos {
 #include "english/internal/private_read_rotation.inl"
 #include "english/internal/private_read_rgba.inl"
 #include "english/internal/private_read_texture.inl"
+#include "english/internal/private_read_texture_path.inl"
 //链式设置
 #include "english/from.inl"
 #include "english/to.inl"
@@ -39,3 +40,5 @@ namespace Gnik_luos {
 #include "english/batch_load.inl"
 //对外查询
 #include "english/vertex.inl"
+#include "english/length.inl"
+#include "english/layout_column.inl"

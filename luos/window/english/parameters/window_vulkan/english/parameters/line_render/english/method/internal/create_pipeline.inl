@@ -101,7 +101,7 @@ namespace Gnik_luos {
 
         vk::PipelineLayoutCreateInfo layout_info;
         layout_info.setSetLayoutCount(1);
-        layout_info.setPSetLayouts(&*descriptor_layout);   // 线条贴图:片元阶段的组合图像采样器
+        layout_info.setPSetLayouts(&*texture().layout());   // 线条贴图:片元阶段的组合图像采样器,布局归贴图仓库管
         layout_info.setPushConstantRangeCount(1);
         layout_info.setPPushConstantRanges(&push_range);
         pipeline_layout = vk::raii::PipelineLayout(vulkan().device, layout_info);

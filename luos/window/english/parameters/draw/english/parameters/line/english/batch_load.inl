@@ -41,6 +41,8 @@ namespace Gnik_luos {
                 private_read_rgba(item.value);
             } else if (item.key == "texture") {
                 private_read_texture(item.value);
+            } else if (item.key == "texture_path") {
+                private_read_texture_path(item.value);
             }
         }
 

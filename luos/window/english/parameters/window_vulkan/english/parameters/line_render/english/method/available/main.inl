@@ -17,5 +17,6 @@ namespace Gnik_luos {
     // 绘制器与本渲染器互为引用:接线在 Window_vulkan 构造完之后做(那时两边都已就位)
     void Vulkan_line_render::attach_draw(Draw& draw_layer) {
         draw_layer.bind_vertex_sink(vertex);
+        draw_layer.bind_span_sink(span);
     }
 }

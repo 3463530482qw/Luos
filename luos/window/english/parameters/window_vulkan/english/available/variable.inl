@@ -13,5 +13,6 @@ Vulkan_depth depth;
 Vulkan_framebuffer framebuffer;
 Vulkan_command_buffer command_buffer;
 Vulkan_synchronization synchronization;
+Vulkan_texture texture;   // 贴图仓库:按路径缓存 GPU 贴图,线条按命令上的路径取
 Vulkan_line_render line_render;
 Vulkan_ground ground;

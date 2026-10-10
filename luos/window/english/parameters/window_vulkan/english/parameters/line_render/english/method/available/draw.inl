@@ -3,24 +3,16 @@ namespace Gnik_luos {
         if (pipeline == nullptr || vertex_count == 0) {
             return;
         }
-        if (!texture_ready) {
-            // 贴图刚建出来还是 UNDEFINED 布局:第一次用它之前记一条屏障,顺带把主机写入变成对片元可见
-            vk::ImageMemoryBarrier barrier;
-            barrier.setOldLayout(vk::ImageLayout::eUndefined);
-            barrier.setNewLayout(vk::ImageLayout::eShaderReadOnlyOptimal);
-            barrier.setSrcQueueFamilyIndex(vk::QueueFamilyIgnored);
-            barrier.setDstQueueFamilyIndex(vk::QueueFamilyIgnored);
-            barrier.setImage(*texture_image);
-            barrier.setSubresourceRange(vk::ImageSubresourceRange{vk::ImageAspectFlagBits::eColor, 0, 1, 0, 1});
-            barrier.setSrcAccessMask(vk::AccessFlagBits::eHostWrite);
-            barrier.setDstAccessMask(vk::AccessFlagBits::eShaderRead);
-            command_buffer.pipelineBarrier(vk::PipelineStageFlagBits::eHost, vk::PipelineStageFlagBits::eFragmentShader, {}, {}, {}, barrier);
-            texture_ready = true;   // 布局跟着图走,后面的帧不用再记
-        }
         command_buffer.bindPipeline(vk::PipelineBindPoint::eGraphics, *pipeline);
-        command_buffer.pushConstants(*pipeline_layout, vk::ShaderStageFlagBits::eVertex, 0, sizeof(push_constants), &push_constants);
-        command_buffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, *pipeline_layout, 0, *descriptor_set, {});
         command_buffer.bindVertexBuffers(0, {*vertex_buffer[vertex_frame]}, {0});
-        command_buffer.draw(vertex_count, 1, 0, 0);
+        for (size_t index = 0; index < group_range.size(); index++) {
+            Line_push_constants group = push_constants;
+            group.texture_scale_x = group_scale[index][0];   // 顶点里的 uv 是世界单位,按这一组的展开尺寸归一
+            group.texture_scale_y = group_scale[index][1];
+            command_buffer.pushConstants(*pipeline_layout, vk::ShaderStageFlagBits::eVertex, 0, sizeof(group), &group);
+            texture().record_barrier(command_buffer, group_texture[index]);   // 这张图第一次用:补一条布局屏障
+            command_buffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, *pipeline_layout, 0, group_descriptor[index], {});
+            command_buffer.draw(group_range[index][1], 1, group_range[index][0], 0);
+        }
     }
 }

@@ -1,10 +1,6 @@
 namespace Gnik_luos {
     Image& Image::load(const char* path) {
-        Information_image image;
-        image.data = stbi_load(path, &image.width, &image.height, nullptr, 4);
-        if (!image.data) {
-            throw std::runtime_error(std::string("Image::load => Image failed to load: ") + path + " (" + stbi_failure_reason() + ")");
-        }
+        Information_image& image = find(std::string(path));   // 解码归缓存管,同一路径只解一次
         pack.emplace_back();
         pack.back().push_back(image);
         return *this;

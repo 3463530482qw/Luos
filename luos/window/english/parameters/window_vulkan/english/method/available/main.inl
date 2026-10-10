@@ -3,7 +3,9 @@ namespace Gnik_luos {
     // 绘制器归窗口所有,窗口在构造期把实体交进来(那时两边都已构造完毕);视口量用的时候从宿主窗口现取
     Window_vulkan::Window_vulkan(Draw& draw_layer) : drawer(draw_layer), line_render(camera), ground(camera) {
         line_render.attach_draw(drawer);
+        line_render.attach_texture(texture);
         depth.attach(vulkan_borrowed);
+        texture.attach(vulkan_borrowed);
         line_render.attach(vulkan_borrowed);
         ground.attach(vulkan_borrowed);
     }

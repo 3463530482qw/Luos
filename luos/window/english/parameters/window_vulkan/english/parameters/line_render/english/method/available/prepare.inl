@@ -1,10 +1,42 @@
 namespace Gnik_luos {
     void Vulkan_line_render::prepare() {
         vertex_count = 0;
+        group_texture.clear();
+        group_descriptor.clear();
+        group_scale.clear();
+        group_range.clear();
         if (pipeline == nullptr || vertex.empty()) {
             vertex.clear();
+            span.clear();
             return;
         }
+
+        // 本帧要画几组:相邻同图的段并成一组,组数就是后面的 draw 次数
+        for (const Line_span& item : span) {
+            if (!group_texture.empty() && group_texture.back() == item.texture_path) {
+                group_range.back()[1] += static_cast<uint32_t>(item.count);
+                continue;
+            }
+            group_texture.push_back(item.texture_path);
+            group_range.push_back({static_cast<uint32_t>(item.begin), static_cast<uint32_t>(item.count)});
+        }
+
+        // 每组取描述符与展开尺度:同一路径的段得先收齐 —— 展开图按最长的那条命令定,短的只占图里一部分
+        for (const std::string& path : group_texture) {
+            std::vector<Line_span> usage;
+            for (const Line_span& item : span) {
+                if (item.texture_path == path) {
+                    usage.push_back(item);
+                }
+            }
+            group_descriptor.push_back(*texture().descriptor(path, usage));
+            const Texture_slot& slot = texture().slot_of(path);
+            group_scale.push_back({
+                static_cast<float>(1.0 / slot.world_width),
+                static_cast<float>(1.0 / slot.world_height)
+            });
+        }
+        span.clear();
 
         size_t bytes = vertex.size() * sizeof(Vertex);
         if (bytes > vertex_capacity) {
