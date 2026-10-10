@@ -11,26 +11,26 @@ namespace Gnik_luos {
             return;
         }
 
-        // 本帧要画几组:相邻同图的段并成一组,组数就是后面的 draw 次数
+        // 本帧要画几组:相邻同贴图的段并成一组,组数就是后面的 draw 次数
         for (const Line_span& item : span) {
-            if (!group_texture.empty() && group_texture.back() == item.texture_path) {
+            if (!group_texture.empty() && group_texture.back() == item.texture_key) {
                 group_range.back()[1] += static_cast<uint32_t>(item.count);
                 continue;
             }
-            group_texture.push_back(item.texture_path);
+            group_texture.push_back(item.texture_key);
             group_range.push_back({static_cast<uint32_t>(item.begin), static_cast<uint32_t>(item.count)});
         }
 
-        // 每组取描述符与展开尺度:同一路径的段得先收齐 —— 展开图按最长的那条命令定,短的只占图里一部分
-        for (const std::string& path : group_texture) {
+        // 每组取描述符与展开尺度:同一个键的段得先收齐 —— 展开图按最长的那条命令定,短的只占图里一部分
+        for (const std::string& key : group_texture) {
             std::vector<Line_span> usage;
             for (const Line_span& item : span) {
-                if (item.texture_path == path) {
+                if (item.texture_key == key) {
                     usage.push_back(item);
                 }
             }
-            group_descriptor.push_back(*texture().descriptor(path, usage));
-            const Texture_slot& slot = texture().slot_of(path);
+            group_descriptor.push_back(*texture().descriptor(key, usage));
+            const Texture_slot& slot = texture().slot_of(key);
             group_scale.push_back({
                 static_cast<float>(1.0 / slot.world_width),
                 static_cast<float>(1.0 / slot.world_height)

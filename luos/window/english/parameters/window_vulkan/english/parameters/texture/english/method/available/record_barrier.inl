@@ -1,6 +1,6 @@
 namespace Gnik_luos {
-    void Vulkan_texture::record_barrier(const vk::raii::CommandBuffer& command_buffer, const std::string& path) {
-        auto it = slot.find(path);
+    void Vulkan_texture::record_barrier(const vk::raii::CommandBuffer& command_buffer, const std::string& key) {
+        auto it = slot.find(key);
         if (it == slot.end() || !it->second.pending) {
             return;   // 没用过这张图,或者布局早就换好了
         }

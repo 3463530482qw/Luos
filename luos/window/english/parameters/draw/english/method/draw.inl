@@ -11,13 +11,14 @@ namespace Gnik_luos {
             }
             if (private_span_sink != nullptr) {
                 private_span_sink->push_back(Line_span{
-                    cmd.texture_path,
+                    cmd.texture_key,
                     private_vertex_sink->size(),
                     vertices.size(),
                     cmd.length(),
                     cmd.size_x,
                     cmd.size_y,
-                    cmd.layout_column()
+                    cmd.layout_column(),
+                    cmd.texture_image
                 });
             }
             private_vertex_sink->insert(private_vertex_sink->end(), vertices.begin(), vertices.end());

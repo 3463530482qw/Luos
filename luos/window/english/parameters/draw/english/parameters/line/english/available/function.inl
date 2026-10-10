@@ -12,3 +12,4 @@ Line& rotation(float x, float y, float z);
 Line& rgba(uint8_t red, uint8_t green, uint8_t blue, float alpha = 1.0f);
 Line& texture(bool value);   // 走不走贴图;false 时路径不参与
 Line& texture(const std::string& path);   // 指定图片路径并顺带打开贴图(空串 = 库内那张纯色)
+Line& texture(const Information_image& image);   // 直接拿已经加载好的像素当贴图(渲染侧建槽位时读一次)
