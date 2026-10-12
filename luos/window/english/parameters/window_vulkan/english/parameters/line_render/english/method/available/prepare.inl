@@ -3,7 +3,6 @@ namespace Gnik_luos {
         vertex_count = 0;
         group_texture.clear();
         group_descriptor.clear();
-        group_scale.clear();
         group_range.clear();
         if (pipeline == nullptr || vertex.empty()) {
             vertex.clear();
@@ -11,30 +10,30 @@ namespace Gnik_luos {
             return;
         }
 
-        // 本帧要画几组:相邻同贴图的段并成一组,组数就是后面的 draw 次数
+        // 每个"段 × 面"一块贴图:每条命令按段数与六个面铺开成组,一组 6 个顶点
+        // (顶点表里就是面优先排的:一段 36 个 = 六个面各 6 个)
         for (const Line_span& item : span) {
-            if (!group_texture.empty() && group_texture.back() == item.texture_key) {
-                group_range.back()[1] += static_cast<uint32_t>(item.count);
-                continue;
-            }
-            group_texture.push_back(item.texture_key);
-            group_range.push_back({static_cast<uint32_t>(item.begin), static_cast<uint32_t>(item.count)});
-        }
-
-        // 每组取描述符与展开尺度:同一个键的段得先收齐 —— 展开图按最长的那条命令定,短的只占图里一部分
-        for (const std::string& key : group_texture) {
-            std::vector<Line_span> usage;
-            for (const Line_span& item : span) {
-                if (item.texture_key == key) {
-                    usage.push_back(item);
+            for (size_t segment = 0; segment < item.segment.size(); segment++) {
+                for (size_t face = 0; face < 6; face++) {
+                    const bool end_face = face < 2;                                   // 面序:起端面 / 终端面 / +x / -x / +y / -y
+                    const bool across_is_y = !end_face && face < 4;                   // 侧面里 +x / -x 跨局部 y,其余跨局部 x
+                    const double block_width = end_face ? item.size_x : item.segment[segment];
+                    const double block_height = end_face ? item.size_y : (across_is_y ? item.size_y : item.size_x);
+                    const bool direct = item.image.data != nullptr;                   // 直接交的像素:所有块共用这一张
+                    std::string key{};
+                    if (direct) {
+                        key = item.texture_key;
+                    } else if (!item.texture_key.empty()) {
+                        key = item.texture_key + "/" + texture_block_name(segment, face) + ".png";
+                    }
+                    group_texture.push_back(key);
+                    group_descriptor.push_back(*texture().descriptor(key, block_width, block_height, direct ? &item.image : nullptr));
+                    group_range.push_back({
+                        static_cast<uint32_t>(item.begin + segment * 36 + face * 6),
+                        6
+                    });
                 }
             }
-            group_descriptor.push_back(*texture().descriptor(key, usage));
-            const Texture_slot& slot = texture().slot_of(key);
-            group_scale.push_back({
-                static_cast<float>(1.0 / slot.sheet_width),
-                static_cast<float>(1.0 / slot.sheet_height)
-            });
         }
         span.clear();
 

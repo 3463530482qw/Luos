@@ -14,10 +14,9 @@ namespace Gnik_luos {
                     cmd.texture_key,
                     private_vertex_sink->size(),
                     vertices.size(),
-                    cmd.length(),
                     cmd.size_x,
                     cmd.size_y,
-                    cmd.layout_column(),
+                    cmd.segment_length(),
                     cmd.texture_image
                 });
             }

@@ -40,5 +40,4 @@ namespace Gnik_luos {
 #include "english/batch_load.inl"
 //对外查询
 #include "english/vertex.inl"
-#include "english/length.inl"
-#include "english/layout_column.inl"
+#include "english/segment_length.inl"

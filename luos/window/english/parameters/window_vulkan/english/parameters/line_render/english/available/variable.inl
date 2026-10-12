@@ -7,11 +7,10 @@ std::string vertex_shader_file{"line.vert.spv"};
 std::string fragment_shader_file{"line.frag.spv"};
 
 std::vector<Vertex> vertex;   // 本帧线条顶点:谁画线就往这里追加,prepare 上传后清空
-std::vector<Line_span> span;   // 本帧分段表:每条命令占的区间与贴图键,Draw 登记时追加,prepare 消费后清空
-std::vector<std::string> group_texture{};             // 本帧分组:每组用哪个贴图键(空串 = 走库内那张纯色)
+std::vector<Line_span> span;   // 本帧分段表:每条命令占的区间与几何,Draw 登记时追加,prepare 消费后清空
+std::vector<std::string> group_texture{};             // 本帧分组:每个"段 × 面"一组,记它那块贴图的路径(空串 = 走库内那张纯色)
 std::vector<vk::DescriptorSet> group_descriptor{};    // 每组绑的描述符集
-std::vector<std::array<float, 2>> group_scale{};       // 每组贴图的 uv 缩放(1/展开版面宽, 1/展开版面高)
-std::vector<std::array<uint32_t, 2>> group_range{};   // 每组在顶点表里的 (起点, 条数)
+std::vector<std::array<uint32_t, 2>> group_range{};   // 每组在顶点表里的 (起点, 条数):一组 6 个顶点
 // 管线与顶点缓冲(资源句柄与窗口其它火山子模块同一风格,对外可见)
 vk::raii::PipelineLayout pipeline_layout{nullptr};
 vk::raii::Pipeline pipeline{nullptr};

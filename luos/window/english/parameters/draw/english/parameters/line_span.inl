@@ -1,12 +1,11 @@
 namespace Gnik_luos {
-    struct Line_span {               // 一条绘制命令在本帧顶点表里占的那一段,以及它要的贴图与展开尺寸
-        std::string texture_key{};    // 贴图槽位键:文件路径或"image:<像素地址>";空 = 走纯色贴图或顶点色
+    struct Line_span {               // 一条绘制命令在本帧顶点表里占的那一段,以及它的贴图与几何
+        std::string texture_key{};    // 贴图文件夹路径,或"image:<像素地址>"(直接交的像素,所有块共用);空 = 走库内那张纯色
         size_t begin{0};
         size_t count{0};
-        double length{0.0};           // 展开图的宽(各列宽之和):同一路径里取最长的那条命令来展开
-        double size_x{0.0};           // 截面两个几何值:展开图的行高由它们拼
+        double size_x{0.0};           // 截面两个几何值:每段每面那些块的尺寸由它们与段长算
         double size_y{0.0};
-        std::vector<double> column{};    // 展开图的列(逐段长度):列数跟段数一致,同长的段列宽相等
-        Information_image image{};       // 直接给的已加载像素(浅拷贝):命中"image:"键时拿它建槽位
+        std::vector<double> segment{};   // 逐段长度(零长段不算),块的编号就按这个顺序
+        Information_image image{};       // 直接交的已加载像素(浅拷贝):命中"image:"键时所有块都用它
     };
 }

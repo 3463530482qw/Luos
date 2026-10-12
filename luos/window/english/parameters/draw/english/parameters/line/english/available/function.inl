@@ -1,7 +1,6 @@
 void update();   // 检查脏标记:脏了就重新装配路由并重算顶点
 const std::vector<Vertex>& vertex() const;
-double length() const;   // 展开图的宽 = 去重后各列宽之和(同一路径里取最长的那条命令来展开)
-const std::vector<double>& layout_column() const;   // 展开图的列 = 去重后的段长:同长的段共用一列
+const std::vector<double>& segment_length() const;   // 逐段长度:渲染侧靠它算每段每面那些贴图块的尺寸
 Line& batch_load(const simdjson::dom::element& json, std::string_view type);   // 读命名的段当一条线:to 给一组是一段,给多组(重复键或数组)是多点折线
 // 链式设置:返回自身,参数落定后由下一轮 Draw::draw 重算
 Line& from(float x, float y, float z);
@@ -11,5 +10,5 @@ Line& rotation_point(float x, float y, float z);
 Line& rotation(float x, float y, float z);
 Line& rgba(uint8_t red, uint8_t green, uint8_t blue, float alpha = 1.0f);
 Line& texture(bool value);   // 走不走贴图;false 时路径不参与
-Line& texture(const std::string& path);   // 指定图片路径并顺带打开贴图(空串 = 库内那张纯色)
-Line& texture(const Information_image& image);   // 直接拿已经加载好的像素当贴图(渲染侧建槽位时读一次)
+Line& texture(const std::string& path);   // 指定贴图文件夹(里面每段每面一块,名字 段号_面名)
+Line& texture(const Information_image& image);   // 直接拿已经加载好的像素当贴图:所有块共用这一张

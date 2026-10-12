@@ -1,3 +1,4 @@
+#include "english/parameters/block_name.inl"
 #include "english/parameters/slot.inl"
 namespace Gnik_luos {
     class Vulkan;
@@ -19,5 +20,5 @@ namespace Gnik_luos {
 #include "english/method/internal/take.inl"
 #include "english/method/internal/create_layout.inl"
 #include "english/method/internal/create_slot.inl"
-#include "english/method/internal/create_guide.inl"
+#include "english/method/internal/create_block.inl"
 #include "english/method/internal/find_memory_type.inl"
