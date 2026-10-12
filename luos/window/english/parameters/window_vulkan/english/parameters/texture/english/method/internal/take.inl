@@ -5,20 +5,21 @@ namespace Gnik_luos {
             return it->second;
         }
 
-        // 展开图的世界尺寸:宽 = 同一个键下最长那条命令的列宽之和,高 = 六行按面的真实尺寸拼出来的总和
-        double world_width = 0.0;
-        double world_height = 0.0;
+        // 展开版面的尺寸(用世界单位量,与场景的世界坐标无关):宽 = 同一个键下最长那条命令的列宽之和,
+        // 高 = 六行按面的真实尺寸拼出来的总和
+        double sheet_width = 0.0;
+        double sheet_height = 0.0;
         for (const Line_span& item : usage) {
-            if (item.length > world_width) {
-                world_width = item.length;
-                world_height = item.size_x * 2.0 + item.size_y * 4.0;
+            if (item.length > sheet_width) {
+                sheet_width = item.length;
+                sheet_height = item.size_x * 2.0 + item.size_y * 4.0;
             }
         }
-        if (world_width <= 0.0) {
-            world_width = 1.0;
+        if (sheet_width <= 0.0) {
+            sheet_width = 1.0;
         }
-        if (world_height <= 0.0) {
-            world_height = 1.0;
+        if (sheet_height <= 0.0) {
+            sheet_height = 1.0;
         }
 
         // 键以 "image:" 开头 = 调用方直接把已经加载好的像素交进来了,这里只读一次
@@ -33,8 +34,8 @@ namespace Gnik_luos {
         }
 
         Texture_slot created{};
-        created.world_width = world_width;
-        created.world_height = world_height;
+        created.sheet_width = sheet_width;
+        created.sheet_height = sheet_height;
         if (passed != nullptr) {
             create_slot(created, passed->data, static_cast<uint32_t>(passed->width), static_cast<uint32_t>(passed->height));
         } else if (key.empty()) {

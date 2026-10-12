@@ -32,8 +32,8 @@ namespace Gnik_luos {
             group_descriptor.push_back(*texture().descriptor(key, usage));
             const Texture_slot& slot = texture().slot_of(key);
             group_scale.push_back({
-                static_cast<float>(1.0 / slot.world_width),
-                static_cast<float>(1.0 / slot.world_height)
+                static_cast<float>(1.0 / slot.sheet_width),
+                static_cast<float>(1.0 / slot.sheet_height)
             });
         }
         span.clear();

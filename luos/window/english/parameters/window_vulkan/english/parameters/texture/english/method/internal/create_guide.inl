@@ -1,6 +1,6 @@
 namespace Gnik_luos {
-    // 缺图时给美术的提示图:黑底,按"列 × 面"分格 —— 列是去重后的段长(同长的段共用一列),行是六个面
-    // 版式由同一路径里最长的那条命令定;尺寸 = 展开世界尺寸 × 2(留精度余量,画完缩小到逻辑尺寸也清楚)
+    // 缺图时给美术的提示图:黑底,按"列 × 面"分格 —— 列是每一段(零长段不占列),行是六个面
+    // 版式由同一键下最长的那条命令定;尺寸 = 展开版面尺寸 × 2(留精度余量,画完缩小到逻辑尺寸也清楚)
     void Vulkan_texture::create_guide(const std::string& path, const std::vector<Line_span>& usage) {
         const Line_span* layout = &usage.front();
         for (const Line_span& item : usage) {
@@ -12,15 +12,15 @@ namespace Gnik_luos {
             throw std::runtime_error("Vulkan_texture::create_guide => Nothing to unwrap for: " + path);
         }
 
-        const double world_width = layout->length;
+        const double sheet_width = layout->length;
         const double row_height[6]{layout->size_y, layout->size_y, layout->size_y, layout->size_x, layout->size_x, layout->size_y};
-        double world_height = 0.0;
+        double sheet_height = 0.0;
         for (double height : row_height) {
-            world_height += height;
+            sheet_height += height;
         }
 
-        const uint32_t width = static_cast<uint32_t>(world_width * 2.0);
-        const uint32_t height = static_cast<uint32_t>(world_height * 2.0);
+        const uint32_t width = static_cast<uint32_t>(sheet_width * 2.0);
+        const uint32_t height = static_cast<uint32_t>(sheet_height * 2.0);
         std::vector<unsigned char> pixels(static_cast<size_t>(width) * height * 4, 0);
         for (size_t index = 3; index < pixels.size(); index += 4) {
             pixels[index] = 255;   // 黑底不透明
