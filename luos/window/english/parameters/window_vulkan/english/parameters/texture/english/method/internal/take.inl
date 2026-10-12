@@ -1,5 +1,10 @@
 namespace Gnik_luos {
     Texture_slot& Vulkan_texture::take(const std::string& key, double block_width, double block_height, const Information_image* passed) {
+        if (block_stale(key, block_width, block_height)) {
+            slot.erase(key);              // 过期的生成块:GPU 贴图与描述符一起放掉
+            image_cache.forget(key);      // 旧像素也别再被 find 命中
+            create_block(key, block_width, block_height);
+        }
         auto it = slot.find(key);
         if (it != slot.end()) {
             return it->second;   // 槽位按块缓存:一块一个槽位

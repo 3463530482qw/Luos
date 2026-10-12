@@ -21,4 +21,7 @@ namespace Gnik_luos {
 #include "english/method/internal/create_layout.inl"
 #include "english/method/internal/create_slot.inl"
 #include "english/method/internal/create_block.inl"
+#include "english/method/internal/block_stale.inl"
+#include "english/method/internal/read_blocks.inl"
+#include "english/method/internal/write_blocks.inl"
 #include "english/method/internal/find_memory_type.inl"

@@ -12,5 +12,6 @@ namespace Gnik_luos {
 }
 #include "english/load.inl"
 #include "english/find.inl"
+#include "english/forget.inl"
 #include "english/save.inl"
 #include "english/clear.inl"

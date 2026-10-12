@@ -1,14 +1,14 @@
 namespace Gnik_luos {
-    // 缺块时给美术的提示块:黑底,覆盖带(暗) + 四边描边(亮,0.5 世界单位宽)
-    // 尺寸 = 该块自己的世界尺寸 ×2(留精度余量,画完缩小到逻辑尺寸也清楚)
-    void Vulkan_texture::create_block(const std::string& path, double world_width, double world_height) {
-        if (world_width <= 0.0 || world_height <= 0.0) {
+    // 缺块或块过期时给美术的提示块:黑底,覆盖带(暗) + 四边描边(亮,0.5 世界单位宽)
+    // 尺寸 = 该块自己的世界尺寸 ×2(留精度余量,画完缩小到逻辑尺寸也清楚);画完把自己记进清单
+    void Vulkan_texture::create_block(const std::string& path, double block_width, double block_height) {
+        if (block_width <= 0.0 || block_height <= 0.0) {
             throw std::runtime_error("Vulkan_texture::create_block => Bad block size for: " + path);
         }
         std::filesystem::create_directories(std::filesystem::path(path).parent_path());   // 贴图文件夹不存在就先建出来
 
-        const uint32_t width = static_cast<uint32_t>(world_width * 2.0);
-        const uint32_t height = static_cast<uint32_t>(world_height * 2.0);
+        const uint32_t width = static_cast<uint32_t>(block_width * 2.0);
+        const uint32_t height = static_cast<uint32_t>(block_height * 2.0);
         std::vector<unsigned char> pixels(static_cast<size_t>(width) * height * 4, 0);
         for (size_t index = 3; index < pixels.size(); index += 4) {
             pixels[index] = 255;   // 黑底不透明
@@ -29,12 +29,14 @@ namespace Gnik_luos {
             }
         };
 
-        fill(0.0, 0.0, world_width, world_height, 64);                                    // 覆盖带
-        fill(0.0, 0.0, world_width, 0.5, 255);                                            // 上边界
-        fill(0.0, world_height - 0.5, world_width, world_height, 255);                    // 下边界
-        fill(0.0, 0.0, 0.5, world_height, 255);                                           // 左边界
-        fill(world_width - 0.5, 0.0, world_width, world_height, 255);                     // 右边界
+        fill(0.0, 0.0, block_width, block_height, 64);                                    // 覆盖带
+        fill(0.0, 0.0, block_width, 0.5, 255);                                            // 上边界
+        fill(0.0, block_height - 0.5, block_width, block_height, 255);                    // 下边界
+        fill(0.0, 0.0, 0.5, block_height, 255);                                           // 左边界
+        fill(block_width - 0.5, 0.0, block_width, block_height, 255);                     // 右边界
 
         image_cache.save(path, pixels.data(), width, height);
+        generated[path] = {block_width, block_height};
+        write_blocks(path);
     }
 }

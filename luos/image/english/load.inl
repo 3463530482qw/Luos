@@ -29,12 +29,7 @@ namespace Gnik_luos {
                 );
                 continue;
             }
-            Information_image image;
-            image.data = stbi_load(temporary_path.data(), &image.width, &image.height, nullptr, 4);
-            if (!image.data) {
-                throw std::runtime_error(std::string("Image::load => Image failed to load: ") + temporary_path.data() + " (" + stbi_failure_reason() + ")");
-            }
-            pack.back().push_back(image);
+            pack.back().push_back(find(std::string(temporary_path)));   // 解码与去重归缓存:同一路径只有一份像素,换图不会每次都换地址
         }
         return *this;
     }
