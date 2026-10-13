@@ -10,11 +10,15 @@ namespace Gnik_luos {
             return;
         }
 
-        // 每个"段 × 面"一块贴图:每条命令按段数与六个面铺开成组,一组 6 个顶点
-        // (顶点表里就是面优先排的:一段 36 个 = 六个面各 6 个)
+        // 每个"段 × 面"一块贴图:逐段按留下的面走,顶点游标顺次推进(连接处那两个端面不在里面)
         for (const Line_span& item : span) {
+            size_t cursor = item.begin;
             for (size_t segment = 0; segment < item.segment.size(); segment++) {
+                const uint8_t mask = segment < item.face_mask.size() ? item.face_mask[segment] : 0x3F;
                 for (size_t face = 0; face < 6; face++) {
+                    if ((mask & (1 << face)) == 0) {
+                        continue;
+                    }
                     const bool end_face = face < 2;                                   // 面序:起端面 / 终端面 / +x / -x / +y / -y
                     const bool across_is_y = !end_face && face < 4;                   // 侧面里 +x / -x 跨局部 y,其余跨局部 x
                     const double block_width = end_face ? item.size_x : item.segment[segment];
@@ -28,10 +32,8 @@ namespace Gnik_luos {
                     }
                     group_texture.push_back(key);
                     group_descriptor.push_back(*texture().descriptor(key, block_width, block_height, direct ? &item.image : nullptr));
-                    group_range.push_back({
-                        static_cast<uint32_t>(item.begin + segment * 36 + face * 6),
-                        6
-                    });
+                    group_range.push_back({static_cast<uint32_t>(cursor), 6});
+                    cursor += 6;
                 }
             }
         }

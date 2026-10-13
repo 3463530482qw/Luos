@@ -15,6 +15,7 @@ namespace Gnik_luos {
         private_start = private_rotate_vector(private_start, pivot);
         private_end = private_rotate_vector(private_end, pivot);
         const Vector3 origin{0.0, 0.0, 0.0};   // 截面朝向只转不平移
+        private_axis = private_rotate_vector(private_axis, origin);
         private_side = private_rotate_vector(private_side, origin);
         private_up = private_rotate_vector(private_up, origin);
     }

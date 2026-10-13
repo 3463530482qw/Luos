@@ -1,5 +1,5 @@
 namespace Gnik_luos {
-    Line& Line::batch_load(const simdjson::dom::element& json, std::string_view type) {   // 取 type 段当一条线读:段内 to 有几组(重复键或多组值)就有几段
+    Line& Line::batch_load(const simdjson::dom::element& json, std::string_view type) {   // 取 type 段当一条线读:data 是点表,首点起点、其余顺次连成折线
         simdjson::dom::object root{};
         simdjson::dom::object body{};
         if (json.get_object().get(root) || root.at_key(type).get_object().get(body)) {
@@ -13,23 +13,23 @@ namespace Gnik_luos {
         to_point.clear();
         Vector3 point{};
         for (auto item : body) {
-            if (item.key == "from") {
-                if (private_read_point(item.value, point)) {
-                    x1 = static_cast<float>(point.x);
-                    y1 = static_cast<float>(point.y);
-                    z1 = static_cast<float>(point.z);
-                }
-            } else if (item.key == "to") {
+            if (item.key == "data") {
                 if (!item.value.is_array()) {
-                    if (private_read_point(item.value, point)) {
-                        to_point.push_back(point);
-                    }
-                    continue;
+                    continue;   // 点表只收数组:类型不对当没写
                 }
+                bool head = true;
                 for (auto entry : item.value.get_array()) {
-                    if (private_read_point(entry, point)) {
-                        to_point.push_back(point);
+                    if (!private_read_point(entry, point)) {
+                        continue;   // 坏组丢掉,其余照旧
                     }
+                    if (head) {
+                        x1 = static_cast<float>(point.x);
+                        y1 = static_cast<float>(point.y);
+                        z1 = static_cast<float>(point.z);
+                        head = false;
+                        continue;
+                    }
+                    to_point.push_back(point);
                 }
             } else if (item.key == "size") {
                 private_read_size(item.value);
@@ -43,6 +43,8 @@ namespace Gnik_luos {
                 private_read_texture(item.value);
             } else if (item.key == "texture_path") {
                 private_read_texture_path(item.value);
+            } else if (item.key == "seal") {
+                private_read_seal(item.value);
             }
         }
 

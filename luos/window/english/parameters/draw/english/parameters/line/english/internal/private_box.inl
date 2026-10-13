@@ -1,20 +1,22 @@
 namespace Gnik_luos {
-    // 八个角:两端各四个,截面沿局部 x/y 各摊半个几何值;六个面各拆两个三角形
-    void Line::private_box(size_t offset) {
+    // 八个角:两端各四个,截面沿局部 x/y 各摊半个几何值,再按关节延长量沿轴挪到关节面上;六个面按掩码输出
+    void Line::private_box(size_t offset, size_t ordinal) {
         const double half_x = size_x * 0.5;
         const double half_y = size_y * 0.5;
         const double side_scale[4]{-half_x, half_x, half_x, -half_x};
         const double up_scale[4]{-half_y, -half_y, half_y, half_y};
         const Vector3 end[2]{private_start, private_end};
+        const uint8_t mask = ordinal < private_face_mask.size() ? private_face_mask[ordinal] : 0x3F;
         Vector3 corner[2][4];
         for (int index = 0; index < 2; index++) {
             for (int quadrant = 0; quadrant < 4; quadrant++) {
                 const double side = side_scale[quadrant];
                 const double up = up_scale[quadrant];
+                const double shift = index == 0 ? private_head_shift[ordinal * 4 + quadrant] : private_tail_shift[ordinal * 4 + quadrant];
                 corner[index][quadrant] = Vector3{
-                    end[index].x + private_side.x * side + private_up.x * up,
-                    end[index].y + private_side.y * side + private_up.y * up,
-                    end[index].z + private_side.z * side + private_up.z * up
+                    end[index].x + private_side.x * side + private_up.x * up + private_axis.x * shift,
+                    end[index].y + private_side.y * side + private_up.y * up + private_axis.y * shift,
+                    end[index].z + private_side.z * side + private_up.z * up + private_axis.z * shift
                 };
             }
         }
@@ -39,6 +41,9 @@ namespace Gnik_luos {
         const float progress[2]{0.0f, 1.0f};
         size_t target = offset;   // 这一段在折线顶点表里的落点
         for (int index = 0; index < 6; index++) {
+            if ((mask & (1 << index)) == 0) {
+                continue;   // 关节那一头的端面不生成
+            }
             const int row = face_row[index];
             for (int step = 0; step < 6; step++) {
                 const int* point = face[index][triangle[step]];

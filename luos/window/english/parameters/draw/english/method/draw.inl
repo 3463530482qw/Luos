@@ -17,6 +17,7 @@ namespace Gnik_luos {
                     cmd.size_x,
                     cmd.size_y,
                     cmd.segment_length(),
+                    cmd.face_mask(),
                     cmd.texture_image
                 });
             }
