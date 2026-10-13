@@ -6,7 +6,7 @@ namespace Gnik_luos {
 
         // 视口量按"用的时候现取"的方式交给 window_vulkan:只交出宿主窗口的位置,不落下成员指针
         window_vulkan.host = this;
-        window_vulkan.id = &id;   // 表面创建要窗口句柄:交出成员地址,窗口活多久它就在多久
+        window_vulkan.id = &id;  // 表面创建要窗口句柄:交出成员地址,窗口活多久它就在多久
 
         private_run.push_back([this]() { router(); });
     }
