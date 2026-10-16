@@ -13,6 +13,9 @@ namespace Gnik_luos {
         Texture_slot created{};
         if (passed != nullptr && passed->data != nullptr) {
             create_slot(created, passed->data, static_cast<uint32_t>(passed->width), static_cast<uint32_t>(passed->height));
+        } else if (key.find(':') != std::string::npos) {
+            // 键里带冒号 = 直接交过来的像素(已经加载好的图片、字体的图集):没有像素就是调用方出了错,不在这里猜文件路径
+            throw std::runtime_error("Vulkan_texture::take => Direct pixels are missing for key: " + key);
         } else if (key.empty()) {
             static const unsigned char solid[4]{102, 102, 102, 255};   // 键为空:库内那张 0.4 纯色(1×1)
             create_slot(created, solid, 1, 1);

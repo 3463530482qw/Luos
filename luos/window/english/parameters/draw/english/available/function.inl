@@ -4,4 +4,8 @@ Line& line();   // 登记一条空命令(当帧内自己设参数),draw 铺完�
 Line& line(const Line& source);   // 按一条已经加载好的线登记命令,draw 铺完即清
 Picture& picture();   // 登记一张空图(当帧内自己设参数),draw 铺完即清
 Picture& picture(const Picture& source);   // 按一张已经加载好的图登记命令,draw 铺完即清
+Text& text();   // 登记一条空文字(当帧内自己设参数),draw 铺完即清
+Text& text(const Text& source);   // 按一条已经排好的文字登记命令,draw 铺完即清
+Tilemap& map();   // 登记一层空地图(当帧内自己设参数),draw 铺完即清
+Tilemap& map(const Tilemap& source);   // 按一层已经铺好的地图登记命令,draw 铺完即清
 void draw();    // 检查命令表里的脏标记,只重算脏的,按登记序追加顶点

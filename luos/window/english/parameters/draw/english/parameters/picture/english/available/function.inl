@@ -11,3 +11,4 @@ Picture& corner_rgba(size_t corner, uint8_t red, uint8_t green, uint8_t blue, fl
 Picture& texture(bool value);   // 走不走贴图;false 时只走四角 rgba
 Picture& texture(const std::string& path);   // 一张图片文件(缺图按这张图的尺寸生成提示图)
 Picture& texture(const Information_image& image);   // 直接拿已经加载好的像素当贴图
+Picture& sheet(int columns, int rows, int index);   // 从图集里切一格(行主序);不切就是整张

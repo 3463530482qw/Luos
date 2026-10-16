@@ -2,8 +2,8 @@ namespace Gnik_luos {
     // 清单里记着、而现算尺寸与记的不符 = 这块生成物过期了,要重画;
     // 清单里没有 = 手画的素材,永不覆盖;文件已被换成手画的(像素尺寸对不上)就从清单里划掉
     bool Vulkan_texture::block_stale(const std::string& path, double block_width, double block_height) {
-        if (path.empty() || path.rfind("image:", 0) == 0) {
-            return false;
+        if (path.empty() || path.find(':') != std::string::npos) {
+            return false;   // 键里带冒号 = 直接交的像素(图片或字体图集):不是磁盘上的生成块
         }
         const size_t slash = path.find_last_of('/');
         if (slash == std::string::npos) {

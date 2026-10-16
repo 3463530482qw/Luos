@@ -18,6 +18,7 @@ namespace Gnik_luos {
 #include "english/rgba.inl"
 #include "english/corner_rgba.inl"
 #include "english/texture.inl"
+#include "english/sheet.inl"
 //几何
 #include "english/update.inl"
 #include "english/internal/private_rotate.inl"

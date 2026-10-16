@@ -5,3 +5,4 @@
 #include "english/color.inl"
 #include "english/color_list.inl"
 #include "english/text.inl"
+#include "english/align.inl"

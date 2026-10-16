@@ -10,6 +10,7 @@ namespace Gnik_luos {
     };
     using 图片 = Image;
 }
+#include "english/available/internal/function.inl"
 #include "english/load.inl"
 #include "english/find.inl"
 #include "english/forget.inl"

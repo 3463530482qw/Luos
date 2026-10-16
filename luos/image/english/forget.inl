@@ -5,9 +5,7 @@ namespace Gnik_luos {
         if (it == cache.end()) {
             return *this;
         }
-        if (it->second.data) {
-            stbi_image_free(it->second.data);
-        }
+        it->second.clear();
         cache.erase(it);
         return *this;
     }
