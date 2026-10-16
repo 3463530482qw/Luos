@@ -42,7 +42,7 @@ namespace Gnik_luos {
         size_t target = offset;   // 这一段在折线顶点表里的落点
         for (int index = 0; index < 6; index++) {
             if ((mask & (1 << index)) == 0) {
-                continue;   // 关节那一头的端面不生成
+                continue;   // 关节那一头的面不生成
             }
             const int row = face_row[index];
             for (int step = 0; step < 6; step++) {

@@ -1,7 +1,8 @@
 namespace Gnik_luos {
-    // 世界 → 视图空间:原点就是相机站位,z 轴取 forward(前方为正),于是
-    //   视图 x = 右、视图 y = 上、视图 z = 前方距离
-    // 三行就是相机的右/上/前三个基,平移项取"基与站位的点积"的相反数,不用真去求逆
+    // 世界 → 视图空间:原点就是相机站位,视图 z = 前方距离(相机看向 -z,世界 z 越小的点越远)
+    //   视图 x = 相机向右、视图 y = 相机向上、视图 z = 前方距离(前方为正,与投影矩阵的 w 同号)
+    // forward 指向相机看的那一侧(世界 -z),"离相机多远"就是沿 forward 走多远,所以第三行取 forward 本身
+    // 平移项取"该行基与站位的点积"的相反数,不用真去求逆
     Matrix4 Camera::view_matrix() const {
         const Rotation_basis basis = private_rotation_basis();
         const Vector3 point = position.position;

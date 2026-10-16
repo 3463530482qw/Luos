@@ -14,7 +14,3 @@ std::vector<double> private_tail_shift{};                       // 逐段四个�
 std::vector<size_t> private_vertex_begin{};                     // 逐段在本段顶点表里的起点
 bool private_closed{false};                                     // 末点等于起点:首尾接上的闭合折线
 uint8_t private_step_count{0};                                  // 路由里装了几步:没段可铺就装 0 步
-double temporary_x{}, temporary_y{}, temporary_z{};             // 读一组坐标值的中转
-int64_t temporary_color{};                                      // 读一个颜色分量的中转
-bool temporary_flag{false};                                     // 读一个开关的中转
-std::string_view temporary_text{};                              // 读一个字符串的中转

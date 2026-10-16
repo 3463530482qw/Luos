@@ -1,5 +1,6 @@
 namespace Gnik_luos {
-    // 视图空间的单位方向 → 世界的单位方向:就是相机的右/上/前三个基按分量组合
+    // 视图空间的分量 → 世界的方向:就是相机的右/上/前三个基按分量组合
+    // 传进来的 z 分量取"前方距离"(正数,与 view_matrix 同一口径);直线往返都不能改这个口径
     Vector3 Camera::private_view_direction(const Vector3& view_direction) const {
         const Rotation_basis basis = private_rotation_basis();
         return Vector3{

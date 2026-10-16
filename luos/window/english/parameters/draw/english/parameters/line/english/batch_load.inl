@@ -19,7 +19,7 @@ namespace Gnik_luos {
                 }
                 bool head = true;
                 for (auto entry : item.value.get_array()) {
-                    if (!private_read_point(entry, point)) {
+                    if (!read_point(entry, point)) {
                         continue;   // 坏组丢掉,其余照旧
                     }
                     if (head) {
@@ -32,19 +32,20 @@ namespace Gnik_luos {
                     to_point.push_back(point);
                 }
             } else if (item.key == "size") {
-                private_read_size(item.value);
+                read_size(item.value, size_x, size_y);
             } else if (item.key == "rotation_point") {
-                private_read_rotation_point(item.value);
+                read_vector(item.value, rotation_point_x, rotation_point_y, rotation_point_z);
             } else if (item.key == "rotation") {
-                private_read_rotation(item.value);
+                read_vector(item.value, rotation_x, rotation_y, rotation_z);
             } else if (item.key == "rgba") {
-                private_read_rgba(item.value);
+                read_color(item.value, r, g, b, a);
             } else if (item.key == "texture") {
-                private_read_texture(item.value);
+                read_flag(item.value, use_texture);
             } else if (item.key == "texture_path") {
-                private_read_texture_path(item.value);
+                read_text(item.value, texture_key);
+                texture_image = Information_image{};
             } else if (item.key == "seal") {
-                private_read_seal(item.value);
+                read_flag(item.value, use_seal);
             }
         }
 

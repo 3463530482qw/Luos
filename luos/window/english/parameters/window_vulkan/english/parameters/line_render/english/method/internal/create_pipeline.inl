@@ -53,9 +53,9 @@ namespace Gnik_luos {
         rasterizer.setRasterizerDiscardEnable(false);
         rasterizer.setPolygonMode(vk::PolygonMode::eFill);
         rasterizer.setLineWidth(1.0f);
-        // 线条是闭合的立体盒子(见 Line::private_box 的面表,绕序朝外),所以剔背面:
-        // 背对相机的面本来就被前脸挡住,剔掉只省光栅化;alpha < 1 的线也不会被前后两面叠混一次
-        rasterizer.setCullMode(vk::CullModeFlagBits::eBack);
+        // 背面不剔除:一张平的图(或绕序给反了的图)正反两面都照常画出来,朝向不该决定画不画;
+        // 代价是 alpha < 1 的形状前后两面各混一次,厚的立体盒子看起来会更实一点
+        rasterizer.setCullMode(vk::CullModeFlagBits::eNone);
         rasterizer.setFrontFace(vk::FrontFace::eClockwise);
         rasterizer.setDepthBiasEnable(false);
 

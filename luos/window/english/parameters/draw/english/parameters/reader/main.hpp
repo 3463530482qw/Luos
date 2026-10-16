@@ -1,0 +1,7 @@
+#include "english/point.inl"
+#include "english/size.inl"
+#include "english/vector.inl"
+#include "english/flag.inl"
+#include "english/color.inl"
+#include "english/color_list.inl"
+#include "english/text.inl"

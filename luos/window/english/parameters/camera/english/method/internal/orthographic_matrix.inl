@@ -1,7 +1,7 @@
 namespace Gnik_luos {
     // 正交档:取景框长在视图空间里,半宽/半高按画布尺寸与 zoom 算,xy 与相机距离无关;
-    // 深度仍按近/远平面归一到 [0, 1](前方距离 d:d = near → 0,d = far → 1),所以两档都能分前后
-    // 纵向同样取负号:视图空间的 y 向上,NDC 的 y 向下,翻过来才与画布口径(x 右、y 上)一致
+    // 深度仍按近/远平面归一到 [0, 1](视图 z 就是前方距离:d = near → 0,d = far → 1),所以两档都能分前后
+    // 纵向取负号:视图 y 向上,而裁剪空间的 y 朝下(Vulkan 口径),翻过来画布才对得上(x 右、y 上)
     Matrix4 Camera::private_orthographic_matrix() const {
         const double scale = (zoom > zoom_min) ? zoom : 1.0;
         const double half_width = canvas_width * 0.5 / scale;

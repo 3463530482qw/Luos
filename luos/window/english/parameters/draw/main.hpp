@@ -1,6 +1,8 @@
 #include "english/parameters/vertex.inl"
 #include "english/parameters/line_span.inl"
+#include "english/parameters/reader/main.hpp"
 #include "english/parameters/line/main.hpp"
+#include "english/parameters/picture/main.hpp"
 namespace Gnik_luos {
     class Draw {
         public:
@@ -15,4 +17,5 @@ namespace Gnik_luos {
 #include "english/method/bind_vertex_sink.inl"
 #include "english/method/bind_span_sink.inl"
 #include "english/method/line.inl"
+#include "english/method/picture.inl"
 #include "english/method/draw.inl"

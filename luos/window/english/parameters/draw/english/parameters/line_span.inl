@@ -7,6 +7,7 @@ namespace Gnik_luos {
         double size_y{0.0};
         std::vector<double> segment{};   // 逐段长度(零长段不算),块的编号就按这个顺序
         std::vector<uint8_t> face_mask{};   // 逐段留下哪几个面:bit0 起端面 / bit1 终端面 / bit2..5 = +x/-x/+y/-y
+        bool single_image{false};        // true = 键本身就是一张图(图片命令):不再拼"段号_面名",一组就铺完
         Information_image image{};       // 直接交的已加载像素(浅拷贝):命中"image:"键时所有块都用它
     };
 }

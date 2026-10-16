@@ -10,8 +10,16 @@ namespace Gnik_luos {
             return;
         }
 
-        // 每个"段 × 面"一块贴图:逐段按留下的面走,顶点游标顺次推进(连接处那两个端面不在里面)
+        // 每个"段 × 面"一块贴图:逐段按留下的面走,顶点游标顺次推进(连接处那两个端面不在里面);
+        // 图片命令是"一张图铺满整个四边形":键就是那张图,一组 6 个顶点
         for (const Line_span& item : span) {
+            if (item.single_image) {
+                const bool direct = item.image.data != nullptr;   // 直接交的像素:键带着地址与宽高
+                group_texture.push_back(item.texture_key);
+                group_descriptor.push_back(*texture().descriptor(item.texture_key, item.size_x, item.size_y, direct ? &item.image : nullptr));
+                group_range.push_back({static_cast<uint32_t>(item.begin), 6});
+                continue;
+            }
             size_t cursor = item.begin;
             for (size_t segment = 0; segment < item.segment.size(); segment++) {
                 const uint8_t mask = segment < item.face_mask.size() ? item.face_mask[segment] : 0x3F;

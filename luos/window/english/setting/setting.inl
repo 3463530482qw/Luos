@@ -20,7 +20,7 @@ namespace Gnik_luos {
         camera.canvas_height = static_cast<double>(logic_height);
         // 相机子模块的初始取景:window_info 里写了 camera 段就用它,没写就保持相机自己的默认
         camera.apply(window_settings_info);
-        // 站位 z >= 0(含把 z 写成 0 的配置)视为要默认贴合:画布与逻辑窗口一一对应
+        // 站位给全 0(或整段不写)才按画布中心贴合;给了非 0 分量就一字不差照用
         camera.apply_default();
         window_vulkan.update_viewport();
 
