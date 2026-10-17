@@ -13,4 +13,4 @@ std::vector<double> private_head_shift{};                       // 逐段四个�
 std::vector<double> private_tail_shift{};                       // 逐段四个角在终端的延长量
 std::vector<size_t> private_vertex_begin{};                     // 逐段在本段顶点表里的起点
 bool private_closed{false};                                     // 末点等于起点:首尾接上的闭合折线
-uint8_t private_step_count{0};                                  // 路由里装了几步:没段可铺就装 0 步
+std::vector<std::function<void()>> private_route{};             // 路由表:按序跑,每步自己管段循环
