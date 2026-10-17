@@ -18,6 +18,9 @@ namespace Gnik_luos {
 #include "english/align.inl"
 #include "english/rotation.inl"
 #include "english/rgba.inl"
+//路由装配:按脏标记定步骤,update 顺次跑步骤出顶点
+#include "english/internal/router.inl"
+#include "english/internal/run.inl"
 //几何
 #include "english/update.inl"
 #include "english/internal/private_rotate.inl"

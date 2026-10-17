@@ -1,3 +1,5 @@
+void private_rebuild_route();
+void private_run_route();
 int private_line_count() const;                    // \n 断出来的行数(至少一行)
 float private_measure(const std::u32string& line) const;   // 一行的排版宽度(含字距)
 float private_advance(char32_t codepoint) const;   // 一个码位的前进量:绑了字体取字形,没绑按字号推
